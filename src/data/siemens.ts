@@ -1,35 +1,35 @@
 export const caseSections = [
-  { id: 'problem', label: 'The problem' },
-  { id: 'role', label: 'My role' },
-  { id: 'architecture', label: 'The workflow' },
-  { id: 'engineering', label: 'Engineering decisions' },
-  { id: 'evaluation', label: 'Model evaluation' },
-  { id: 'results', label: 'Results & learnings' },
+  { id: 'problem', label: 'Het probleem' },
+  { id: 'role', label: 'Mijn rol' },
+  { id: 'architecture', label: 'De workflow' },
+  { id: 'engineering', label: 'Technische keuzes' },
+  { id: 'evaluation', label: 'Modelevaluatie' },
+  { id: 'results', label: 'Resultaat & inzichten' },
 ]
 
 export const roleGroups = [
   {
-    title: 'Understand & design',
+    title: 'Begrijpen & ontwerpen',
     items: [
-      'Analysed the existing process and bottlenecks.',
-      'Gathered process information and requirements from stakeholders.',
-      'Designed the proposed AI workflow.',
+      'Het bestaande proces en de knelpunten geanalyseerd.',
+      'Procesinformatie en eisen opgehaald bij stakeholders.',
+      'De voorgestelde AI-workflow ontworpen.',
     ],
   },
   {
-    title: 'Build & validate',
+    title: 'Bouwen & valideren',
     items: [
-      'Developed the Python solution and processed different document types.',
-      'Evaluated multiple Large Language Models and applied prompt engineering.',
-      'Implemented structured JSON output and deterministic validation logic.',
-      'Added error handling, warnings and human-in-the-loop checks.',
+      'De Python-oplossing ontwikkeld en verschillende documenttypen verwerkt.',
+      'Meerdere Large Language Models geëvalueerd en prompt engineering toegepast.',
+      'Gestructureerde JSON-uitvoer en deterministische validatielogica geïmplementeerd.',
+      'Foutafhandeling, waarschuwingen en human-in-the-loop-controles toegevoegd.',
     ],
   },
   {
-    title: 'Test & evaluate',
+    title: 'Testen & evalueren',
     items: [
-      'Tested the end-to-end solution with representative requests.',
-      'Evaluated processing time.',
+      'De volledige oplossing getest met representatieve aanvragen.',
+      'De verwerkingstijd geëvalueerd.',
     ],
   },
 ]
@@ -37,41 +37,46 @@ export const roleGroups = [
 export const projectPillars = [
   {
     title: 'AI',
-    description: 'The LLM interpreted less structured customer requests and extracted information.',
+    description:
+      'Het LLM interpreteerde minder gestructureerde klantaanvragen en haalde er informatie uit.',
   },
   {
     title: 'Software',
     description:
-      'Python orchestrated document processing, validation logic, error handling and the workflow.',
+      'Python stuurde de documentverwerking, validatielogica, foutafhandeling en workflow aan.',
   },
   {
     title: 'Data',
-    description: 'Generated information was structured and checked against trusted source data.',
+    description:
+      'Gegenereerde informatie werd gestructureerd en gecontroleerd aan de hand van betrouwbare brondata.',
   },
 ]
 
 export const evaluationDimensions = [
   {
-    title: 'Information / article recognition',
-    description: 'Could the model identify the relevant information and articles?',
+    title: 'Herkenning van informatie en artikelen',
+    description: 'Kon het model de relevante informatie en artikelen herkennen?',
   },
   {
-    title: 'Quantity extraction',
-    description: 'Were the requested quantities extracted correctly?',
+    title: 'Extractie van aantallen',
+    description: 'Werden de gevraagde aantallen correct uit de aanvraag gehaald?',
   },
-  { title: 'JSON validity', description: 'Was the output valid structured JSON?' },
+  { title: 'Geldigheid van JSON', description: 'Was de uitvoer geldige, gestructureerde JSON?' },
   {
-    title: 'Hallucinations / incorrect output',
-    description: 'Did the model introduce unsupported or incorrect information?',
+    title: 'Hallucinaties en onjuiste uitvoer',
+    description: 'Voegde het model niet-onderbouwde of onjuiste informatie toe?',
   },
-  { title: 'Processing time', description: 'How long did the model take to process the request?' },
+  {
+    title: 'Verwerkingstijd',
+    description: 'Hoe lang had het model nodig om de aanvraag te verwerken?',
+  },
 ]
 
 export const learnings = [
-  'AI is more reliable when combined with deterministic logic where appropriate.',
-  'Understand the process before choosing the technology.',
-  'Let stakeholder requirements influence technical design.',
-  'Evaluate LLMs on more than answer quality.',
-  'Keep human review available when uncertainty remains.',
-  'A useful AI solution is more than just the model.',
+  'AI wordt betrouwbaarder door waar passend deterministische logica toe te voegen.',
+  'Begrijp het proces voordat je de technologie kiest.',
+  'Laat eisen van stakeholders meewegen in het technische ontwerp.',
+  'Evalueer LLMs op meer dan alleen de kwaliteit van het antwoord.',
+  'Houd menselijke controle beschikbaar wanneer er onzekerheid blijft.',
+  'Een bruikbare AI-oplossing is meer dan alleen het model.',
 ]

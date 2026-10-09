@@ -26,40 +26,40 @@ export default function Siemens() {
       <section className="case-hero container">
         <BackToWork />
         <p className="eyebrow case-eyebrow">
-          Siemens Buildings<span className="eyebrow-divider">/</span>Graduation project · 2026
+          Siemens Buildings<span className="eyebrow-divider">/</span>Afstudeerproject · 2026
         </p>
         <h1>
-          AI-Powered
+          Offertes automatiseren
           <br />
-          Quotation Automation<span className="accent">.</span>
+          met AI<span className="accent">.</span>
         </h1>
         <p className="case-lead">
-          An AI-driven workflow designed to reduce manual work in an existing quotation process by
-          extracting structured information from unstructured customer requests and validating the
-          result against reliable product data.
+          Een AI-workflow om handmatig werk in een bestaand offerteproces te verminderen. De
+          oplossing haalt gestructureerde informatie uit ongestructureerde klantaanvragen en
+          valideert het resultaat aan de hand van betrouwbare productdata.
         </p>
         <div className="case-facts">
           <div>
-            <span className="eyebrow">Role</span>
-            <p>AI Engineer / Graduation Intern</p>
+            <span className="eyebrow">Rol</span>
+            <p>AI Engineer / Afstudeerstagiair</p>
           </div>
           <div>
             <span className="eyebrow">Focus</span>
             <p>
-              Applied AI · LLM-based information extraction
+              Toegepaste AI · Informatie-extractie met LLMs
               <br />
-              Process automation · Data validation
+              Procesautomatisering · Datavalidatie
             </p>
           </div>
           <div className="case-hero-metric">
             <strong>
-              68.8%
+              68,8%
               <ArrowDown size={24} aria-hidden="true" />
             </strong>
             <p>
-              Reduction in processing time
+              Minder verwerkingstijd
               <br />
-              <small>across the evaluated test cases</small>
+              <small>bij de geëvalueerde testcases</small>
             </p>
           </div>
         </div>
@@ -68,8 +68,8 @@ export default function Siemens() {
 
       <div className="case-body container">
         <aside className="case-sidebar">
-          <nav aria-label="Case study contents">
-            <span className="eyebrow">Inside the project</span>
+          <nav aria-label="Inhoud van de casestudy">
+            <span className="eyebrow">In dit project</span>
             {caseSections.map((section, index) => (
               <Link to={`#${section.id}`} key={section.id}>
                 <span>0{index + 1}</span>
@@ -79,27 +79,27 @@ export default function Siemens() {
           </nav>
           <div className="case-sidebar-note">
             <ShieldCheck size={19} aria-hidden="true" />
-            <p>Extraction supported by validation and human oversight.</p>
+            <p>Informatie-extractie met validatie en menselijke controle.</p>
           </div>
         </aside>
         <article className="case-content">
           <section className="case-section" id="problem" tabIndex={-1}>
             <p className="eyebrow">
-              <span>01</span>The business problem
+              <span>01</span>Het procesvraagstuk
             </p>
             <h2>
-              One process.
+              Eén proces.
               <br />
-              Many kinds of input.
+              Verschillende soorten input.
             </h2>
             <p>
-              Customer requests could arrive as emails, PDFs, Excel files or Word documents. The
-              information in these requests had to be interpreted and processed manually as part of
-              the quotation workflow.
+              Klantaanvragen konden binnenkomen als e-mails, pdf's, Excel-bestanden of
+              Word-documenten. De informatie moest handmatig worden geïnterpreteerd en verwerkt
+              binnen het offerteproces.
             </p>
             <div className="document-formats">
               {[
-                { name: 'Email', icon: Mail },
+                { name: 'E-mail', icon: Mail },
                 { name: 'PDF', icon: FileText },
                 { name: 'Excel', icon: FileSpreadsheet },
                 { name: 'Word', icon: FileText },
@@ -111,32 +111,31 @@ export default function Siemens() {
               ))}
             </div>
             <p>
-              Before building the solution, I analysed the current quotation workflow. I discussed
-              the existing process, bottlenecks and user needs with relevant stakeholders, including
-              the Sales Team Lead.
+              Voordat ik de oplossing bouwde, analyseerde ik het bestaande offerteproces. Ik besprak
+              het proces, de knelpunten en de behoeften van gebruikers met betrokken stakeholders,
+              waaronder de Sales Team Lead.
             </p>
             <div className="editorial-note">
-              <span>START WITH THE PROCESS</span>
+              <span>BEGIN BIJ HET PROCES</span>
               <p>
-                The technical design followed an understanding of the workflow and the people using
-                it.
+                Het technische ontwerp volgde uit inzicht in het proces en de mensen die ermee
+                werken.
               </p>
             </div>
           </section>
 
           <section className="case-section" id="role" tabIndex={-1}>
             <p className="eyebrow">
-              <span>02</span>My contribution
+              <span>02</span>Mijn bijdrage
             </p>
             <h2>
-              From process analysis
+              Van procesanalyse
               <br />
-              to an evaluated prototype.
+              tot een geëvalueerd prototype.
             </h2>
             <p>
-              I worked on the graduation project end to end: understanding the process, designing
-              the workflow, implementing the Python solution and evaluating it with representative
-              requests.
+              Ik werkte aan het volledige afstudeerproject: het proces begrijpen, de workflow
+              ontwerpen, de Python-oplossing bouwen en deze evalueren met representatieve aanvragen.
             </p>
             <div className="role-groups">
               {roleGroups.map((group, index) => (
@@ -157,16 +156,16 @@ export default function Siemens() {
 
           <section className="case-section architecture-section" id="architecture" tabIndex={-1}>
             <p className="eyebrow">
-              <span>03</span>The architecture
+              <span>03</span>De architectuur
             </p>
             <h2>
-              Flexible interpretation.
+              Flexibel interpreteren.
               <br />
-              Explicit checks.
+              Gericht controleren.
             </h2>
             <p>
-              The pipeline combined LLM-based extraction with deterministic Python validation,
-              trusted source data and human review for uncertain results.
+              De pipeline combineerde informatie-extractie met LLMs, deterministische
+              Python-validatie, betrouwbare brondata en menselijke controle bij onzekere resultaten.
             </p>
             <ArchitectureDiagram />
             <div className="project-pillar-grid">
@@ -182,58 +181,58 @@ export default function Siemens() {
 
           <section className="case-section" id="engineering" tabIndex={-1}>
             <p className="eyebrow">
-              <span>04</span>An engineering decision
+              <span>04</span>Een technische keuze
             </p>
             <h2>
-              Why not trust
+              Waarom het LLM
               <br />
-              the LLM directly?
+              niet direct vertrouwen?
             </h2>
             <p>
-              The LLM was useful for extracting information from inconsistent or less structured
-              input. But generated output should not automatically be trusted in a quotation-related
-              process.
+              Het LLM was bruikbaar om informatie te halen uit wisselende of minder gestructureerde
+              input. Gegenereerde uitvoer moet in een offerteproces echter niet automatisch worden
+              vertrouwd.
             </p>
             <p>
-              I therefore combined LLM extraction with deterministic Python validation and reliable
-              source data. Warnings and human-in-the-loop checks kept uncertain results visible and
-              available for review.
+              Daarom combineerde ik LLM-extractie met deterministische Python-validatie en
+              betrouwbare brondata. Waarschuwingen en human-in-the-loop-controles maakten onzekere
+              resultaten zichtbaar, zodat ze konden worden beoordeeld.
             </p>
             <div className="trust-chain">
               <div>
-                <span>INTERPRET</span>
-                <strong>LLM extraction</strong>
+                <span>INTERPRETEREN</span>
+                <strong>LLM-extractie</strong>
               </div>
               <ArrowRight aria-hidden="true" />
               <div>
-                <span>CHECK</span>
-                <strong>Python + source data</strong>
+                <span>CONTROLEREN</span>
+                <strong>Python + brondata</strong>
               </div>
               <ArrowRight aria-hidden="true" />
               <div>
-                <span>OVERSEE</span>
-                <strong>Warnings + human review</strong>
+                <span>BEOORDELEN</span>
+                <strong>Waarschuwingen + menselijke controle</strong>
               </div>
             </div>
             <p className="engineering-conclusion">
-              Each part had a clear responsibility: interpret the request, check the information and
-              make uncertainty visible.
+              Elk onderdeel had een duidelijke taak: de aanvraag interpreteren, de informatie
+              controleren en onzekerheid zichtbaar maken.
             </p>
           </section>
 
           <section className="case-section" id="evaluation" tabIndex={-1}>
             <p className="eyebrow">
-              <span>05</span>Model evaluation
+              <span>05</span>Modelevaluatie
             </p>
             <h2>
-              Choose the model
+              Kies het model
               <br />
-              for the whole workflow.
+              voor de hele workflow.
             </h2>
             <p>
-              I compared multiple Large Language Models and selected the most suitable model based
-              on the evaluation. The comparison considered the quality and structure of the output,
-              incorrect information and processing time.
+              Ik vergeleek meerdere Large Language Models en selecteerde op basis van de evaluatie
+              het meest geschikte model. Daarbij keek ik naar de kwaliteit en structuur van de
+              uitvoer, onjuiste informatie en verwerkingstijd.
             </p>
             <div className="evaluation-list">
               {evaluationDimensions.map((dimension, index) => (
@@ -250,28 +249,28 @@ export default function Siemens() {
 
           <section className="case-section results-section" id="results" tabIndex={-1}>
             <p className="eyebrow">
-              <span>06</span>Results & learnings
+              <span>06</span>Resultaat & inzichten
             </p>
             <h2>
-              Less manual processing.
+              Minder handmatig werk.
               <br />
-              Validation retained.
+              Met behoud van validatie.
             </h2>
             <div className="result-panel">
-              <p className="eyebrow">EVALUATED PROTOTYPE</p>
+              <p className="eyebrow">GEËVALUEERD PROTOTYPE</p>
               <strong>
-                68.8%
+                68,8%
                 <ArrowDown aria-hidden="true" />
               </strong>
-              <h3>Processing-time reduction</h3>
-              <p>Across the evaluated test cases</p>
+              <h3>Minder verwerkingstijd</h3>
+              <p>Bij de geëvalueerde testcases</p>
               <div className="result-panel-divider" />
               <p className="result-explanation">
-                The prototype demonstrated significant potential for reducing manual processing
-                while retaining validation and human oversight.
+                Het prototype liet zien dat handmatige verwerking aanzienlijk kan worden verminderd,
+                met behoud van validatie en menselijke controle.
               </p>
             </div>
-            <h3 className="learnings-title">What I learned</h3>
+            <h3 className="learnings-title">Wat ik heb geleerd</h3>
             <ul className="learnings">
               {learnings.map((learning) => (
                 <li key={learning}>
@@ -284,13 +283,13 @@ export default function Siemens() {
           <div className="confidentiality">
             <ShieldCheck size={21} aria-hidden="true" />
             <p>
-              This case study describes the project at a high level. Confidential Siemens data,
-              internal systems, source code and customer information are intentionally not included.
+              Deze casestudy beschrijft het project op hoofdlijnen. Vertrouwelijke Siemens-data,
+              interne systemen, broncode en klantinformatie zijn bewust niet opgenomen.
             </p>
           </div>
           <div className="case-next">
             <Link className="text-link" to="/#work">
-              Explore more work
+              Bekijk meer projecten
               <ArrowRight size={17} aria-hidden="true" />
             </Link>
             <span>AI + Software + Data</span>

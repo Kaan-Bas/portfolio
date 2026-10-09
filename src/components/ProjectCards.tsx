@@ -9,7 +9,7 @@ export function FeaturedProject() {
     <article className="featured-project">
       <div className="featured-main">
         <div className="project-overline">
-          <span>FEATURED CASE STUDY</span>
+          <span>UITGELICHT PROJECT</span>
           <span>2026</span>
         </div>
         <p className="company-label">{featuredProject.organization}</p>
@@ -23,28 +23,28 @@ export function FeaturedProject() {
         <p className="featured-description">{featuredProject.description}</p>
         <Tags items={featuredProject.tags} />
         <Link className="button button-light" to={`/projects/${featuredProject.slug}`}>
-          View case study
+          Bekijk de casestudy
           <ArrowRight size={17} aria-hidden="true" />
         </Link>
       </div>
       <div className="featured-result">
         <div className="result-label">
           <span className="status-dot" />
-          EVALUATED IMPACT
+          GEMETEN RESULTAAT
         </div>
         <div className="metric">
           {featuredProject.metric}
           <span aria-hidden="true">↘</span>
         </div>
         <p>
-          Reduction in processing time
+          Minder verwerkingstijd
           <br />
-          <span>across the evaluated test cases</span>
+          <span>bij de geëvalueerde testcases</span>
         </p>
         <FeaturedWorkflow />
       </div>
       <div className="featured-bottom">
-        <span>ONE CONNECTED SOLUTION</span>
+        <span>ÉÉN SAMENHANGENDE OPLOSSING</span>
         <div>
           {featuredProject.areas.map((area, i) => (
             <span key={area}>
@@ -85,8 +85,8 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
         <Tags items={project.tags} />
         <div className="project-card-bottom">
           <span>{project.areas.join(' + ')}</span>
-          <Link to={`/projects/${project.slug}`} aria-label={`View project: ${project.title}`}>
-            View project
+          <Link to={`/projects/${project.slug}`} aria-label={`Bekijk project: ${project.title}`}>
+            Bekijk project
             <ArrowRight size={15} aria-hidden="true" />
           </Link>
         </div>

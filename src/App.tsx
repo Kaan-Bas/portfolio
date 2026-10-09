@@ -10,7 +10,7 @@ export default function App() {
   return (
     <>
       <a className="skip-link" href="#main-content">
-        Skip to content
+        Ga naar de inhoud
       </a>
       <RouteEffects />
       <Header />

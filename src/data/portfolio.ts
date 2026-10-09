@@ -1,42 +1,48 @@
-// Edit personal details and contact links here. Empty links render as labelled placeholders.
+// Pas hier je persoonlijke gegevens en contactlinks aan. Lege links tonen een gelabelde placeholder.
 export const profile = {
   name: 'Kaan Bas',
   headline: {
-    firstLine: 'Building practical solutions',
-    secondLine: 'with ',
+    firstLine: 'Praktische oplossingen bouwen',
+    secondLine: 'met ',
     emphasis: 'AI, software & data.',
   },
   introduction:
-    'Recent HBO-ICT: Software Engineering graduate with practical experience in AI Engineering, machine learning, data and software development.',
+    'Recent afgestudeerd in HBO-ICT: Software Engineering aan de Hogeschool van Amsterdam, met praktijkervaring in AI Engineering, machine learning, data en softwareontwikkeling.',
   email: 'kaan.bas762@gmail.com',
   linkedin: 'https://www.linkedin.com/in/kaan-bas-62225a420',
   github: 'https://github.com/Kaan-Bas',
   siteUrl: 'https://kaan-bas-engineering.peachybow5.chatgpt.site',
 }
 
-export const navigation = ['Work', 'About', 'Experience', 'Skills', 'Contact'] as const
+export const navigation = [
+  { label: 'Projecten', id: 'work' },
+  { label: 'Over mij', id: 'about' },
+  { label: 'Ervaring', id: 'experience' },
+  { label: 'Vaardigheden', id: 'skills' },
+  { label: 'Contact', id: 'contact' },
+] as const
 
 export const pillars = [
   {
     id: 'ai',
     number: '01',
     title: 'AI Engineering',
-    description: 'Interpreting information. Automating practical work.',
-    skills: ['LLMs', 'AI Agents', 'Prompt Engineering', 'Automation', 'Human-in-the-Loop'],
+    description: 'Informatie interpreteren. Praktisch werk automatiseren.',
+    skills: ['LLMs', 'AI-agents', 'Prompt Engineering', 'Automatisering', 'Human-in-the-Loop'],
   },
   {
     id: 'software',
     number: '02',
     title: 'Software Engineering',
-    description: 'Turning technical ideas into usable applications.',
-    skills: ['Python', 'Java', 'JavaScript', 'REST APIs', 'Git / CI/CD', 'Application Development'],
+    description: 'Technische ideeën omzetten in bruikbare applicaties.',
+    skills: ['Python', 'Java', 'JavaScript', 'REST APIs', 'Git / CI/CD', 'Applicatieontwikkeling'],
   },
   {
     id: 'data',
     number: '03',
     title: 'Data & Machine Learning',
-    description: 'Finding patterns. Structuring and learning from data.',
-    skills: ['SQL', 'pandas', 'NumPy', 'scikit-learn', 'Data Analysis', 'Machine Learning'],
+    description: 'Patronen vinden. Data structureren en ervan leren.',
+    skills: ['SQL', 'pandas', 'NumPy', 'scikit-learn', 'Data-analyse', 'Machine Learning'],
   },
 ] as const
 
@@ -57,99 +63,92 @@ export interface Project {
 export const featuredProject = {
   slug: 'siemens-ai-quotation-automation',
   organization: 'Siemens Buildings',
-  title: 'AI-Powered Quotation Automation',
-  context: 'Graduation Internship — AI Engineer',
+  title: 'Offertes automatiseren met AI',
+  context: 'Afstudeerstage — AI Engineer',
   description:
-    'Designed and built a Python/LLM pipeline that processes unstructured customer requests, converts them into structured information and validates the generated output against trusted source data.',
+    'Een Python/LLM-pipeline ontworpen en gebouwd die ongestructureerde klantaanvragen verwerkt, omzet naar gestructureerde informatie en de gegenereerde uitvoer valideert aan de hand van betrouwbare brondata.',
   tags: [
     'Python',
     'LLMs',
     'Prompt Engineering',
-    'Structured JSON',
-    'Validation',
+    'Gestructureerde JSON',
+    'Validatie',
     'Human-in-the-Loop',
-    'Process Automation',
+    'Procesautomatisering',
   ],
-  areas: ['AI Engineering', 'Software', 'Process / Data handling'],
-  metric: '68.8%',
+  areas: ['AI Engineering', 'Software', 'Proces- en dataverwerking'],
+  metric: '68,8%',
 }
 
 export const projects: Project[] = [
   {
     slug: 'idcp-chatbot-recommendation',
     organization: 'IDCP',
-    title: 'LLM Chatbot & Hybrid Recommendation System',
-    context: 'Data Driven Business – AI Engineering Minor',
+    title: 'LLM-chatbot & hybride aanbevelingssysteem',
+    context: 'Minor Data Driven Business – AI Engineering',
     description:
-      'Worked in an Agile/Scrum team on an LLM-based chatbot for user support and developed a hybrid machine-learning recommendation system in Python.',
+      'Binnen een Agile/Scrum-team gewerkt aan een LLM-chatbot voor gebruikersondersteuning en een hybride aanbevelingssysteem ontwikkeld met machine learning in Python.',
     tags: [
       'Python',
       'LLMs',
       'Machine Learning',
-      'Recommendation Systems',
-      'Data Processing',
+      'Aanbevelingssystemen',
+      'Dataverwerking',
       'Agile/Scrum',
     ],
     areas: ['AI Engineering', 'Data & Machine Learning'],
     visual: 'recommendation',
     overview:
-      'This minor project brought together conversational AI and machine-learning recommendations. Data about users, their interests and available content was processed and used within the recommendation system and chatbot.',
+      'Dit minorproject combineerde een AI-chatbot met aanbevelingen op basis van machine learning. Data over gebruikers, hun interesses en beschikbare content werd verwerkt en gebruikt binnen het aanbevelingssysteem en de chatbot.',
     contributions: [
       {
-        title: 'LLM-based user support',
+        title: 'Gebruikersondersteuning met een LLM',
         description:
-          'Worked with an Agile/Scrum team on a chatbot that used an LLM for user support.',
+          'Binnen een Agile/Scrum-team gewerkt aan een chatbot die een LLM gebruikte voor gebruikersondersteuning.',
       },
       {
-        title: 'Hybrid recommendations',
-        description: 'Developed a hybrid machine-learning recommendation system in Python.',
+        title: 'Hybride aanbevelingen',
+        description: 'Een hybride aanbevelingssysteem ontwikkeld met machine learning in Python.',
       },
       {
-        title: 'Connecting AI and data',
+        title: 'AI en data verbinden',
         description:
-          'Processed user, interest and content data for use within the recommendation system and chatbot.',
+          'Data over gebruikers, interesses en content verwerkt voor gebruik binnen het aanbevelingssysteem en de chatbot.',
       },
     ],
     takeaway:
-      'A project at the intersection of AI and data: using information about users and content within both a chatbot and a recommendation system.',
+      'Een project op het snijvlak van AI en data: informatie over gebruikers en content toepassen in zowel een chatbot als een aanbevelingssysteem.',
   },
   {
     slug: 'waternet-pipe-failure-prediction',
     organization: 'Waternet',
-    title: 'Pipe Failure Prediction',
-    context: 'Data Driven Business – AI Engineering Minor',
+    title: 'Voorspellen van leidingstoringen',
+    context: 'Minor Data Driven Business – AI Engineering',
     description:
-      'Prepared and analysed water infrastructure data and developed a classification model in Python/scikit-learn for predicting pipe failures from historical failure data.',
-    tags: [
-      'Python',
-      'pandas',
-      'scikit-learn',
-      'Machine Learning',
-      'Data Analysis',
-      'Classification',
-    ],
+      'Data over waterinfrastructuur voorbereid en geanalyseerd en een classificatiemodel ontwikkeld in Python/scikit-learn om leidingstoringen te voorspellen op basis van historische storingsdata.',
+    tags: ['Python', 'pandas', 'scikit-learn', 'Machine Learning', 'Data-analyse', 'Classificatie'],
     areas: ['Data & Machine Learning'],
     visual: 'water',
     overview:
-      'This project focused on using historical failure data to predict pipe failures. The work combined preparing and analysing water infrastructure data with developing a machine-learning classification model.',
+      'Dit project richtte zich op het voorspellen van leidingstoringen met historische storingsdata. Het werk combineerde de voorbereiding en analyse van data over waterinfrastructuur met de ontwikkeling van een classificatiemodel op basis van machine learning.',
     contributions: [
       {
-        title: 'Data preparation',
+        title: 'Datavoorbereiding',
         description:
-          'Prepared water infrastructure data for analysis and classification in Python.',
+          'Data over waterinfrastructuur voorbereid voor analyse en classificatie in Python.',
       },
       {
-        title: 'Exploratory analysis',
-        description: 'Analysed historical failure data using Python and pandas.',
+        title: 'Verkennende data-analyse',
+        description: 'Historische storingsdata geanalyseerd met Python en pandas.',
       },
       {
-        title: 'Failure classification',
+        title: 'Storingen classificeren',
         description:
-          'Developed a classification model using scikit-learn to predict pipe failures from historical failure data.',
+          'Een classificatiemodel ontwikkeld met scikit-learn om leidingstoringen te voorspellen op basis van historische storingsdata.',
       },
     ],
     takeaway:
-      'A practical data and machine-learning project, connecting data preparation and analysis to a classification model for an infrastructure problem.',
+      'Een praktisch project met data en machine learning, waarin datavoorbereiding en analyse samenkwamen in een classificatiemodel voor een infrastructuurvraagstuk.',
   },
 ]
 
@@ -157,18 +156,18 @@ export const experience = [
   {
     company: 'Siemens',
     role: 'AI Engineer',
-    type: 'Graduation Internship',
+    type: 'Afstudeerstage',
     date: '2026',
     description:
-      'Analysed an existing quotation process and developed an AI-driven automation solution combining LLM extraction, structured data and deterministic validation.',
+      'Een bestaand offerteproces geanalyseerd en een AI-oplossing voor automatisering ontwikkeld die LLM-extractie, gestructureerde data en deterministische validatie combineert.',
   },
   {
     company: 'Endeavour',
     role: 'Software Developer',
-    type: 'Internship',
+    type: 'Stage',
     date: '2024–2025',
     description:
-      'Worked on frontend and backend development, connecting database/CMS data to the frontend and developing API endpoints.',
+      'Gewerkt aan frontend- en backendontwikkeling, data uit een database/CMS gekoppeld aan de frontend en API-endpoints ontwikkeld.',
   },
 ]
 
@@ -182,39 +181,39 @@ export const education = {
 
 export const skillGroups = [
   {
-    title: 'AI & Machine Learning',
+    title: 'AI & machine learning',
     skills: [
       'Large Language Models',
-      'AI Agents',
+      'AI-agents',
       'Prompt Engineering',
       'Machine Learning',
       'Human-in-the-Loop',
-      'Model Evaluation',
+      'Modelevaluatie',
     ],
   },
   {
-    title: 'Software Development',
+    title: 'Softwareontwikkeling',
     skills: ['Python', 'Java', 'JavaScript', 'REST APIs', 'JSON', 'Git', 'GitLab CI/CD'],
   },
   {
     title: 'Data',
-    skills: ['SQL', 'NoSQL', 'pandas', 'NumPy', 'scikit-learn', 'Data Analysis', 'Power BI'],
+    skills: ['SQL', 'NoSQL', 'pandas', 'NumPy', 'scikit-learn', 'Data-analyse', 'Power BI'],
   },
-  { title: 'Automation & Ways of Working', skills: ['Power Automate', 'Agile / Scrum'] },
+  { title: 'Automatisering & werkwijzen', skills: ['Power Automate', 'Agile / Scrum'] },
 ]
 
 export const about = [
-  'I recently graduated from HBO-ICT: Software Engineering at Hogeschool van Amsterdam. During my studies, a growing interest in AI and data led me to the Data Driven Business – AI Engineering minor.',
-  'I enjoy understanding how a process works, exploring what technology can improve it, and then turning that idea into something practical. I like learning new technologies and working across AI, software and data, with a particular interest in applied AI and automation.',
+  'Ik ben recent afgestudeerd in HBO-ICT: Software Engineering aan de Hogeschool van Amsterdam. Tijdens mijn studie groeide mijn interesse in AI en data. Daarom volgde ik de minor Data Driven Business – AI Engineering.',
+  'Ik vind het interessant om te begrijpen hoe een proces werkt, te onderzoeken wat technologie kan verbeteren en dat vervolgens om te zetten in een praktische oplossing. Ik leer graag nieuwe technologieën en werk het liefst op het snijvlak van AI, software en data, met een bijzondere interesse in toegepaste AI en automatisering.',
 ]
 
 export const interests = [
-  'Applied AI',
-  'Generative AI',
-  'LLM applications',
-  'AI agents',
-  'Automation',
-  'Software integrations',
+  'Toegepaste AI',
+  'Generatieve AI',
+  'LLM-applicaties',
+  'AI-agents',
+  'Automatisering',
+  'Software-integraties',
   'Machine learning',
-  'Data analysis',
+  'Data-analyse',
 ]

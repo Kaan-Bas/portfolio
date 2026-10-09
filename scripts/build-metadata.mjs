@@ -19,7 +19,10 @@ for (const [route, page] of Object.entries(pages)) {
     .replace(/<title>[^<]*<\/title>/, `<title>${escape(page.title)}</title>`)
     .replace(/(<meta\s+name="description"\s+content=")[^"]*"/, `$1${escape(page.description)}"`)
     .replace(/(<meta\s+property="og:title"\s+content=")[^"]*"/, `$1${escape(page.title)}"`)
-    .replace(/(<meta\s+property="og:description"\s+content=")[^"]*"/, `$1${escape(page.description)}"`)
+    .replace(
+      /(<meta\s+property="og:description"\s+content=")[^"]*"/,
+      `$1${escape(page.description)}"`,
+    )
   if (siteUrl && route !== '404') {
     const url = `${siteUrl}${route}`
     html = html.replace(

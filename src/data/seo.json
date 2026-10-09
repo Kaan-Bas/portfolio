@@ -1,22 +1,22 @@
 {
+  "404": {
+    "title": "Pagina niet gevonden — Kaan Bas",
+    "description": "Deze pagina is niet gevonden. Bekijk de projecten van Kaan Bas op het gebied van AI, software engineering en data."
+  },
   "/": {
     "title": "Kaan Bas — AI, Software & Data",
-    "description": "Kaan Bas — recent Software Engineering graduate building practical solutions with AI, software and data. Explore Siemens, IDCP and Waternet projects."
+    "description": "Kaan Bas — recent afgestudeerd in Software Engineering. Ik bouw praktische oplossingen met AI, software en data. Bekijk mijn projecten bij Siemens, IDCP en Waternet."
   },
   "/projects/siemens-ai-quotation-automation": {
-    "title": "AI-Powered Quotation Automation · Siemens — Kaan Bas",
-    "description": "An end-to-end Siemens graduation project combining LLM extraction, Python validation and human review. 68.8% less processing time across evaluated test cases."
+    "title": "Offertes automatiseren met AI · Siemens — Kaan Bas",
+    "description": "Een afstudeerproject bij Siemens met LLM-extractie, Python-validatie en menselijke controle. 68,8% minder verwerkingstijd bij de geëvalueerde testcases."
   },
   "/projects/idcp-chatbot-recommendation": {
-    "title": "LLM Chatbot & Hybrid Recommendation System — Kaan Bas",
-    "description": "An AI Engineering minor project: an LLM-based support chatbot and a hybrid machine-learning recommendation system using Python and user, interest and content data."
+    "title": "LLM-chatbot & hybride aanbevelingssysteem — Kaan Bas",
+    "description": "Een project binnen de minor AI Engineering: een LLM-chatbot en een hybride aanbevelingssysteem in Python met data over gebruikers, interesses en content."
   },
   "/projects/waternet-pipe-failure-prediction": {
-    "title": "Pipe Failure Prediction · Waternet — Kaan Bas",
-    "description": "A Data Driven Business – AI Engineering minor project using Python, pandas and scikit-learn to analyse water infrastructure data and predict pipe failures."
-  },
-  "404": {
-    "title": "Page not found — Kaan Bas",
-    "description": "This page could not be found. Explore Kaan Bas's work in AI, software engineering and data."
+    "title": "Voorspellen van leidingstoringen · Waternet — Kaan Bas",
+    "description": "Een project binnen de minor Data Driven Business – AI Engineering: waterinfrastructuur analyseren en leidingstoringen voorspellen met Python, pandas en scikit-learn."
   }
 }

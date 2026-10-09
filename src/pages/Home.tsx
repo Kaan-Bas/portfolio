@@ -23,7 +23,7 @@ export default function Home() {
         <div className="hero-copy">
           <p className="eyebrow hero-eyebrow">
             <span className="status-dot" />
-            Open to early-career opportunities
+            Open voor een startende engineeringfunctie
           </p>
           <h1 id="hero-title">
             {profile.name}
@@ -38,7 +38,7 @@ export default function Home() {
           <p className="hero-introduction">{profile.introduction}</p>
           <div className="hero-actions">
             <Link className="button button-primary" to="/#work">
-              View my work
+              Bekijk mijn projecten
               <ArrowDown size={17} aria-hidden="true" />
             </Link>
             <ExternalLink className="text-link" href={profile.linkedin}>
@@ -58,15 +58,15 @@ export default function Home() {
 
       <section className="pillars-section container" aria-labelledby="pillars-title">
         <div className="pillar-intro">
-          <p className="eyebrow">A connected technical profile</p>
+          <p className="eyebrow">Een samenhangend technisch profiel</p>
           <h2 id="pillars-title">
-            Three disciplines.
-            <br className="mobile-only" /> One practical approach.
+            Drie vakgebieden.
+            <br className="mobile-only" /> Eén praktische aanpak.
           </h2>
           <p>
-            Use data to understand. Use AI to interpret.
+            Data om te begrijpen. AI om te interpreteren.
             <br />
-            Use software to make it work.
+            Software om het bruikbaar te maken.
           </p>
         </div>
         <div className="pillar-grid">
@@ -88,7 +88,7 @@ export default function Home() {
         <div className="pillars-connection" aria-hidden="true">
           <span />
           <p>
-            Connected in the work below
+            Samen in de projecten hieronder
             <ArrowDown size={14} />
           </p>
           <span />
@@ -98,13 +98,13 @@ export default function Home() {
       <section className="work-section container section" id="work" tabIndex={-1}>
         <SectionHeading
           number="01"
-          eyebrow="Selected work"
-          title="Practical problems. Built solutions."
-          description="Applied AI, software and data — explored through projects with a clear purpose."
+          eyebrow="Uitgelichte projecten"
+          title="Praktische vraagstukken. Concrete oplossingen."
+          description="Toegepaste AI, software en data: projecten met een concreet doel."
         />
         <FeaturedProject />
         <div className="selected-heading">
-          <h3>More perspectives on the same foundation</h3>
+          <h3>Meer projecten vanuit dezelfde basis</h3>
           <span>AI + DATA / MACHINE LEARNING</span>
         </div>
         <SelectedProjects />
@@ -114,23 +114,23 @@ export default function Home() {
         <div className="container about-grid">
           <div>
             <p className="eyebrow">
-              <span>02</span>About me
+              <span>02</span>Over mij
             </p>
             <h2>
-              Curious about the process.
+              Nieuwsgierig naar het proces.
               <br />
-              Focused on the solution<span className="accent">.</span>
+              Gericht op de oplossing<span className="accent">.</span>
             </h2>
             <div className="about-aside">
               <span className="about-monogram" aria-hidden="true">
                 KB<span>+</span>
               </span>
               <p>
-                A software foundation.
+                Een basis in software.
                 <br />
-                An applied AI focus.
+                Een focus op toegepaste AI.
                 <br />
-                Room to keep learning.
+                Ruimte om te blijven leren.
               </p>
             </div>
           </div>
@@ -139,7 +139,7 @@ export default function Home() {
               <p key={paragraph}>{paragraph}</p>
             ))}
             <div className="interests">
-              <p className="eyebrow">Currently interested in</p>
+              <p className="eyebrow">Mijn huidige interesses</p>
               <Tags items={interests} />
             </div>
           </div>
@@ -149,12 +149,12 @@ export default function Home() {
       <section className="experience-section container section" id="experience" tabIndex={-1}>
         <SectionHeading
           number="03"
-          eyebrow="Experience & education"
-          title="A foundation built through practice."
+          eyebrow="Ervaring & opleiding"
+          title="Een basis opgebouwd in de praktijk."
         />
         <div className="background-grid">
           <div>
-            <h3 className="column-heading">Professional experience</h3>
+            <h3 className="column-heading">Werkervaring</h3>
             <div className="timeline">
               {experience.map((item) => (
                 <article className="timeline-item" key={item.company}>
@@ -172,7 +172,7 @@ export default function Home() {
                       className="text-link small-link"
                       to="/projects/siemens-ai-quotation-automation"
                     >
-                      Explore the graduation project
+                      Bekijk het afstudeerproject
                       <ArrowRight size={15} aria-hidden="true" />
                     </Link>
                   )}
@@ -181,14 +181,14 @@ export default function Home() {
             </div>
           </div>
           <div className="education-column">
-            <h3 className="column-heading">Education</h3>
+            <h3 className="column-heading">Opleiding</h3>
             <article className="education-card">
               <GraduationCap size={25} aria-hidden="true" />
               <p className="education-institution">{education.institution}</p>
               <h4>{education.degree}</h4>
               <p className="education-period">
                 {education.period}
-                <span>Graduated</span>
+                <span>Afgestudeerd</span>
               </p>
               <div className="minor">
                 <span className="eyebrow">Minor</span>
@@ -196,9 +196,9 @@ export default function Home() {
                 <p>{education.minorPeriod}</p>
               </div>
               <p className="education-note">
-                Software Engineering as the foundation.
+                Software Engineering als basis.
                 <br />
-                AI Engineering as a further focus.
+                AI Engineering als verdere verdieping.
               </p>
             </article>
           </div>
@@ -209,9 +209,9 @@ export default function Home() {
         <div className="container">
           <SectionHeading
             number="04"
-            eyebrow="Technical toolkit"
-            title="Tools I work with."
-            description="A foundation across engineering disciplines, with a growing focus on applied AI."
+            eyebrow="Technische vaardigheden"
+            title="Waar ik mee werk."
+            description="Een basis in verschillende technische vakgebieden, met een groeiende focus op toegepaste AI."
           />
           <div className="skills-grid">
             {skillGroups.map((group, index) => (

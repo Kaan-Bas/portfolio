@@ -17,7 +17,7 @@ export default function ProjectPage() {
         <BackToWork />
         <p className="eyebrow case-eyebrow">
           {project.organization}
-          <span className="eyebrow-divider">/</span>Minor project
+          <span className="eyebrow-divider">/</span>Minorproject
         </p>
         <h1>
           {project.title}
@@ -31,19 +31,19 @@ export default function ProjectPage() {
         <ProjectVisual type={project.visual} large />
         <div className="simple-project-overview">
           <div>
-            <p className="eyebrow">The project</p>
+            <p className="eyebrow">Het project</p>
             <h2>
               {project.visual === 'water'
-                ? 'From historical data to failure prediction.'
-                : 'Connecting user support and recommendations.'}
+                ? 'Van historische data naar het voorspellen van storingen.'
+                : 'Gebruikersondersteuning en aanbevelingen verbinden.'}
             </h2>
             <Tags items={project.areas} />
           </div>
           <p>{project.overview}</p>
         </div>
         <section className="contributions-section">
-          <p className="eyebrow">My work</p>
-          <h2>Putting the pieces together.</h2>
+          <p className="eyebrow">Mijn bijdrage</p>
+          <h2>Van onderdelen naar een geheel.</h2>
           <div className="contributions-grid">
             {project.contributions.map((contribution, index) => (
               <article key={contribution.title}>
@@ -55,7 +55,7 @@ export default function ProjectPage() {
           </div>
         </section>
         <div className="project-takeaway">
-          <p className="eyebrow">A connected profile in practice</p>
+          <p className="eyebrow">Een samenhangend profiel in de praktijk</p>
           <p>{project.takeaway}</p>
         </div>
         <div className="case-next">
@@ -64,7 +64,7 @@ export default function ProjectPage() {
             <ArrowRight size={17} aria-hidden="true" />
           </Link>
           <Link className="text-link" to="/#work">
-            All work
+            Alle projecten
           </Link>
         </div>
       </div>

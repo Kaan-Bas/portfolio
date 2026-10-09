@@ -41,7 +41,7 @@ export function Header() {
         <button
           ref={toggle}
           className="menu-toggle"
-          aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
+          aria-label={menuOpen ? 'Navigatie sluiten' : 'Navigatie openen'}
           aria-expanded={menuOpen}
           aria-controls="primary-navigation"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -52,18 +52,18 @@ export function Header() {
           ref={menu}
           id="primary-navigation"
           className={menuOpen ? 'nav-links is-open' : 'nav-links'}
-          aria-label="Main navigation"
+          aria-label="Hoofdnavigatie"
         >
-          {navigation.map((label) => (
+          {navigation.map(({ label, id }) => (
             <Link
-              key={label}
-              className={label === 'Contact' ? 'nav-contact' : ''}
-              to={`/#${label.toLowerCase()}`}
-              aria-current={location.hash === `#${label.toLowerCase()}` ? 'location' : undefined}
+              key={id}
+              className={id === 'contact' ? 'nav-contact' : ''}
+              to={`/#${id}`}
+              aria-current={location.hash === `#${id}` ? 'location' : undefined}
               onClick={() => setMenuOpen(false)}
             >
               {label}
-              {label === 'Contact' && <ArrowUpRight size={14} aria-hidden="true" />}
+              {id === 'contact' && <ArrowUpRight size={14} aria-hidden="true" />}
             </Link>
           ))}
         </nav>
@@ -79,25 +79,25 @@ export function Contact() {
         <div>
           <p className="eyebrow">
             <span className="status-dot" />
-            Let’s connect
+            Neem contact op
           </p>
           <h2>
-            Good work starts
+            Goed werk begint
             <br />
-            with a conversation<span className="accent">.</span>
+            met een gesprek<span className="accent">.</span>
           </h2>
           <p>
-            Interested in discussing AI, software or data?
+            In gesprek over AI, software of data?
             <br />
-            I’m looking for an early-career engineering role where I can keep learning and build
-            useful solutions.
+            Ik zoek een startende engineeringfunctie waarin ik kan blijven leren en bruikbare
+            oplossingen kan bouwen.
           </p>
         </div>
         <div className="contact-links">
           {profile.email ? (
             <a href={`mailto:${profile.email}`}>
               <span>
-                <small>Email</small>
+                <small>E-mail</small>
                 {profile.email}
               </span>
               <ArrowUpRight aria-hidden="true" />
@@ -105,13 +105,13 @@ export function Contact() {
           ) : (
             <div className="contact-placeholder">
               <span>
-                <small>Email</small>Address coming soon
+                <small>E-mail</small>E-mailadres volgt
               </span>
             </div>
           )}
           <ExternalLink href={profile.linkedin}>
             <span>
-              <small>Connect</small>LinkedIn
+              <small>Verbinden</small>LinkedIn
             </span>
           </ExternalLink>
           {profile.github && (
@@ -135,7 +135,7 @@ export function Footer() {
           {profile.name}
           <span aria-hidden="true">.</span>
         </Link>
-        <p>AI. Software. Data. One connected approach.</p>
+        <p>AI. Software. Data. Eén samenhangende aanpak.</p>
         <span>
           © {new Date().getFullYear()} {profile.name}
         </span>

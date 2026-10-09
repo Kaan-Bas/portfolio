@@ -29,7 +29,7 @@ export function SectionHeading({
 
 export function Tags({ items, className = '' }: { items: readonly string[]; className?: string }) {
   return (
-    <ul className={`tags ${className}`} aria-label="Technologies and focus areas">
+    <ul className={`tags ${className}`} aria-label="Technologieën en aandachtsgebieden">
       {items.map((item) => (
         <li key={item}>{item}</li>
       ))}
@@ -50,14 +50,14 @@ export function ExternalLink({
     return (
       <span className={`link-placeholder ${className}`} aria-disabled="true">
         {children}
-        <span className="placeholder-note">Link coming soon</span>
+        <span className="placeholder-note">Link volgt</span>
       </span>
     )
   return (
     <a className={className} href={href} target="_blank" rel="noopener noreferrer">
       {children}
       <ArrowUpRight size={17} aria-hidden="true" />
-      <span className="sr-only"> (opens in a new tab)</span>
+      <span className="sr-only"> (opent in een nieuw tabblad)</span>
     </a>
   )
 }
@@ -65,7 +65,7 @@ export function ExternalLink({
 export function BackToWork() {
   return (
     <Link className="back-link" to="/#work">
-      <span aria-hidden="true">←</span> Back to work
+      <span aria-hidden="true">←</span> Terug naar projecten
     </Link>
   )
 }
