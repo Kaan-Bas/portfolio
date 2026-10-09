@@ -1,0 +1,340 @@
+import {
+  ArrowDown,
+  ArrowRight,
+  Braces,
+  Check,
+  Code2,
+  Database,
+  FileText,
+  GitBranch,
+  Layers3,
+  Mail,
+  ShieldCheck,
+  Sparkles,
+  TriangleAlert,
+  UserRound,
+} from 'lucide-react'
+import type { ReactNode } from 'react'
+
+export function IntersectionGraphic() {
+  return (
+    <figure
+      className="intersection-graphic"
+      aria-label="AI engineering, software engineering and data overlap to create practical solutions"
+    >
+      <div className="graphic-topline">
+        <span>THREE DISCIPLINES. ONE APPROACH.</span>
+        <span className="graphic-plus" aria-hidden="true">
+          +
+        </span>
+      </div>
+      <svg
+        className="intersection-svg"
+        viewBox="0 0 460 380"
+        role="img"
+        aria-labelledby="intersection-title"
+      >
+        <title id="intersection-title">The intersection of AI, software and data</title>
+        <defs>
+          <pattern id="dot-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="1" fill="#ccd3de" />
+          </pattern>
+        </defs>
+        <rect x="0" y="0" width="460" height="380" fill="url(#dot-grid)" />
+        <circle
+          cx="230"
+          cy="150"
+          r="113"
+          fill="#edf2fd"
+          fillOpacity=".48"
+          stroke="#9bb2e6"
+          strokeWidth="1.3"
+        />
+        <circle
+          cx="169"
+          cy="243"
+          r="113"
+          fill="#f4f6f9"
+          fillOpacity=".5"
+          stroke="#bbc5d3"
+          strokeWidth="1.3"
+        />
+        <circle
+          cx="291"
+          cy="243"
+          r="113"
+          fill="#e7ecf6"
+          fillOpacity=".4"
+          stroke="#a7b5ce"
+          strokeWidth="1.3"
+        />
+        <circle cx="230" cy="216" r="36" fill="#1c2b46" />
+        <path d="M218 216h24m-12-12v24" stroke="#fff" strokeWidth="1.7" />
+        <circle cx="230" cy="37" r="4" fill="#3566c7" />
+        <circle cx="67" cy="292" r="4" fill="#3566c7" />
+        <circle cx="393" cy="292" r="4" fill="#3566c7" />
+        <text x="230" y="108" textAnchor="middle" className="diagram-svg-label">
+          AI Engineering
+        </text>
+        <text x="145" y="270" textAnchor="middle" className="diagram-svg-label">
+          Software
+        </text>
+        <text x="315" y="270" textAnchor="middle" className="diagram-svg-label">
+          Data & ML
+        </text>
+        <path d="M230 252v53" stroke="#8398bb" strokeDasharray="3 4" />
+        <rect x="151" y="304" width="158" height="32" rx="16" fill="#fff" stroke="#d8dee8" />
+        <text x="230" y="324" textAnchor="middle" className="diagram-svg-small">
+          Practical solutions
+        </text>
+      </svg>
+      <figcaption>
+        <span className="status-dot" /> Connected thinking. Useful outcomes.
+      </figcaption>
+    </figure>
+  )
+}
+
+export function FeaturedWorkflow() {
+  return (
+    <div
+      className="featured-workflow"
+      aria-label="Customer request, LLM extraction, Python validation and human review"
+    >
+      <span className="diagram-kicker">FROM REQUEST TO STRUCTURED RESULT</span>
+      <div className="mini-flow">
+        <div>
+          <FileText aria-hidden="true" />
+          <span>Request</span>
+        </div>
+        <ArrowRight className="flow-arrow" aria-hidden="true" />
+        <div>
+          <Sparkles aria-hidden="true" />
+          <span>Extract</span>
+        </div>
+        <ArrowRight className="flow-arrow" aria-hidden="true" />
+        <div>
+          <ShieldCheck aria-hidden="true" />
+          <span>Validate</span>
+        </div>
+        <ArrowRight className="flow-arrow" aria-hidden="true" />
+        <div>
+          <UserRound aria-hidden="true" />
+          <span>Review</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export function ProjectVisual({
+  type,
+  large = false,
+}: {
+  type: 'recommendation' | 'water'
+  large?: boolean
+}) {
+  return (
+    <figure
+      className={`project-visual ${type} ${large ? 'visual-large' : ''}`}
+      aria-label={
+        type === 'water'
+          ? 'Conceptual workflow: historical data, analysis, classification, pipe failure prediction'
+          : 'Conceptual workflow: user, interest and content data connected to recommendations and chatbot support'
+      }
+    >
+      <div className="visual-caption">
+        <span>{type === 'water' ? 'DATA → PREDICTION' : 'DATA → RELEVANCE'}</span>
+        <span>CONCEPTUAL WORKFLOW</span>
+      </div>
+      {type === 'recommendation' ? (
+        <div className="recommendation-diagram">
+          <div className="source-stack">
+            <span>
+              <UserRound size={16} aria-hidden="true" />
+              Users
+            </span>
+            <span>
+              <Sparkles size={16} aria-hidden="true" />
+              Interests
+            </span>
+            <span>
+              <Layers3 size={16} aria-hidden="true" />
+              Content
+            </span>
+          </div>
+          <div className="visual-connector" aria-hidden="true">
+            <i />
+            <i />
+            <i />
+          </div>
+          <div className="visual-node">
+            <GitBranch size={25} aria-hidden="true" />
+            <span>
+              Hybrid
+              <br />
+              recommendations
+            </span>
+          </div>
+          <div className="visual-connector single" aria-hidden="true">
+            <i />
+          </div>
+          <div className="visual-node end-node">
+            <Sparkles size={24} aria-hidden="true" />
+            <span>
+              LLM
+              <br />
+              chatbot
+            </span>
+          </div>
+        </div>
+      ) : (
+        <div className="water-diagram">
+          <svg viewBox="0 0 410 150" aria-hidden="true">
+            <g fill="none" stroke="#a3bac1" strokeWidth="2">
+              <path d="M5 38h81v76h92V38h96v76h131M86 76h67V15h180v61h73M35 76v66h91M224 38V5M333 76v60" />
+            </g>
+            <g fill="#f5f8f8" stroke="#70919c" strokeWidth="2">
+              {[
+                [86, 38],
+                [86, 114],
+                [178, 114],
+                [178, 38],
+                [274, 38],
+                [274, 114],
+                [153, 76],
+                [333, 76],
+              ].map(([cx, cy]) => (
+                <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="6" />
+              ))}
+            </g>
+            <circle cx="274" cy="38" r="16" fill="#e9f0f5" stroke="#3566c7" strokeWidth="1" />
+            <circle cx="274" cy="38" r="5" fill="#3566c7" />
+            <path d="M284 24l19-14h66" stroke="#3566c7" fill="none" />
+            <text x="305" y="8" fontSize="9" fill="#31576f" fontFamily="monospace">
+              CLASSIFICATION
+            </text>
+          </svg>
+          <div className="water-flow">
+            <span>Historical data</span>
+            <ArrowRight size={14} aria-hidden="true" />
+            <span>Analysis</span>
+            <ArrowRight size={14} aria-hidden="true" />
+            <span>Prediction</span>
+          </div>
+        </div>
+      )}
+    </figure>
+  )
+}
+
+function FlowNode({
+  icon,
+  title,
+  subtitle,
+  className = '',
+}: {
+  icon: ReactNode
+  title: string
+  subtitle?: string
+  className?: string
+}) {
+  return (
+    <div className={`architecture-node ${className}`}>
+      <span className="node-icon">{icon}</span>
+      <div>
+        <strong>{title}</strong>
+        {subtitle && <small>{subtitle}</small>}
+      </div>
+    </div>
+  )
+}
+
+function Connector() {
+  return (
+    <div className="architecture-connector" aria-hidden="true">
+      <ArrowDown size={18} />
+    </div>
+  )
+}
+
+export function ArchitectureDiagram() {
+  return (
+    <figure className="architecture" aria-labelledby="architecture-caption">
+      <div className="architecture-topline">
+        <span>WORKFLOW ARCHITECTURE</span>
+        <span>LLM + PYTHON + HUMAN OVERSIGHT</span>
+      </div>
+      <div className="architecture-flow">
+        <FlowNode icon={<Mail />} title="Customer request" subtitle="Email · PDF · Excel · Word" />
+        <Connector />
+        <FlowNode
+          icon={<FileText />}
+          title="Document processing / parsing"
+          subtitle="Prepare the request for extraction"
+        />
+        <Connector />
+        <FlowNode
+          icon={<Sparkles />}
+          title="LLM information extraction"
+          subtitle="Interpret less structured information"
+          className="ai-node"
+        />
+        <Connector />
+        <FlowNode
+          icon={<Braces />}
+          title="Structured JSON"
+          subtitle="A consistent format for the next step"
+        />
+        <Connector />
+        <div className="validation-row">
+          <FlowNode
+            icon={<ShieldCheck />}
+            title="Python validation"
+            subtitle="Deterministic checks"
+            className="validation-node"
+          />
+          <div className="source-connection" aria-hidden="true">
+            ↔
+          </div>
+          <FlowNode
+            icon={<Database />}
+            title="Trusted source data"
+            subtitle="Reliable product information"
+            className="source-node"
+          />
+        </div>
+        <div className="branch-connector" aria-hidden="true">
+          <span />
+          <span />
+        </div>
+        <div className="result-branches">
+          <FlowNode
+            icon={<Check />}
+            title="Valid result"
+            subtitle="Passes the validation checks"
+            className="valid-node"
+          />
+          <FlowNode
+            icon={<TriangleAlert />}
+            title="Warning / human review"
+            subtitle="Uncertain results require a check"
+            className="review-node"
+          />
+        </div>
+        <div className="merge-connector" aria-hidden="true">
+          <span />
+          <span />
+        </div>
+        <FlowNode
+          icon={<Code2 />}
+          title="Quotation overview"
+          subtitle="Structured output with validation and oversight"
+        />
+      </div>
+      <figcaption id="architecture-caption">
+        High-level project architecture. The LLM extracts; Python checks; people review uncertainty.
+      </figcaption>
+    </figure>
+  )
+}
