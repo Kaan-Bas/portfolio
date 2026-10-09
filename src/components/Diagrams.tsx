@@ -36,31 +36,31 @@ export function IntersectionGraphic() {
           cx="230"
           cy="150"
           r="113"
-          fill="#54272e"
+          fill="#f2c7cc"
           fillOpacity=".48"
-          stroke="#b85a65"
+          stroke="#cd8a92"
           strokeWidth="1.3"
         />
         <circle
           cx="169"
           cy="243"
           r="113"
-          fill="#302a2b"
+          fill="#efecec"
           fillOpacity=".5"
-          stroke="#8b7274"
+          stroke="#b9adaf"
           strokeWidth="1.3"
         />
         <circle
           cx="291"
           cy="243"
           r="113"
-          fill="#3d262b"
+          fill="#f1e3e5"
           fillOpacity=".4"
-          stroke="#a16b73"
+          stroke="#c2a1a6"
           strokeWidth="1.3"
         />
         <circle cx="230" cy="216" r="36" fill="var(--accent-solid)" />
-        <path d="M218 216h24m-12-12v24" stroke="var(--ink)" strokeWidth="1.7" />
+        <path d="M218 216h24m-12-12v24" stroke="var(--on-accent)" strokeWidth="1.7" />
         <circle cx="230" cy="37" r="4" fill="var(--accent)" />
         <circle cx="67" cy="292" r="4" fill="var(--accent)" />
         <circle cx="393" cy="292" r="4" fill="var(--accent)" />
@@ -73,7 +73,7 @@ export function IntersectionGraphic() {
         <text x="315" y="270" textAnchor="middle" className="diagram-svg-label">
           Data & ML
         </text>
-        <path d="M230 252v53" stroke="#bb747c" strokeDasharray="3 4" />
+        <path d="M230 252v53" stroke="var(--diagram-line)" strokeDasharray="3 4" />
         <rect
           x="151"
           y="304"
@@ -156,10 +156,10 @@ export function ProjectVisual({
       ) : (
         <div className="water-diagram">
           <svg viewBox="0 0 410 150" aria-hidden="true">
-            <g fill="none" stroke="#855d62" strokeWidth="2">
+            <g fill="none" stroke="#a7999b" strokeWidth="2">
               <path d="M5 38h81v76h92V38h96v76h131M86 76h67V15h180v61h73M35 76v66h91M224 38V5M333 76v60" />
             </g>
-            <g fill="#211d1e" stroke="#b18086" strokeWidth="2">
+            <g fill="var(--surface)" stroke="var(--diagram-line)" strokeWidth="2">
               {[
                 [86, 38],
                 [86, 114],
