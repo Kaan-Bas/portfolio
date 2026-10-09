@@ -18,6 +18,7 @@
   --surface-soft: #141414;
   --accent-surface: #28191c;
   --accent-line: #633238;
+  --section-alternate: #1b1b1b;
   --heading: 'Manrope Variable', 'Segoe UI', sans-serif;
 }
 *,
@@ -91,6 +92,14 @@ section[tabindex='-1']:focus {
 }
 .section {
   padding-block: 100px;
+}
+.home-section {
+  padding-block: 104px;
+  border-top: 1px solid var(--line);
+}
+.work-section,
+.experience-section {
+  background: var(--section-alternate);
 }
 .accent {
   color: var(--accent);
@@ -346,10 +355,6 @@ section[tabindex='-1']:focus {
   letter-spacing: 1.25px;
   padding: 2px 7px;
 }
-.graphic-plus {
-  font-size: 18px;
-  color: var(--muted);
-}
 .intersection-svg {
   display: block;
   width: 100%;
@@ -375,22 +380,14 @@ section[tabindex='-1']:focus {
   font-size: 9px;
   color: var(--muted);
 }
-.intersection-graphic figcaption .status-dot {
-  width: 4px;
-  height: 4px;
-}
 .pillars-section {
-  padding-bottom: 10px;
+  padding-bottom: 88px;
 }
 .pillar-intro {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: end;
   margin-bottom: 26px;
-}
-.pillar-intro .eyebrow {
-  grid-column: 1 / -1;
-  margin-bottom: 9px;
 }
 .pillar-intro h2 {
   font-size: 24px;
@@ -399,7 +396,7 @@ section[tabindex='-1']:focus {
 }
 .pillar-intro > p:last-child {
   justify-self: end;
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.6;
   color: var(--muted);
 }
@@ -423,11 +420,6 @@ section[tabindex='-1']:focus {
   justify-content: space-between;
   color: var(--accent);
 }
-.pillar-top > span {
-  color: var(--muted);
-  font-family: monospace;
-  font-size: 10px;
-}
 .pillar h3 {
   font-size: 17px;
   font-weight: 650;
@@ -436,36 +428,15 @@ section[tabindex='-1']:focus {
 }
 .pillar > p {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
   max-width: 255px;
   margin-top: 9px;
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
-.pillar .tags li {
-  border: 0;
-  background: var(--surface-raised);
-  font-size: 9px;
-  padding: 5px 7px;
-}
-.pillars-connection {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin: 18px auto 0;
-  max-width: 580px;
-}
-.pillars-connection > span {
-  height: 1px;
-  flex: 1;
-  background: var(--line);
-}
-.pillars-connection p {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-size: 9px;
-  color: var(--muted);
+.pillar .pillar-skills {
+  font-size: 11px;
+  line-height: 1.9;
+  margin-top: 18px;
 }
 
 /* Project selection */
@@ -474,30 +445,39 @@ section[tabindex='-1']:focus {
   justify-content: space-between;
   align-items: flex-end;
   gap: 36px;
-  margin-bottom: 35px;
+  margin-bottom: 48px;
+}
+.section-heading > div::before {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 3px;
+  background: var(--accent-solid);
+  margin-bottom: 22px;
+}
+.section-heading .eyebrow > span {
+  color: var(--accent);
 }
 .section-heading h2 {
-  font-size: clamp(26px, 2.8vw, 35px);
+  font-size: clamp(32px, 3.4vw, 44px);
   font-weight: 650;
   line-height: 1.35;
   letter-spacing: -1.25px;
   margin-top: 14px;
 }
 .section-description {
-  max-width: 280px;
+  max-width: 360px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.7;
-}
-.work-section {
-  padding-top: 82px;
 }
 .featured-project {
   display: grid;
   grid-template-columns: 1.16fr 1fr;
   border-radius: 8px;
   overflow: hidden;
-  background: var(--accent-surface);
+  background: var(--paper);
+  border: 1px solid var(--line);
   color: var(--ink);
 }
 .featured-main {
@@ -565,7 +545,7 @@ section[tabindex='-1']:focus {
 .featured-main .tags li {
   border-color: var(--line);
   color: var(--muted);
-  font-size: 9px;
+  font-size: 11px;
 }
 .featured-main .button {
   margin-top: 28px;
@@ -578,7 +558,7 @@ section[tabindex='-1']:focus {
   justify-content: center;
   padding: 46px 40px 38px;
   border-left: 1px solid var(--line);
-  background: #1d191a;
+  background: var(--accent-surface);
 }
 .result-label {
   display: flex;
@@ -617,40 +597,6 @@ section[tabindex='-1']:focus {
   font-size: 11px;
   color: var(--muted);
 }
-.featured-workflow {
-  margin-top: 55px;
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
-}
-.diagram-kicker {
-  font-size: 7px;
-  letter-spacing: 1.5px;
-  color: var(--muted);
-}
-.mini-flow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 7px;
-  margin-top: 23px;
-}
-.mini-flow > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  font-size: 8px;
-  color: var(--muted);
-}
-.mini-flow > div > svg {
-  width: 23px;
-  height: 23px;
-  stroke-width: 1.3;
-}
-.mini-flow > .flow-arrow {
-  width: 13px;
-  color: var(--muted);
-}
 .featured-bottom {
   grid-column: 1/-1;
   display: flex;
@@ -659,11 +605,6 @@ section[tabindex='-1']:focus {
   gap: 24px;
   padding: 19px 39px;
   border-top: 1px solid var(--line);
-}
-.featured-bottom > span {
-  font-size: 8px;
-  color: var(--muted);
-  letter-spacing: 1.45px;
 }
 .featured-bottom > div {
   display: flex;
@@ -682,17 +623,12 @@ section[tabindex='-1']:focus {
   justify-content: space-between;
   align-items: center;
   gap: 24px;
-  margin-block: 45px 20px;
+  margin-block: 48px 24px;
 }
 .selected-heading h3 {
   font-family: 'DM Sans Variable', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-}
-.selected-heading > span {
-  font-size: 8px;
-  letter-spacing: 1.3px;
-  color: var(--muted);
+  font-size: 18px;
+  font-weight: 600;
 }
 .selected-projects {
   display: grid;
@@ -702,7 +638,7 @@ section[tabindex='-1']:focus {
 .project-card {
   display: flex;
   flex-direction: column;
-  background: var(--surface);
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 6px;
   overflow: hidden;
@@ -710,9 +646,6 @@ section[tabindex='-1']:focus {
 }
 .project-card:hover {
   border-color: #88565b;
-}
-.project-image-link {
-  display: block;
 }
 .project-visual {
   background: #1e191a;
@@ -859,7 +792,7 @@ section[tabindex='-1']:focus {
 }
 .project-card .project-overline {
   color: var(--muted);
-  font-size: 8px;
+  font-size: 10px;
 }
 .project-card h3 {
   font-size: 22px;
@@ -886,14 +819,14 @@ section[tabindex='-1']:focus {
 }
 .project-description {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   margin-block: 17px 22px;
 }
 .project-card .tags {
   margin-top: auto;
 }
 .project-card .tags li {
-  font-size: 9px;
+  font-size: 11px;
   background: var(--surface-soft);
 }
 .project-card-bottom {
@@ -921,75 +854,40 @@ section[tabindex='-1']:focus {
 
 /* Personal background */
 .about-section {
-  background: var(--surface-soft);
-  border-block: 1px solid var(--line);
+  background: var(--paper);
 }
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 100px;
 }
-.about-grid h2 {
-  font-size: 33px;
+.about-focus {
+  font-size: 25px;
   line-height: 1.4;
   letter-spacing: -1.2px;
   font-weight: 650;
-  margin-top: 17px;
+  max-width: 440px;
 }
 .about-copy > p {
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.85;
   color: var(--muted);
 }
 .about-copy > p + p {
   margin-top: 20px;
 }
-.about-aside {
-  display: flex;
-  align-items: center;
-  gap: 17px;
-  margin-top: 37px;
-}
-.about-monogram {
-  width: 59px;
-  height: 59px;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  position: relative;
-  display: grid;
-  place-items: center;
-  font-family: var(--heading);
-  font-size: 17px;
-  letter-spacing: -1px;
-  color: var(--muted);
-}
-.about-monogram span {
-  position: absolute;
-  bottom: -2px;
-  right: -1px;
-  font-size: 15px;
-  background: var(--surface-soft);
-  color: var(--accent);
-  padding: 2px;
-  line-height: 1;
-}
-.about-aside p {
-  font-size: 10px;
-  line-height: 1.8;
-  color: var(--muted);
-}
 .interests {
-  margin-top: 25px;
+  margin-top: 32px;
 }
-.interests > p {
-  margin-bottom: 13px;
-  font-size: 8px;
+.interests h3 {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.interests p {
+  font-size: 13px;
+  line-height: 1.9;
   color: var(--muted);
-}
-.interests .tags li {
-  background: var(--surface);
-  border-color: var(--line);
-  font-size: 9px;
 }
 .background-grid {
   display: grid;
@@ -999,7 +897,7 @@ section[tabindex='-1']:focus {
 }
 .column-heading {
   font-family: 'DM Sans Variable', sans-serif;
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 600;
   margin-bottom: 27px;
   color: var(--muted);
@@ -1055,7 +953,7 @@ section[tabindex='-1']:focus {
   margin-top: 2px;
 }
 .timeline-description {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
   margin-top: 16px;
 }
@@ -1065,7 +963,7 @@ section[tabindex='-1']:focus {
   color: var(--accent);
 }
 .education-card {
-  background: var(--surface);
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 6px;
   padding: 29px;
@@ -1125,8 +1023,7 @@ section[tabindex='-1']:focus {
   color: var(--muted);
 }
 .skills-section {
-  background: var(--surface-soft);
-  border-block: 1px solid var(--line);
+  background: var(--paper);
 }
 .skills-grid {
   display: grid;
@@ -1141,27 +1038,24 @@ section[tabindex='-1']:focus {
   padding-left: 0;
   border-left: 0;
 }
-.skill-number {
-  font-family: monospace;
-  color: var(--muted);
-  font-size: 10px;
-}
 .skill-group h3 {
-  margin: 13px 0 19px;
+  margin: 0 0 19px;
   font-family: 'DM Sans Variable', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.6;
   font-weight: 600;
 }
 .skill-group li {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--muted);
   line-height: 2.5;
 }
 
 /* Contact and footer */
 .contact-section {
-  padding-block: 85px;
+  padding-block: 104px;
+  background: #211719;
+  border-top: 1px solid var(--accent-line);
 }
 .contact-inner {
   display: grid;
@@ -1170,7 +1064,7 @@ section[tabindex='-1']:focus {
   align-items: center;
 }
 .contact-inner h2 {
-  font-size: 37px;
+  font-size: clamp(32px, 3.4vw, 44px);
   font-weight: 650;
   letter-spacing: -1.5px;
   line-height: 1.4;
@@ -1179,7 +1073,7 @@ section[tabindex='-1']:focus {
 .contact-inner > div > p:last-child {
   margin-top: 23px;
   max-width: 470px;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
   line-height: 1.85;
 }
@@ -1369,8 +1263,14 @@ section[tabindex='-1']:focus {
   min-width: 0;
 }
 .case-section {
-  padding-block: 46px 53px;
-  border-top: 1px solid var(--line);
+  padding: 40px 32px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-soft);
+  margin-bottom: 32px;
+}
+.case-section:nth-of-type(even) {
+  background: var(--surface);
 }
 .case-section h2 {
   font-size: clamp(28px, 3vw, 38px);
@@ -2030,9 +1930,6 @@ section[tabindex='-1']:focus {
   .about-grid {
     gap: 55px;
   }
-  .about-grid h2 {
-    font-size: 28px;
-  }
   .background-grid {
     gap: 50px;
   }
@@ -2057,6 +1954,10 @@ section[tabindex='-1']:focus {
 @media (max-width: 850px) {
   .section {
     padding-block: 72px;
+  }
+  .home-section,
+  .contact-section {
+    padding-block: 80px;
   }
   .hero {
     grid-template-columns: 1.15fr 1fr;
@@ -2099,22 +2000,15 @@ section[tabindex='-1']:focus {
     min-height: 36px;
     font-size: 10px;
   }
-  .pillar .tags {
-    gap: 5px;
-  }
-  .pillar .tags li {
-    font-size: 8px;
-    padding: 4px 6px;
-  }
   .pillar-intro h2 {
     font-size: 21px;
   }
   .section-heading h2 {
-    font-size: 27px;
+    font-size: 36px;
   }
   .section-description {
-    max-width: 220px;
-    font-size: 11px;
+    max-width: 280px;
+    font-size: 13px;
   }
   .featured-project {
     grid-template-columns: 1.1fr 1fr;
@@ -2145,16 +2039,8 @@ section[tabindex='-1']:focus {
   .featured-result > p > span {
     font-size: 9px;
   }
-  .diagram-kicker {
-    font-size: 6px;
-    letter-spacing: 0.7px;
-  }
   .featured-bottom {
     gap: 18px;
-  }
-  .featured-bottom > span {
-    font-size: 7px;
-    white-space: nowrap;
   }
   .featured-bottom > div {
     font-size: 8px;
@@ -2208,9 +2094,6 @@ section[tabindex='-1']:focus {
   }
   .about-grid {
     gap: 40px;
-  }
-  .about-grid h2 {
-    font-size: 25px;
   }
   .about-copy > p {
     font-size: 12px;
@@ -2319,6 +2202,12 @@ section[tabindex='-1']:focus {
   .section {
     padding-block: 58px;
   }
+  .home-section {
+    padding-block: 64px;
+  }
+  .pillars-section {
+    padding-bottom: 56px;
+  }
   .eyebrow {
     font-size: 9px;
     letter-spacing: 1.4px;
@@ -2423,9 +2312,6 @@ section[tabindex='-1']:focus {
     display: block;
     margin-bottom: 23px;
   }
-  .pillar-intro .eyebrow {
-    margin-bottom: 11px;
-  }
   .pillar-intro h2 {
     font-size: 23px;
     line-height: 1.45;
@@ -2464,26 +2350,15 @@ section[tabindex='-1']:focus {
     font-size: 11px;
     margin-bottom: 17px;
   }
-  .pillar .tags li {
-    font-size: 9px;
-    padding: 5px 7px;
-  }
-  .pillars-connection {
-    margin-top: 20px;
-    gap: 10px;
-  }
-  .pillars-connection p {
-    font-size: 8px;
-  }
   .work-section {
-    padding-top: 50px;
+    padding-top: 64px;
   }
   .section-heading {
     display: block;
-    margin-bottom: 27px;
+    margin-bottom: 32px;
   }
   .section-heading h2 {
-    font-size: 28px;
+    font-size: 32px;
     line-height: 1.4;
     letter-spacing: -0.9px;
     margin-top: 12px;
@@ -2548,28 +2423,11 @@ section[tabindex='-1']:focus {
   .featured-result > p > span {
     font-size: 11px;
   }
-  .featured-workflow {
-    margin-top: 28px;
-  }
-  .diagram-kicker {
-    font-size: 7px;
-    letter-spacing: 1px;
-  }
-  .mini-flow {
-    justify-content: space-around;
-    gap: 10px;
-  }
-  .mini-flow > div {
-    font-size: 9px;
-  }
   .featured-bottom {
     padding: 20px 25px;
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
-  }
-  .featured-bottom > span {
-    font-size: 7px;
   }
   .featured-bottom > div {
     gap: 10px;
@@ -2583,12 +2441,7 @@ section[tabindex='-1']:focus {
     margin-block: 35px 19px;
   }
   .selected-heading h3 {
-    font-size: 11px;
-  }
-  .selected-heading > span {
-    display: block;
-    margin-top: 9px;
-    font-size: 7px;
+    font-size: 16px;
   }
   .selected-projects {
     grid-template-columns: 1fr;
@@ -2657,12 +2510,6 @@ section[tabindex='-1']:focus {
     grid-template-columns: 1fr;
     gap: 29px;
   }
-  .about-grid h2 {
-    font-size: 30px;
-  }
-  .about-aside {
-    margin-top: 24px;
-  }
   .about-copy > p {
     font-size: 13px;
   }
@@ -2703,14 +2550,14 @@ section[tabindex='-1']:focus {
     padding-inline: 18px 0;
   }
   .skill-group h3 {
-    font-size: 11px;
+    font-size: 13px;
   }
   .skill-group li {
-    font-size: 10px;
+    font-size: 12px;
     line-height: 2.6;
   }
   .contact-section {
-    padding-block: 58px;
+    padding-block: 64px;
   }
   .contact-inner {
     grid-template-columns: 1fr;
@@ -2795,7 +2642,8 @@ section[tabindex='-1']:focus {
     padding-block: 9px;
   }
   .case-section {
-    padding-block: 35px 40px;
+    padding: 28px 20px;
+    margin-bottom: 24px;
   }
   .case-section h2 {
     font-size: 29px;

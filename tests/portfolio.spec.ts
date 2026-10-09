@@ -25,9 +25,7 @@ test('recruiter flow: homepage → Siemens → work → contact', async ({ page 
   await page.getByRole('link', { name: '03 De workflow' }).click()
   await expect(page.getByText('Documentverwerking / parsing', { exact: true })).toBeVisible()
   await page.getByRole('link', { name: 'Terug naar projecten' }).click()
-  await expect(
-    page.getByRole('heading', { name: 'Praktische vraagstukken. Concrete oplossingen.' }),
-  ).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Projecten', exact: true })).toBeVisible()
   await expect(page.getByRole('link', { name: 'kaan.bas762@gmail.com' })).toHaveAttribute(
     'href',
     'mailto:kaan.bas762@gmail.com',
@@ -83,7 +81,7 @@ test('keyboard skip link and mobile navigation', async ({ page, isMobile }) => {
       .getByRole('navigation', { name: 'Hoofdnavigatie' })
       .getByRole('link', { name: 'Vaardigheden' })
       .click()
-    await expect(page.getByRole('heading', { name: 'Waar ik mee werk.' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Vaardigheden', exact: true })).toBeVisible()
     await expect(toggle).toHaveAttribute('aria-expanded', 'false')
   }
 })

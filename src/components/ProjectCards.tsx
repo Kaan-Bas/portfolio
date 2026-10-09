@@ -1,7 +1,6 @@
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { featuredProject, projects, type Project } from '../data/portfolio'
-import { FeaturedWorkflow, ProjectVisual } from './Diagrams'
 import { Tags } from './ui'
 
 export function FeaturedProject() {
@@ -21,7 +20,7 @@ export function FeaturedProject() {
         </h3>
         <p className="project-context">{featuredProject.context}</p>
         <p className="featured-description">{featuredProject.description}</p>
-        <Tags items={featuredProject.tags} />
+        <Tags items={featuredProject.previewTags} />
         <Link className="button button-light" to={`/projects/${featuredProject.slug}`}>
           Bekijk de casestudy
           <ArrowRight size={17} aria-hidden="true" />
@@ -41,10 +40,8 @@ export function FeaturedProject() {
           <br />
           <span>bij de geëvalueerde testcases</span>
         </p>
-        <FeaturedWorkflow />
       </div>
       <div className="featured-bottom">
-        <span>ÉÉN SAMENHANGENDE OPLOSSING</span>
         <div>
           {featuredProject.areas.map((area, i) => (
             <span key={area}>
@@ -61,14 +58,6 @@ export function FeaturedProject() {
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <article className="project-card">
-      <Link
-        className="project-image-link"
-        tabIndex={-1}
-        aria-hidden="true"
-        to={`/projects/${project.slug}`}
-      >
-        <ProjectVisual type={project.visual} />
-      </Link>
       <div className="project-card-body">
         <div className="project-overline">
           <span>{project.organization}</span>
@@ -82,7 +71,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
         </h3>
         <p className="project-context">{project.context}</p>
         <p className="project-description">{project.description}</p>
-        <Tags items={project.tags} />
+        <Tags items={project.previewTags} />
         <div className="project-card-bottom">
           <span>{project.areas.join(' + ')}</span>
           <Link to={`/projects/${project.slug}`} aria-label={`Bekijk project: ${project.title}`}>

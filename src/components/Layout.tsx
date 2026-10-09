@@ -74,18 +74,14 @@ export function Header() {
 
 export function Contact() {
   return (
-    <section className="contact-section" id="contact" tabIndex={-1}>
+    <section className="contact-section" id="contact" tabIndex={-1} aria-labelledby="contact-title">
       <div className="container contact-inner">
         <div>
           <p className="eyebrow">
-            <span className="status-dot" />
-            Neem contact op
+            <span>05</span>
+            Laten we kennismaken
           </p>
-          <h2>
-            Goed werk begint
-            <br />
-            met een gesprek<span className="accent">.</span>
-          </h2>
+          <h2 id="contact-title">Contact</h2>
           <p>
             In gesprek over AI, software of data?
             <br />

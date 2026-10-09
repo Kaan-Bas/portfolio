@@ -53,6 +53,7 @@ export interface Project {
   context: string
   description: string
   tags: string[]
+  previewTags: string[]
   areas: string[]
   visual: 'recommendation' | 'water'
   overview: string
@@ -76,6 +77,7 @@ export const featuredProject = {
     'Human-in-the-Loop',
     'Procesautomatisering',
   ],
+  previewTags: ['Python', 'LLMs', 'Validatie', 'Human-in-the-Loop'],
   areas: ['AI Engineering', 'Software', 'Proces- en dataverwerking'],
   metric: '68,8%',
 }
@@ -97,6 +99,7 @@ export const projects: Project[] = [
       'Agile/Scrum',
     ],
     areas: ['AI Engineering', 'Data & Machine Learning'],
+    previewTags: ['Python', 'LLMs', 'Machine Learning'],
     visual: 'recommendation',
     overview:
       'Dit minorproject combineerde een AI-chatbot met aanbevelingen op basis van machine learning. Data over gebruikers, hun interesses en beschikbare content werd verwerkt en gebruikt binnen het aanbevelingssysteem en de chatbot.',
@@ -128,6 +131,7 @@ export const projects: Project[] = [
       'Data over waterinfrastructuur voorbereid en geanalyseerd en een classificatiemodel ontwikkeld in Python/scikit-learn om leidingstoringen te voorspellen op basis van historische storingsdata.',
     tags: ['Python', 'pandas', 'scikit-learn', 'Machine Learning', 'Data-analyse', 'Classificatie'],
     areas: ['Data & Machine Learning'],
+    previewTags: ['Python', 'scikit-learn', 'Data-analyse'],
     visual: 'water',
     overview:
       'Dit project richtte zich op het voorspellen van leidingstoringen met historische storingsdata. Het werk combineerde de voorbereiding en analyse van data over waterinfrastructuur met de ontwikkeling van een classificatiemodel op basis van machine learning.',

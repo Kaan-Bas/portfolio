@@ -54,6 +54,7 @@ Start in **`src/data/portfolio.ts`**:
 - `profile`: name, introduction, email, LinkedIn, GitHub and website origin.
 - `featuredProject`: homepage Siemens card.
 - `projects`: IDCP, Waternet and any additional projects.
+- `previewTags`: a short selection of tags for the homepage; `tags` keeps the complete list for each case study.
 - `experience`, `education`, `skillGroups`, `about` and `interests`: homepage content.
 
 The contact email and social links are used throughout the site. Clear a social URL to show a labelled placeholder; an empty GitHub URL hides that optional link.
@@ -70,7 +71,7 @@ The project card and `/projects/:slug` page are generated automatically. For a l
 
 ## Change the design
 
-The top of **`src/styles.css`** contains the main colour and typography variables. Section spacing uses `.section`, and page width uses `.container`. Tablet and mobile overrides are grouped at the bottom. Fonts are self-hosted and bundled from Fontsource; visitors do not need a third-party font request.
+The top of **`src/styles.css`** contains the main colour and typography variables. Homepage section spacing uses `.home-section`, while project layouts use `.section`. The `--section-alternate` token controls the alternating homepage backgrounds, and page width uses `.container`. Tablet and mobile overrides are grouped at the bottom. Fonts are self-hosted and bundled from Fontsource; visitors do not need a third-party font request.
 
 ## Tests
 

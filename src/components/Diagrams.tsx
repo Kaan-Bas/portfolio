@@ -24,9 +24,6 @@ export function IntersectionGraphic() {
     >
       <div className="graphic-topline">
         <span>DRIE VAKGEBIEDEN. ÉÉN AANPAK.</span>
-        <span className="graphic-plus" aria-hidden="true">
-          +
-        </span>
       </div>
       <svg
         className="intersection-svg"
@@ -35,12 +32,6 @@ export function IntersectionGraphic() {
         aria-labelledby="intersection-title"
       >
         <title id="intersection-title">Het snijvlak van AI, software en data</title>
-        <defs>
-          <pattern id="dot-grid" width="20" height="20" patternUnits="userSpaceOnUse">
-            <circle cx="1" cy="1" r="1" fill="#3b3032" />
-          </pattern>
-        </defs>
-        <rect x="0" y="0" width="460" height="380" fill="url(#dot-grid)" />
         <circle
           cx="230"
           cy="150"
@@ -96,42 +87,8 @@ export function IntersectionGraphic() {
           Praktische oplossingen
         </text>
       </svg>
-      <figcaption>
-        <span className="status-dot" /> Samenhangend denken. Bruikbare resultaten.
-      </figcaption>
+      <figcaption>AI, software en data in één praktische aanpak.</figcaption>
     </figure>
-  )
-}
-
-export function FeaturedWorkflow() {
-  return (
-    <div
-      className="featured-workflow"
-      aria-label="Klantaanvraag, LLM-extractie, Python-validatie en menselijke controle"
-    >
-      <span className="diagram-kicker">VAN AANVRAAG NAAR GESTRUCTUREERD RESULTAAT</span>
-      <div className="mini-flow">
-        <div>
-          <FileText aria-hidden="true" />
-          <span>Aanvraag</span>
-        </div>
-        <ArrowRight className="flow-arrow" aria-hidden="true" />
-        <div>
-          <Sparkles aria-hidden="true" />
-          <span>Extractie</span>
-        </div>
-        <ArrowRight className="flow-arrow" aria-hidden="true" />
-        <div>
-          <ShieldCheck aria-hidden="true" />
-          <span>Validatie</span>
-        </div>
-        <ArrowRight className="flow-arrow" aria-hidden="true" />
-        <div>
-          <UserRound aria-hidden="true" />
-          <span>Controle</span>
-        </div>
-      </div>
-    </div>
   )
 }
 
