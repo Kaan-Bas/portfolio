@@ -37,7 +37,7 @@ export function IntersectionGraphic() {
         <title id="intersection-title">Het snijvlak van AI, software en data</title>
         <defs>
           <pattern id="dot-grid" width="20" height="20" patternUnits="userSpaceOnUse">
-            <circle cx="1" cy="1" r="1" fill="#ccd3de" />
+            <circle cx="1" cy="1" r="1" fill="#3b3032" />
           </pattern>
         </defs>
         <rect x="0" y="0" width="460" height="380" fill="url(#dot-grid)" />
@@ -45,34 +45,34 @@ export function IntersectionGraphic() {
           cx="230"
           cy="150"
           r="113"
-          fill="#edf2fd"
+          fill="#54272e"
           fillOpacity=".48"
-          stroke="#9bb2e6"
+          stroke="#b85a65"
           strokeWidth="1.3"
         />
         <circle
           cx="169"
           cy="243"
           r="113"
-          fill="#f4f6f9"
+          fill="#302a2b"
           fillOpacity=".5"
-          stroke="#bbc5d3"
+          stroke="#8b7274"
           strokeWidth="1.3"
         />
         <circle
           cx="291"
           cy="243"
           r="113"
-          fill="#e7ecf6"
+          fill="#3d262b"
           fillOpacity=".4"
-          stroke="#a7b5ce"
+          stroke="#a16b73"
           strokeWidth="1.3"
         />
-        <circle cx="230" cy="216" r="36" fill="#1c2b46" />
-        <path d="M218 216h24m-12-12v24" stroke="#fff" strokeWidth="1.7" />
-        <circle cx="230" cy="37" r="4" fill="#3566c7" />
-        <circle cx="67" cy="292" r="4" fill="#3566c7" />
-        <circle cx="393" cy="292" r="4" fill="#3566c7" />
+        <circle cx="230" cy="216" r="36" fill="var(--accent-solid)" />
+        <path d="M218 216h24m-12-12v24" stroke="var(--ink)" strokeWidth="1.7" />
+        <circle cx="230" cy="37" r="4" fill="var(--accent)" />
+        <circle cx="67" cy="292" r="4" fill="var(--accent)" />
+        <circle cx="393" cy="292" r="4" fill="var(--accent)" />
         <text x="230" y="108" textAnchor="middle" className="diagram-svg-label">
           AI Engineering
         </text>
@@ -82,8 +82,16 @@ export function IntersectionGraphic() {
         <text x="315" y="270" textAnchor="middle" className="diagram-svg-label">
           Data & ML
         </text>
-        <path d="M230 252v53" stroke="#8398bb" strokeDasharray="3 4" />
-        <rect x="151" y="304" width="158" height="32" rx="16" fill="#fff" stroke="#d8dee8" />
+        <path d="M230 252v53" stroke="#bb747c" strokeDasharray="3 4" />
+        <rect
+          x="151"
+          y="304"
+          width="158"
+          height="32"
+          rx="16"
+          fill="var(--surface-raised)"
+          stroke="var(--line)"
+        />
         <text x="230" y="324" textAnchor="middle" className="diagram-svg-small">
           Praktische oplossingen
         </text>
@@ -191,10 +199,10 @@ export function ProjectVisual({
       ) : (
         <div className="water-diagram">
           <svg viewBox="0 0 410 150" aria-hidden="true">
-            <g fill="none" stroke="#a3bac1" strokeWidth="2">
+            <g fill="none" stroke="#855d62" strokeWidth="2">
               <path d="M5 38h81v76h92V38h96v76h131M86 76h67V15h180v61h73M35 76v66h91M224 38V5M333 76v60" />
             </g>
-            <g fill="#f5f8f8" stroke="#70919c" strokeWidth="2">
+            <g fill="#211d1e" stroke="#b18086" strokeWidth="2">
               {[
                 [86, 38],
                 [86, 114],
@@ -208,10 +216,17 @@ export function ProjectVisual({
                 <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="6" />
               ))}
             </g>
-            <circle cx="274" cy="38" r="16" fill="#e9f0f5" stroke="#3566c7" strokeWidth="1" />
-            <circle cx="274" cy="38" r="5" fill="#3566c7" />
-            <path d="M284 24l19-14h66" stroke="#3566c7" fill="none" />
-            <text x="305" y="8" fontSize="9" fill="#31576f" fontFamily="monospace">
+            <circle
+              cx="274"
+              cy="38"
+              r="16"
+              fill="var(--accent-surface)"
+              stroke="var(--accent)"
+              strokeWidth="1"
+            />
+            <circle cx="274" cy="38" r="5" fill="var(--accent)" />
+            <path d="M284 24l19-14h66" stroke="var(--accent)" fill="none" />
+            <text x="305" y="8" fontSize="9" fill="var(--accent)" fontFamily="monospace">
               CLASSIFICATIE
             </text>
           </svg>
