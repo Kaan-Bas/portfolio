@@ -2,45 +2,53 @@
   font-family: 'DM Sans Variable', 'Segoe UI', sans-serif;
   color: var(--ink);
   background: var(--paper);
-  color-scheme: light;
+  color-scheme: dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  --ink: #232139;
-  --muted: #605c70;
-  --accent: #6342c1;
-  --accent-solid: #6342c1;
-  --accent-hover: #4e329d;
+  --ink: #edf0f7;
+  --muted: #b1b6c7;
+  --accent: #b9a0ff;
+  --accent-solid: #7550cd;
+  --accent-hover: #6240b6;
   --on-accent: #fff;
-  --line: #e3e0e9;
-  --paper: #fffdf9;
-  --surface: #fff;
-  --surface-raised: #f0edfa;
-  --surface-soft: #faf8fd;
-  --accent-surface: #eee6fb;
-  --accent-line: #c7b7e9;
-  --section-alternate: #f1ecfc;
-  --contact-surface: #fff2cf;
-  --diagram-line: #a99ac3;
-  --feature-surface: #372566;
-  --ai-ink: #6342c1;
-  --ai-surface: #eee6fb;
-  --ai-line: #c7b7e9;
-  --software-ink: #08716b;
-  --software-surface: #e2f3ef;
-  --software-line: #a1cfc4;
-  --data-ink: #b94a2f;
-  --data-surface: #ffede1;
-  --data-line: #e5b69d;
-  --automation-ink: #895408;
-  --automation-surface: #fff2cf;
-  --automation-line: #dfc58e;
-  --success-surface: #edf5ef;
-  --success-line: #b4c9bd;
-  --success-ink: #285a43;
-  --warning-surface: #fff5e5;
-  --warning-line: #dcc7a5;
-  --warning-ink: #76561f;
+  --line: #343b4c;
+  --paper: #11131a;
+  --surface: #1b1e28;
+  --surface-raised: #252a37;
+  --surface-soft: #161922;
+  --accent-surface: #28233c;
+  --accent-line: #51446e;
+  --section-alternate: #1b1d2b;
+  --contact-surface: #302b20;
+  --diagram-line: #8c82a3;
+  --feature-surface: #302248;
+  --ai-ink: #b9a0ff;
+  --ai-surface: #28233c;
+  --ai-line: #51446e;
+  --ai-solid: #7550cd;
+  --ai-hover: #6240b6;
+  --software-ink: #67d9c2;
+  --software-surface: #1d3333;
+  --software-line: #37635c;
+  --software-solid: #196c62;
+  --software-hover: #125b53;
+  --data-ink: #ffae8d;
+  --data-surface: #36282b;
+  --data-line: #774f45;
+  --data-solid: #ad472b;
+  --data-hover: #913820;
+  --automation-ink: #e9c073;
+  --automation-surface: #352e21;
+  --automation-line: #65553b;
+  --automation-solid: #835e1d;
+  --automation-hover: #6d4c16;
+  --success-surface: #20382e;
+  --success-line: #47715e;
+  --success-ink: #a1e0bc;
+  --warning-surface: #3b3023;
+  --warning-line: #826c49;
+  --warning-ink: #f0cc8d;
   --heading: 'Manrope Variable', 'Segoe UI', sans-serif;
 }
 
@@ -48,27 +56,35 @@
   --area-ink: var(--ai-ink);
   --area-surface: var(--ai-surface);
   --area-line: var(--ai-line);
+  --area-solid: var(--ai-solid);
+  --area-hover: var(--ai-hover);
 }
 [data-area='software'] {
   --area-ink: var(--software-ink);
   --area-surface: var(--software-surface);
   --area-line: var(--software-line);
+  --area-solid: var(--software-solid);
+  --area-hover: var(--software-hover);
 }
 [data-area='data'] {
   --area-ink: var(--data-ink);
   --area-surface: var(--data-surface);
   --area-line: var(--data-line);
+  --area-solid: var(--data-solid);
+  --area-hover: var(--data-hover);
 }
 [data-area='automation'] {
   --area-ink: var(--automation-ink);
   --area-surface: var(--automation-surface);
   --area-line: var(--automation-line);
+  --area-solid: var(--automation-solid);
+  --area-hover: var(--automation-hover);
 }
 
 main[data-area] {
   --accent: var(--area-ink);
-  --accent-solid: var(--area-ink);
-  --accent-hover: var(--area-ink);
+  --accent-solid: var(--area-solid);
+  --accent-hover: var(--area-hover);
   --accent-surface: var(--area-surface);
   --accent-line: var(--area-line);
 }
@@ -277,7 +293,7 @@ section[tabindex='-1']:focus {
   position: sticky;
   z-index: 50;
   top: 0;
-  background: rgba(255, 255, 255, 0.97);
+  background: rgba(17, 19, 26, 0.97);
   border-bottom: 1px solid var(--line);
 }
 .nav-inner {
@@ -572,7 +588,7 @@ section[tabindex='-1']:focus {
   transition: color 0.18s;
 }
 .featured-main h3 a:hover {
-  color: var(--accent-hover);
+  color: var(--accent);
 }
 .featured-title-arrow {
   width: 23px;
