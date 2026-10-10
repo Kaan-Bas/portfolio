@@ -73,6 +73,8 @@ The project card and `/projects/:slug` page are generated automatically. For a l
 
 The top of **`src/styles.css`** contains the main colour and typography variables. Homepage section spacing uses `.home-section`, while project layouts use `.section`. The `--section-alternate` token controls the alternating homepage backgrounds, and page width uses `.container`. Tablet and mobile overrides are grouped at the bottom. Fonts are self-hosted and bundled from Fontsource; visitors do not need a third-party font request.
 
+The `--ai-*`, `--software-*`, `--data-*` and `--automation-*` colour tokens define the coordinated palette. The `area` field on skill groups and `data-area` attributes connect cards to those colours; changing the tokens updates the palette throughout the site.
+
 ## Tests
 
 ```sh

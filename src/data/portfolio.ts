@@ -185,6 +185,7 @@ export const education = {
 
 export const skillGroups = [
   {
+    area: 'ai',
     title: 'AI & machine learning',
     skills: [
       'Large Language Models',
@@ -196,14 +197,20 @@ export const skillGroups = [
     ],
   },
   {
+    area: 'software',
     title: 'Softwareontwikkeling',
     skills: ['Python', 'Java', 'JavaScript', 'REST APIs', 'JSON', 'Git', 'GitLab CI/CD'],
   },
   {
+    area: 'data',
     title: 'Data',
     skills: ['SQL', 'NoSQL', 'pandas', 'NumPy', 'scikit-learn', 'Data-analyse', 'Power BI'],
   },
-  { title: 'Automatisering & werkwijzen', skills: ['Power Automate', 'Agile / Scrum'] },
+  {
+    area: 'automation',
+    title: 'Automatisering & werkwijzen',
+    skills: ['Power Automate', 'Agile / Scrum'],
+  },
 ]
 
 export const about = [

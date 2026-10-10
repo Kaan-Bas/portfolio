@@ -72,7 +72,7 @@ export default function Home() {
           {pillars.map((pillar, index) => {
             const Icon = pillarIcons[index]
             return (
-              <article className="pillar" key={pillar.id}>
+              <article className="pillar" data-area={pillar.id} key={pillar.id}>
                 <div className="pillar-top">
                   <Icon size={23} aria-hidden="true" />
                 </div>
@@ -192,7 +192,7 @@ export default function Home() {
           />
           <div className="skills-grid">
             {skillGroups.map((group) => (
-              <article className="skill-group" key={group.title}>
+              <article className="skill-group" data-area={group.area} key={group.title}>
                 <h3>{group.title}</h3>
                 <ul>
                   {group.skills.map((skill) => (

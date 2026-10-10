@@ -36,34 +36,34 @@ export function IntersectionGraphic() {
           cx="230"
           cy="150"
           r="113"
-          fill="#f2c7cc"
-          fillOpacity=".48"
-          stroke="#cd8a92"
+          fill="var(--ai-surface)"
+          fillOpacity=".82"
+          stroke="var(--ai-ink)"
           strokeWidth="1.3"
         />
         <circle
           cx="169"
           cy="243"
           r="113"
-          fill="#efecec"
-          fillOpacity=".5"
-          stroke="#b9adaf"
+          fill="var(--software-surface)"
+          fillOpacity=".78"
+          stroke="var(--software-ink)"
           strokeWidth="1.3"
         />
         <circle
           cx="291"
           cy="243"
           r="113"
-          fill="#f1e3e5"
-          fillOpacity=".4"
-          stroke="#c2a1a6"
+          fill="var(--data-surface)"
+          fillOpacity=".72"
+          stroke="var(--data-ink)"
           strokeWidth="1.3"
         />
         <circle cx="230" cy="216" r="36" fill="var(--accent-solid)" />
         <path d="M218 216h24m-12-12v24" stroke="var(--on-accent)" strokeWidth="1.7" />
-        <circle cx="230" cy="37" r="4" fill="var(--accent)" />
-        <circle cx="67" cy="292" r="4" fill="var(--accent)" />
-        <circle cx="393" cy="292" r="4" fill="var(--accent)" />
+        <circle cx="230" cy="37" r="4" fill="var(--ai-ink)" />
+        <circle cx="67" cy="292" r="4" fill="var(--software-ink)" />
+        <circle cx="393" cy="292" r="4" fill="var(--data-ink)" />
         <text x="230" y="108" textAnchor="middle" className="diagram-svg-label">
           AI Engineering
         </text>
@@ -156,7 +156,7 @@ export function ProjectVisual({
       ) : (
         <div className="water-diagram">
           <svg viewBox="0 0 410 150" aria-hidden="true">
-            <g fill="none" stroke="#a7999b" strokeWidth="2">
+            <g fill="none" stroke="var(--software-ink)" strokeWidth="2">
               <path d="M5 38h81v76h92V38h96v76h131M86 76h67V15h180v61h73M35 76v66h91M224 38V5M333 76v60" />
             </g>
             <g fill="var(--surface)" stroke="var(--diagram-line)" strokeWidth="2">

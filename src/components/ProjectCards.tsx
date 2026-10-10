@@ -21,7 +21,7 @@ export function FeaturedProject() {
         <p className="project-context">{featuredProject.context}</p>
         <p className="featured-description">{featuredProject.description}</p>
         <Tags items={featuredProject.previewTags} />
-        <Link className="button button-light" to={`/projects/${featuredProject.slug}`}>
+        <Link className="button button-primary" to={`/projects/${featuredProject.slug}`}>
           Bekijk de casestudy
           <ArrowRight size={17} aria-hidden="true" />
         </Link>
@@ -57,7 +57,7 @@ export function FeaturedProject() {
 
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
-    <article className="project-card">
+    <article className="project-card" data-area={project.visual === 'water' ? 'data' : 'ai'}>
       <div className="project-card-body">
         <div className="project-overline">
           <span>{project.organization}</span>
