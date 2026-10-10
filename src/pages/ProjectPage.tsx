@@ -12,7 +12,7 @@ export default function ProjectPage() {
   if (!project) return <NotFound />
   const nextProject = projects.find((item) => item.slug !== slug)!
   return (
-    <main id="main-content" data-area={project.visual === 'water' ? 'data' : 'ai'} tabIndex={-1}>
+    <main id="main-content" tabIndex={-1}>
       <section className="case-hero container simple-project-hero">
         <BackToWork />
         <p className="eyebrow case-eyebrow">

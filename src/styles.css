@@ -20,29 +20,21 @@
   --accent-surface: #28233c;
   --accent-line: #51446e;
   --section-alternate: #1b1d2b;
-  --contact-surface: #302b20;
+  --contact-surface: #1b1d2b;
   --diagram-line: #8c82a3;
   --feature-surface: #302248;
   --ai-ink: #b9a0ff;
   --ai-surface: #28233c;
   --ai-line: #51446e;
-  --ai-solid: #7550cd;
-  --ai-hover: #6240b6;
   --software-ink: #67d9c2;
   --software-surface: #1d3333;
   --software-line: #37635c;
-  --software-solid: #196c62;
-  --software-hover: #125b53;
   --data-ink: #ffae8d;
   --data-surface: #36282b;
   --data-line: #774f45;
-  --data-solid: #ad472b;
-  --data-hover: #913820;
   --automation-ink: #e9c073;
   --automation-surface: #352e21;
   --automation-line: #65553b;
-  --automation-solid: #835e1d;
-  --automation-hover: #6d4c16;
   --success-surface: #20382e;
   --success-line: #47715e;
   --success-ink: #a1e0bc;
@@ -56,38 +48,23 @@
   --area-ink: var(--ai-ink);
   --area-surface: var(--ai-surface);
   --area-line: var(--ai-line);
-  --area-solid: var(--ai-solid);
-  --area-hover: var(--ai-hover);
 }
 [data-area='software'] {
   --area-ink: var(--software-ink);
   --area-surface: var(--software-surface);
   --area-line: var(--software-line);
-  --area-solid: var(--software-solid);
-  --area-hover: var(--software-hover);
 }
 [data-area='data'] {
   --area-ink: var(--data-ink);
   --area-surface: var(--data-surface);
   --area-line: var(--data-line);
-  --area-solid: var(--data-solid);
-  --area-hover: var(--data-hover);
 }
 [data-area='automation'] {
   --area-ink: var(--automation-ink);
   --area-surface: var(--automation-surface);
   --area-line: var(--automation-line);
-  --area-solid: var(--automation-solid);
-  --area-hover: var(--automation-hover);
 }
 
-main[data-area] {
-  --accent: var(--area-ink);
-  --accent-solid: var(--area-solid);
-  --accent-hover: var(--area-hover);
-  --accent-surface: var(--area-surface);
-  --accent-line: var(--area-line);
-}
 *,
 *::before,
 *::after {
@@ -164,11 +141,9 @@ section[tabindex='-1']:focus {
   padding-block: 104px;
   border-top: 1px solid var(--line);
 }
-.work-section {
-  background: var(--section-alternate);
-}
+.work-section,
 .experience-section {
-  background: var(--software-surface);
+  background: var(--section-alternate);
 }
 .accent {
   color: var(--accent);
@@ -363,9 +338,6 @@ section[tabindex='-1']:focus {
   letter-spacing: -6px;
   line-height: 1.12;
   margin-left: -4px;
-}
-.hero h1 .accent {
-  color: var(--data-ink);
 }
 .hero h2 {
   font-size: clamp(24px, 2.55vw, 33px);
@@ -630,7 +602,6 @@ section[tabindex='-1']:focus {
 .featured-result {
   --ink: #fff;
   --muted: #e5def4;
-  --accent: #f4c85c;
   --line: #65518e;
   color: var(--ink);
   display: flex;
@@ -718,17 +689,20 @@ section[tabindex='-1']:focus {
 .project-card {
   display: flex;
   flex-direction: column;
-  background: var(--area-surface);
-  border: 1px solid var(--area-line);
-  border-top: 4px solid var(--area-ink);
+  background: var(--surface);
+  border: 1px solid var(--accent-line);
+  border-top: 4px solid var(--accent);
   border-radius: 12px;
   overflow: hidden;
   transition: border-color 0.2s;
 }
 .project-card:hover {
-  border-color: var(--area-ink);
+  border-color: var(--accent);
 }
 .project-visual {
+  --accent: var(--area-ink);
+  --accent-surface: var(--area-surface);
+  --accent-line: var(--area-line);
   background: var(--ai-surface);
   padding: 22px 25px;
   min-height: 224px;
@@ -872,7 +846,7 @@ section[tabindex='-1']:focus {
   flex-direction: column;
 }
 .project-card .project-overline {
-  color: var(--area-ink);
+  color: var(--accent);
   font-size: 10px;
 }
 .project-card h3 {
@@ -889,7 +863,7 @@ section[tabindex='-1']:focus {
 }
 .project-card h3 svg {
   margin-top: 5px;
-  color: var(--area-ink);
+  color: var(--accent);
   transition: transform 0.2s;
 }
 .project-card h3 a:hover svg {
@@ -930,7 +904,7 @@ section[tabindex='-1']:focus {
   white-space: nowrap;
 }
 .project-card-bottom a:hover {
-  color: var(--area-ink);
+  color: var(--accent);
 }
 
 /* Personal background */
@@ -949,7 +923,7 @@ section[tabindex='-1']:focus {
   font-weight: 650;
   max-width: 440px;
   padding-left: 24px;
-  border-left: 4px solid var(--software-ink);
+  border-left: 4px solid var(--accent);
 }
 .about-copy > p {
   font-size: 15px;
@@ -1048,12 +1022,12 @@ section[tabindex='-1']:focus {
 .education-card {
   background: var(--paper);
   border: 1px solid var(--line);
-  border-left: 4px solid var(--software-ink);
+  border-left: 4px solid var(--accent);
   border-radius: 12px;
   padding: 29px;
 }
 .education-card > svg {
-  color: var(--software-ink);
+  color: var(--accent);
   margin-bottom: 19px;
 }
 .education-institution {

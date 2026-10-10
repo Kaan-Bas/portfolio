@@ -57,7 +57,7 @@ export function FeaturedProject() {
 
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
-    <article className="project-card" data-area={project.visual === 'water' ? 'data' : 'ai'}>
+    <article className="project-card">
       <div className="project-card-body">
         <div className="project-overline">
           <span>{project.organization}</span>

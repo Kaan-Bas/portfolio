@@ -102,6 +102,7 @@ export function ProjectVisual({
   return (
     <figure
       className={`project-visual ${type} ${large ? 'visual-large' : ''}`}
+      data-area={type === 'water' ? 'data' : 'ai'}
       aria-label={
         type === 'water'
           ? 'Conceptuele workflow: historische data, analyse, classificatie en voorspelling van leidingstoringen'
