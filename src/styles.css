@@ -22,7 +22,7 @@
   --section-alternate: #1b1d2b;
   --contact-surface: #1b1d2b;
   --diagram-line: #8c82a3;
-  --feature-surface: #302248;
+  --feature-surface: var(--surface-soft);
   --ai-ink: #b9a0ff;
   --ai-surface: #28233c;
   --ai-line: #51446e;
@@ -600,9 +600,6 @@ section[tabindex='-1']:focus {
   min-height: 43px;
 }
 .featured-result {
-  --ink: #fff;
-  --muted: #e5def4;
-  --line: #65518e;
   color: var(--ink);
   display: flex;
   flex-direction: column;
@@ -623,6 +620,7 @@ section[tabindex='-1']:focus {
   background: var(--accent);
 }
 .metric {
+  color: var(--accent);
   font-family: var(--heading);
   font-weight: 500;
   font-size: clamp(60px, 7vw, 93px);
@@ -1682,7 +1680,7 @@ section[tabindex='-1']:focus {
   color: var(--muted);
 }
 .result-panel {
-  background: var(--accent-surface);
+  background: var(--feature-surface);
   border: 1px solid var(--line);
   border-radius: 6px;
   padding: 35px;
