@@ -3,7 +3,7 @@ export const profile = {
   name: 'Kaan Bas',
   headline: 'Toegepaste AI & machine learning.',
   introduction:
-    'Recent afgestudeerd in HBO-ICT: Software Engineering. Ervaring met LLM-toepassingen bij Siemens en machine-learningprojecten tijdens de minor Data Driven Business – AI Engineering.',
+    'Afgestudeerd in HBO-ICT met een sterke interesse in AI & Data. Gedreven om technologie te vertalen naar praktische en slimme oplossingen.',
   email: 'kaan.bas762@gmail.com',
   linkedin: 'https://www.linkedin.com/in/kaan-bas-62225a420',
   github: 'https://github.com/Kaan-Bas',
