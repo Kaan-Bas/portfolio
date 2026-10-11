@@ -1,7 +1,7 @@
 // Pas hier je persoonlijke gegevens en contactlinks aan. Lege links tonen een gelabelde placeholder.
 export const profile = {
   name: 'Kaan Bas',
-  headline: 'Toegepaste AI & machine learning.',
+  headline: 'Technologie vertalen naar impact',
   introduction:
     'Afgestudeerd in HBO-ICT met een sterke interesse in AI & Data. Gedreven om technologie te vertalen naar praktische en slimme oplossingen.',
   email: 'kaan.bas762@gmail.com',
