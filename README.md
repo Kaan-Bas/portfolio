@@ -25,7 +25,7 @@ Use `npm run format` to format source files consistently.
 
 ```text
 src/
-  components/       Reusable layout, focus navigation, cards and workflow diagrams
+  components/       Reusable layout, filters, cards and conceptual workflow visuals
   data/
     portfolio.ts    Personal details, links, projects, skills and background
     siemens.ts      Case-study contributions, evaluation and learnings
@@ -53,7 +53,7 @@ tests/portfolio.spec.ts   Browser, navigation, responsive and accessibility chec
 Start in **`src/data/portfolio.ts`**:
 
 - `profile`: name, introduction, email, LinkedIn, GitHub and website origin.
-- `focusAreas`: descriptions and introductions for AI, data and software. The hero navigation and filters use these entries.
+- `focusAreas`: descriptions and introductions for AI, data and software. The profile cards and filters select these entries.
 - `featuredProject`: homepage Siemens card.
 - `projects`: IDCP, Waternet and any additional projects.
 - `previewTags`: a short selection of tags for the homepage; `tags` keeps the complete list for each case study.
@@ -62,7 +62,9 @@ Start in **`src/data/portfolio.ts`**:
 
 The contact email and social links are used throughout the site. Clear a social URL to show a labelled placeholder; an empty GitHub URL hides that optional link.
 
-Recruiters can choose a discipline in the hero or use the project and skill filters. The choice is preserved in the URL, for example `/?focus=data#work`, so it survives reloads, remains selected when returning from a case study and can be shared. AI shows Siemens and IDCP; data shows Waternet first, followed by IDCP; software shows the Endeavour internship as work experience. `Alles` restores the full overview. The three profile cards remain visible in every view.
+Recruiters can choose a discipline from the technical-background cards or use the project and skill filters. The choice is preserved in the URL, for example `/?focus=data#work`, so it survives reloads, remains selected when returning from a case study and can be shared. AI shows Siemens and IDCP; data shows Waternet first, followed by IDCP; software shows the Endeavour internship as work experience. `Alles` restores the full overview. The three profile cards remain visible in every view.
+
+The hero uses `src/components/CodeVisual.tsx`: a decorative SVG with abstract coding symbols, layered panels and a subtle dot grid. It has no project-specific meaning, contains no actual source code and is hidden from assistive technology. Its styles are in `.code-visual` in `src/styles.css`.
 
 The Siemens story is laid out in **`src/pages/Siemens.tsx`**. Its reusable lists are in **`src/data/siemens.ts`**. Keep the metric tied to the evaluated test cases and describe the solution as a prototype. The architecture in `src/components/Diagrams.tsx` is conceptual and does not reproduce internal systems or confidential data.
 

@@ -34,8 +34,6 @@ export const focusAreas = [
   {
     id: 'ai',
     title: 'AI Engineering',
-    summary: 'LLM-toepassingen & procesautomatisering',
-    proof: 'Siemens · offerteautomatisering',
     introduction:
       'Tijdens mijn afstudeerstage bij Siemens ontwikkelde ik een LLM-workflow voor offerteverwerking, met Python-validatie en menselijke controle. Mijn focus ligt op praktische AI-toepassingen.',
     workDescription: 'LLM-extractie, procesautomatisering en gebruikersondersteuning met AI.',
@@ -43,8 +41,6 @@ export const focusAreas = [
   {
     id: 'data',
     title: 'Data & Machine Learning',
-    summary: 'Data-analyse & voorspellende modellen',
-    proof: 'Waternet · leidingstoringen voorspellen',
     introduction:
       'Tijdens mijn AI Engineering-minor analyseerde ik historische storingsdata en ontwikkelde ik een classificatiemodel voor Waternet. Bij IDCP werkte ik aan een hybride aanbevelingssysteem in Python.',
     workDescription: 'Datavoorbereiding, analyse, classificatie en aanbevelingssystemen in Python.',
@@ -52,8 +48,6 @@ export const focusAreas = [
   {
     id: 'software',
     title: 'Software Engineering',
-    summary: 'Frontend, backend & API-ontwikkeling',
-    proof: 'Endeavour · softwareontwikkelstage',
     introduction:
       'Afgestudeerd in HBO-ICT: Software Engineering. Tijdens mijn stage bij Endeavour werkte ik aan frontend- en backendontwikkeling, API-endpoints en de koppeling van database- en CMS-data aan de frontend.',
     workDescription:

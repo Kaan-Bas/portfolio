@@ -382,78 +382,17 @@ section[tabindex='-1']:focus {
 .hero-headline {
   color: var(--accent);
 }
-.focus-navigator {
+.code-visual {
   width: 100%;
   max-width: 490px;
   margin-left: auto;
-  padding: 30px;
-  background: var(--surface-soft);
-  border: 1px solid var(--line);
-  border-radius: 16px;
+  pointer-events: none;
+  user-select: none;
 }
-.hero .focus-heading {
-  font-size: 25px;
-  line-height: 1.35;
-  letter-spacing: -0.8px;
-  margin-top: 12px;
-}
-.focus-introduction {
-  color: var(--muted);
-  font-size: 12px;
-  margin-top: 12px;
-  max-width: 330px;
-}
-.focus-navigator nav {
-  margin-top: 24px;
-}
-.focus-navigator nav a {
-  display: grid;
-  grid-template-columns: 22px minmax(0, 1fr) 19px;
-  gap: 12px;
-  align-items: start;
-  padding-block: 21px;
-  border-top: 1px solid var(--line);
-  transition: color 160ms ease;
-}
-.focus-number,
-.focus-navigator nav a > svg {
-  color: var(--accent);
-  margin-top: 3px;
-}
-.focus-number {
-  font-size: 10px;
-  font-weight: 600;
-}
-.focus-details > * {
+.code-visual > svg {
   display: block;
-}
-.focus-details strong {
-  font-family: var(--heading);
-  font-size: 15px;
-  font-weight: 650;
-}
-.focus-details > span {
-  color: var(--muted);
-  font-size: 11px;
-  margin-top: 4px;
-}
-.focus-details small {
-  color: var(--accent);
-  font-size: 10px;
-  margin-top: 8px;
-}
-.focus-navigator nav a:hover,
-.focus-navigator nav a[aria-current] {
-  color: var(--accent);
-}
-.focus-note {
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 10px;
-  color: var(--muted);
+  width: 100%;
+  height: auto;
 }
 .pillars-section {
   padding-bottom: 88px;
@@ -2146,22 +2085,6 @@ section[tabindex='-1']:focus {
   .hero-introduction {
     font-size: 12px;
   }
-  .focus-navigator {
-    padding: 20px;
-  }
-  .hero .focus-heading {
-    font-size: 20px;
-  }
-  .focus-navigator nav a {
-    grid-template-columns: minmax(0, 1fr) 16px;
-    gap: 8px;
-  }
-  .focus-number {
-    display: none;
-  }
-  .focus-details strong {
-    font-size: 13px;
-  }
   .pillar {
     padding: 23px 17px;
   }
@@ -2465,16 +2388,9 @@ section[tabindex='-1']:focus {
   .hero-education small {
     font-size: 9px;
   }
-  .focus-navigator {
-    margin: 35px auto 0;
-    max-width: 460px;
-    padding: 24px;
-  }
-  .hero .focus-heading {
-    font-size: 23px;
-  }
-  .focus-details strong {
-    font-size: 15px;
+  .code-visual {
+    margin: 28px auto 0;
+    max-width: 400px;
   }
   .focus-filters a {
     padding: 9px 12px;

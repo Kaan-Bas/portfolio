@@ -12,7 +12,8 @@ import {
   projects,
   projectUrl,
 } from '../data/portfolio'
-import { FocusFilters, FocusNavigator } from '../components/FocusNavigation'
+import { FocusFilters } from '../components/FocusNavigation'
+import { CodeVisual } from '../components/CodeVisual'
 import { FeaturedProject, SelectedProjects, SoftwareExperience } from '../components/ProjectCards'
 import { Contact } from '../components/Layout'
 import { ExternalLink, SectionHeading } from '../components/ui'
@@ -63,7 +64,7 @@ export default function Home() {
             </span>
           </div>
         </div>
-        <FocusNavigator focus={focus} />
+        <CodeVisual />
       </section>
 
       <section className="pillars-section container" aria-labelledby="pillars-title">

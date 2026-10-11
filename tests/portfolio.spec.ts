@@ -59,6 +59,11 @@ test('pages load directly with correct titles and no horizontal overflow', async
         path: `.artifacts/${route === '/' ? 'home' : 'siemens'}-${testInfo.project.name}.png`,
         fullPage: true,
       })
+      if (route === '/') {
+        await page
+          .locator('.hero')
+          .screenshot({ path: `.artifacts/hero-${testInfo.project.name}.png` })
+      }
     }
   }
   expect(errors).toEqual([])
@@ -93,10 +98,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   isMobile,
 }, testInfo) => {
   await page.goto('/')
-  await page
-    .getByRole('navigation', { name: 'Bekijk werk per vakgebied' })
-    .getByRole('link', { name: /Data & Machine Learning/ })
-    .click()
+  await page.getByRole('link', { name: 'Bekijk dataprojecten', exact: true }).click()
   await expect(page).toHaveURL(/\?focus=data#work$/)
   await expect(page).toHaveTitle('Data & Machine Learning — Kaan Bas')
   const work = page.locator('#work')
