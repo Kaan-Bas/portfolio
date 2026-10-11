@@ -379,49 +379,80 @@ section[tabindex='-1']:focus {
   color: var(--muted);
   margin-top: 4px;
 }
-.intersection-graphic {
+.hero-headline {
+  color: var(--accent);
+}
+.focus-navigator {
   width: 100%;
   max-width: 490px;
   margin-left: auto;
-  position: relative;
-  padding: 24px;
+  padding: 30px;
   background: var(--surface-soft);
   border: 1px solid var(--line);
-  border-radius: 20px;
+  border-radius: 16px;
 }
-.graphic-topline {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.hero .focus-heading {
+  font-size: 25px;
+  line-height: 1.35;
+  letter-spacing: -0.8px;
+  margin-top: 12px;
+}
+.focus-introduction {
   color: var(--muted);
-  font-size: 8px;
+  font-size: 12px;
+  margin-top: 12px;
+  max-width: 330px;
+}
+.focus-navigator nav {
+  margin-top: 24px;
+}
+.focus-navigator nav a {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) 19px;
+  gap: 12px;
+  align-items: start;
+  padding-block: 21px;
+  border-top: 1px solid var(--line);
+  transition: color 160ms ease;
+}
+.focus-number,
+.focus-navigator nav a > svg {
+  color: var(--accent);
+  margin-top: 3px;
+}
+.focus-number {
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 1.25px;
-  padding: 2px 7px;
 }
-.intersection-svg {
+.focus-details > * {
   display: block;
-  width: 100%;
-  height: auto;
-  margin-block: 3px;
 }
-.diagram-svg-label {
+.focus-details strong {
   font-family: var(--heading);
-  font-size: 13px;
-  fill: var(--ink);
+  font-size: 15px;
   font-weight: 650;
 }
-.diagram-svg-small {
-  font-family: 'DM Sans Variable', sans-serif;
-  font-size: 10px;
-  fill: var(--muted);
+.focus-details > span {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 4px;
 }
-.intersection-graphic figcaption {
-  padding: 10px 7px 2px;
+.focus-details small {
+  color: var(--accent);
+  font-size: 10px;
+  margin-top: 8px;
+}
+.focus-navigator nav a:hover,
+.focus-navigator nav a[aria-current] {
+  color: var(--accent);
+}
+.focus-note {
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 9px;
+  font-size: 10px;
   color: var(--muted);
 }
 .pillars-section {
@@ -450,6 +481,8 @@ section[tabindex='-1']:focus {
   gap: 16px;
 }
 .pillar {
+  display: flex;
+  flex-direction: column;
   padding: 28px 27px;
   background: var(--area-surface);
   border: 1px solid var(--area-line);
@@ -484,6 +517,82 @@ section[tabindex='-1']:focus {
   font-size: 11px;
   line-height: 1.9;
   margin-top: 18px;
+}
+.pillar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 20px;
+  margin-top: auto;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--area-ink);
+}
+.focus-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.focus-filters a {
+  padding: 10px 15px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface-soft);
+  color: var(--muted);
+  font-size: 12px;
+  transition:
+    border-color 160ms ease,
+    color 160ms ease;
+}
+.focus-filters a:hover,
+.focus-filters a[aria-current] {
+  border-color: var(--accent-line);
+  background: var(--accent-surface);
+  color: var(--accent);
+}
+.focus-status {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.selected-projects.is-single {
+  grid-template-columns: 1fr;
+  max-width: 760px;
+}
+.software-experience {
+  padding: 40px;
+  border: 1px solid var(--line);
+  background: var(--surface-soft);
+  border-radius: 12px;
+}
+.software-experience .company-label {
+  margin-top: 28px;
+}
+.software-experience h3 {
+  font-size: 28px;
+  line-height: 1.4;
+  letter-spacing: -0.8px;
+  margin-top: 12px;
+}
+.software-experience > p:not(.company-label) {
+  max-width: 620px;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 18px;
+}
+.software-experience .tags {
+  margin-top: 24px;
+}
+.software-experience > a {
+  margin-top: 28px;
+}
+.skills-grid.is-focused {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  max-width: 760px;
+}
+.skills-grid.is-focused .skill-group:only-child {
+  max-width: 430px;
 }
 
 /* Project selection */
@@ -1610,17 +1719,17 @@ section[tabindex='-1']:focus {
   padding-top: 16px;
   line-height: 1.8;
 }
-.project-pillar-grid {
+.pipeline-components {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 23px;
   margin-top: 29px;
 }
-.project-pillar-grid h3 {
+.pipeline-components h3 {
   font-size: 18px;
   margin-top: 8px;
 }
-.project-pillar-grid p {
+.pipeline-components p {
   margin-top: 9px;
   font-size: 11px;
   line-height: 1.8;
@@ -2037,15 +2146,21 @@ section[tabindex='-1']:focus {
   .hero-introduction {
     font-size: 12px;
   }
-  .intersection-graphic {
-    padding: 12px;
+  .focus-navigator {
+    padding: 20px;
   }
-  .graphic-topline {
-    font-size: 6px;
-    letter-spacing: 0.6px;
+  .hero .focus-heading {
+    font-size: 20px;
   }
-  .intersection-graphic figcaption {
-    font-size: 7px;
+  .focus-navigator nav a {
+    grid-template-columns: minmax(0, 1fr) 16px;
+    gap: 8px;
+  }
+  .focus-number {
+    display: none;
+  }
+  .focus-details strong {
+    font-size: 13px;
   }
   .pillar {
     padding: 23px 17px;
@@ -2350,20 +2465,29 @@ section[tabindex='-1']:focus {
   .hero-education small {
     font-size: 9px;
   }
-  .intersection-graphic {
+  .focus-navigator {
     margin: 35px auto 0;
-    max-width: 420px;
-    padding: 15px;
+    max-width: 460px;
+    padding: 24px;
   }
-  .graphic-topline {
-    font-size: 7px;
-    letter-spacing: 1px;
+  .hero .focus-heading {
+    font-size: 23px;
   }
-  .intersection-svg {
-    max-height: 310px;
+  .focus-details strong {
+    font-size: 15px;
   }
-  .intersection-graphic figcaption {
-    font-size: 8px;
+  .focus-filters a {
+    padding: 9px 12px;
+    font-size: 11px;
+  }
+  .software-experience {
+    padding: 24px;
+  }
+  .software-experience h3 {
+    font-size: 23px;
+  }
+  .skills-grid.is-focused {
+    grid-template-columns: 1fr;
   }
   .pillar-intro {
     display: block;
@@ -2790,24 +2914,24 @@ section[tabindex='-1']:focus {
   .architecture figcaption {
     font-size: 7px;
   }
-  .project-pillar-grid {
+  .pipeline-components {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  .project-pillar-grid > div {
+  .pipeline-components > div {
     padding-left: 15px;
     border-left: 1px solid var(--line);
   }
-  .project-pillar-grid .eyebrow {
+  .pipeline-components .eyebrow {
     display: inline-block;
     margin-right: 13px;
   }
-  .project-pillar-grid h3 {
+  .pipeline-components h3 {
     display: inline-block;
     margin-top: 0;
     font-size: 16px;
   }
-  .project-pillar-grid p {
+  .pipeline-components p {
     font-size: 11px;
     margin-top: 8px;
   }

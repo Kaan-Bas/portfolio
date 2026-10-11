@@ -14,6 +14,8 @@ const projectPaths = [
   '/projects/waternet-pipe-failure-prediction',
 ]
 
+const focusPaths = ['/?focus=ai', '/?focus=data', '/?focus=software']
+
 test('recruiter flow: homepage → Siemens → work → contact', async ({ page }) => {
   await page.goto('/')
   await expect(page.getByRole('heading', { name: 'Kaan Bas.' })).toBeVisible()
@@ -41,7 +43,7 @@ test('pages load directly with correct titles and no horizontal overflow', async
 }, testInfo) => {
   const errors: string[] = []
   page.on('pageerror', (error) => errors.push(error.message))
-  for (const route of ['/', ...projectPaths, '/missing-page']) {
+  for (const route of ['/', ...focusPaths, '/?focus=unknown', ...projectPaths, '/missing-page']) {
     await page.goto(route)
     await expect(page.locator('html')).toHaveAttribute('lang', 'nl')
     await expect(page.locator('main h1')).toHaveCount(1)
@@ -86,9 +88,96 @@ test('keyboard skip link and mobile navigation', async ({ page, isMobile }) => {
   }
 })
 
+test('recruiters can choose a discipline, reload it and reset the view', async ({
+  page,
+  isMobile,
+}, testInfo) => {
+  await page.goto('/')
+  await page
+    .getByRole('navigation', { name: 'Bekijk werk per vakgebied' })
+    .getByRole('link', { name: /Data & Machine Learning/ })
+    .click()
+  await expect(page).toHaveURL(/\?focus=data#work$/)
+  await expect(page).toHaveTitle('Data & Machine Learning — Kaan Bas')
+  const work = page.locator('#work')
+  const skills = page.locator('#skills')
+  const projectFilters = page.getByRole('navigation', { name: 'Filter projecten op vakgebied' })
+  await expect(work.getByRole('heading', { level: 3 }).first()).toHaveText(
+    'Voorspellen van leidingstoringen',
+  )
+  await expect(work.getByRole('link', { name: 'Bekijk de casestudy' })).toHaveCount(0)
+  await expect(skills.getByRole('heading', { level: 3 })).toHaveCount(1)
+  await expect(skills.getByRole('heading', { name: 'Data & Machine Learning' })).toBeVisible()
+  await page.reload()
+  await expect(
+    projectFilters.getByRole('link', { name: 'Data & Machine Learning' }),
+  ).toHaveAttribute('aria-current', 'true')
+  await work.screenshot({ path: `.artifacts/focus-data-${testInfo.project.name}.png` })
+  await work
+    .getByRole('link', { name: 'Bekijk project: Voorspellen van leidingstoringen', exact: true })
+    .click()
+  await expect(page).toHaveURL(/waternet-pipe-failure-prediction\?focus=data$/)
+  await page.getByRole('link', { name: 'Terug naar projecten' }).click()
+  await expect(page).toHaveURL(/\?focus=data#work$/)
+  await expect(work.getByRole('link', { name: 'Bekijk de casestudy' })).toHaveCount(0)
+
+  await projectFilters.getByRole('link', { name: 'Software Engineering', exact: true }).click()
+  await expect(work.getByRole('heading', { name: 'Praktijkervaring' })).toBeVisible()
+  await expect(work.getByText('Stage · Endeavour')).toBeVisible()
+  await expect(
+    work.getByRole('heading', { name: 'Frontend, backend en API-ontwikkeling' }),
+  ).toBeVisible()
+  await expect(
+    skills.getByRole('heading', { name: 'Software Engineering', exact: true }),
+  ).toBeVisible()
+  await work.getByRole('link', { name: 'Bekijk mijn werkervaring' }).click()
+  await expect(page).toHaveURL(/\?focus=software#experience$/)
+  await expect(
+    page.locator('#experience').getByRole('heading', { name: 'Endeavour' }),
+  ).toBeVisible()
+
+  await projectFilters.getByRole('link', { name: 'AI Engineering', exact: true }).click()
+  await expect(work.getByRole('link', { name: 'Bekijk de casestudy' })).toBeVisible()
+  await expect(
+    work.getByRole('heading', { name: 'LLM-chatbot & hybride aanbevelingssysteem' }),
+  ).toBeVisible()
+  await expect(work.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(
+    0,
+  )
+  await work.getByRole('link', { name: 'Bekijk de casestudy' }).click()
+  await expect(page).toHaveURL(/siemens-ai-quotation-automation\?focus=ai$/)
+  await page.getByRole('link', { name: '03 De workflow' }).click()
+  await expect(page).toHaveURL(/\?focus=ai#architecture$/)
+  await page.getByRole('link', { name: 'Terug naar projecten' }).click()
+  await expect(page).toHaveURL(/\?focus=ai#work$/)
+  await expect(work.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(
+    0,
+  )
+  if (isMobile) await page.getByRole('button', { name: 'Navigatie openen' }).click()
+  await page
+    .getByRole('navigation', { name: 'Hoofdnavigatie' })
+    .getByRole('link', { name: 'Vaardigheden' })
+    .click()
+  await expect(page).toHaveURL(/\?focus=ai#skills$/)
+  await expect(skills.getByRole('heading', { name: 'AI Engineering', exact: true })).toBeVisible()
+
+  await page
+    .getByRole('navigation', { name: 'Filter vaardigheden op vakgebied' })
+    .getByRole('link', { name: 'Alles', exact: true })
+    .click()
+  await expect(page).toHaveURL('/#skills')
+  await expect(skills.getByRole('heading', { level: 3 })).toHaveCount(4)
+  await expect(work.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(
+    1,
+  )
+  await page.goBack()
+  await expect(page).toHaveURL(/\?focus=ai#skills$/)
+  await expect(skills.getByRole('heading', { level: 3 })).toHaveCount(2)
+})
+
 test('all portfolio pages have no WCAG A/AA violations', async ({ page }) => {
   const issues = []
-  for (const route of ['/', ...projectPaths]) {
+  for (const route of ['/', ...focusPaths, ...projectPaths]) {
     await page.goto(route)
     await page.addScriptTag({ content: axe.source })
     const violations = await page.evaluate(async () => {

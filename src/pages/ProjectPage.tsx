@@ -1,16 +1,20 @@
 import { ArrowRight } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
-import { projects } from '../data/portfolio'
+import { focusUrl, projects, projectUrl } from '../data/portfolio'
 import { BackToWork, Tags } from '../components/ui'
 import { ProjectVisual } from '../components/Diagrams'
 import { Contact } from '../components/Layout'
 import NotFound from './NotFound'
+import { useFocus } from '../hooks/useFocus'
 
 export default function ProjectPage() {
   const { slug } = useParams()
+  const { focus } = useFocus()
   const project = projects.find((item) => item.slug === slug)
   if (!project) return <NotFound />
-  const nextProject = projects.find((item) => item.slug !== slug)!
+  const nextProject = projects.find(
+    (item) => item.slug !== slug && (focus === 'all' || item.focusAreas.includes(focus)),
+  )
   return (
     <main id="main-content" tabIndex={-1}>
       <section className="case-hero container simple-project-hero">
@@ -37,13 +41,13 @@ export default function ProjectPage() {
                 ? 'Van historische data naar het voorspellen van storingen.'
                 : 'Gebruikersondersteuning en aanbevelingen verbinden.'}
             </h2>
-            <Tags items={project.areas} />
+            <Tags items={project.topics} />
           </div>
           <p>{project.overview}</p>
         </div>
         <section className="contributions-section">
           <p className="eyebrow">Mijn bijdrage</p>
-          <h2>Van onderdelen naar een geheel.</h2>
+          <h2>Mijn werk aan het project.</h2>
           <div className="contributions-grid">
             {project.contributions.map((contribution, index) => (
               <article key={contribution.title}>
@@ -55,15 +59,17 @@ export default function ProjectPage() {
           </div>
         </section>
         <div className="project-takeaway">
-          <p className="eyebrow">Een samenhangend profiel in de praktijk</p>
+          <p className="eyebrow">Wat dit project laat zien</p>
           <p>{project.takeaway}</p>
         </div>
         <div className="case-next">
-          <Link className="text-link" to={`/projects/${nextProject.slug}`}>
-            {nextProject.title}
-            <ArrowRight size={17} aria-hidden="true" />
-          </Link>
-          <Link className="text-link" to="/#work">
+          {nextProject && (
+            <Link className="text-link" to={projectUrl(nextProject.slug, focus)}>
+              {nextProject.title}
+              <ArrowRight size={17} aria-hidden="true" />
+            </Link>
+          )}
+          <Link className="text-link" to={focusUrl(focus)}>
             Alle projecten
           </Link>
         </div>

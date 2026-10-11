@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { focusUrl } from '../data/portfolio'
+import { useFocus } from '../hooks/useFocus'
 
 export function SectionHeading({
   number,
@@ -63,8 +65,9 @@ export function ExternalLink({
 }
 
 export function BackToWork() {
+  const { focus } = useFocus()
   return (
-    <Link className="back-link" to="/#work">
+    <Link className="back-link" to={focusUrl(focus)}>
       <span aria-hidden="true">←</span> Terug naar projecten
     </Link>
   )

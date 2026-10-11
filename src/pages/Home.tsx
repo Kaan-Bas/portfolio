@@ -4,19 +4,34 @@ import {
   about,
   education,
   experience,
+  focusUrl,
   interests,
   pillars,
   profile,
   skillGroups,
+  projects,
+  projectUrl,
 } from '../data/portfolio'
-import { IntersectionGraphic } from '../components/Diagrams'
-import { FeaturedProject, SelectedProjects } from '../components/ProjectCards'
+import { FocusFilters, FocusNavigator } from '../components/FocusNavigation'
+import { FeaturedProject, SelectedProjects, SoftwareExperience } from '../components/ProjectCards'
 import { Contact } from '../components/Layout'
 import { ExternalLink, SectionHeading } from '../components/ui'
+import { useFocus } from '../hooks/useFocus'
 
 const pillarIcons = [Sparkles, Braces, Database]
 
 export default function Home() {
+  const { focus, selectedArea } = useFocus()
+  const visibleProjects = projects.filter(
+    (project) => focus === 'all' || project.focusAreas.includes(focus),
+  )
+  if (focus === 'data')
+    visibleProjects.sort((a, b) => Number(b.visual === 'water') - Number(a.visual === 'water'))
+  const visibleSkills = skillGroups.filter(
+    (group) =>
+      focus === 'all' || group.area === focus || (focus === 'ai' && group.area === 'automation'),
+  )
+  const showFeatured = focus === 'all' || focus === 'ai'
   return (
     <main id="main-content" className="home-page" tabIndex={-1}>
       <section className="hero container" aria-labelledby="hero-title">
@@ -29,15 +44,10 @@ export default function Home() {
             {profile.name}
             <span className="accent">.</span>
           </h1>
-          <h2>
-            {profile.headline.firstLine}
-            <br />
-            {profile.headline.secondLine}
-            <span className="accent">{profile.headline.emphasis}</span>
-          </h2>
-          <p className="hero-introduction">{profile.introduction}</p>
+          <h2 className="hero-headline">{selectedArea?.title ?? profile.headline}</h2>
+          <p className="hero-introduction">{selectedArea?.introduction ?? profile.introduction}</p>
           <div className="hero-actions">
-            <Link className="button button-primary" to="/#work">
+            <Link className="button button-primary" to={focusUrl(focus)}>
               Bekijk mijn projecten
               <ArrowDown size={17} aria-hidden="true" />
             </Link>
@@ -53,20 +63,13 @@ export default function Home() {
             </span>
           </div>
         </div>
-        <IntersectionGraphic />
+        <FocusNavigator focus={focus} />
       </section>
 
       <section className="pillars-section container" aria-labelledby="pillars-title">
         <div className="pillar-intro">
-          <h2 id="pillars-title">
-            Drie vakgebieden.
-            <br className="mobile-only" /> Eén praktische aanpak.
-          </h2>
-          <p>
-            Data om te begrijpen. AI om te interpreteren.
-            <br />
-            Software om het bruikbaar te maken.
-          </p>
+          <h2 id="pillars-title">Mijn technische achtergrond</h2>
+          <p>Per vakgebied: relevante ervaring en de technieken waarmee ik werk.</p>
         </div>
         <div className="pillar-grid">
           {pillars.map((pillar, index) => {
@@ -79,6 +82,10 @@ export default function Home() {
                 <h3>{pillar.title}</h3>
                 <p>{pillar.description}</p>
                 <p className="pillar-skills">{pillar.skills.join(' · ')}</p>
+                <Link className="pillar-link" to={focusUrl(pillar.id)}>
+                  {pillar.linkLabel}
+                  <ArrowRight size={15} aria-hidden="true" />
+                </Link>
               </article>
             )
           })}
@@ -90,14 +97,27 @@ export default function Home() {
           <SectionHeading
             number="01"
             eyebrow="Mijn werk"
-            title="Projecten"
-            description="Toegepaste AI, software en data: projecten met een concreet doel."
+            title={focus === 'software' ? 'Praktijkervaring' : 'Projecten'}
+            description={
+              selectedArea?.workDescription ??
+              'Bekijk het werk dat relevant is voor jouw vakgebied.'
+            }
           />
-          <FeaturedProject />
-          <div className="selected-heading">
-            <h3>Meer projecten</h3>
-          </div>
-          <SelectedProjects />
+          <FocusFilters focus={focus} />
+          <p className="focus-status" role="status">
+            {selectedArea ? `Nu zichtbaar: ${selectedArea.title}` : 'Alle projecten'}
+          </p>
+          {showFeatured && <FeaturedProject />}
+          {showFeatured && (
+            <div className="selected-heading">
+              <h3>{focus === 'ai' ? 'Meer AI-projecten' : 'Meer projecten'}</h3>
+            </div>
+          )}
+          {focus === 'software' ? (
+            <SoftwareExperience />
+          ) : (
+            <SelectedProjects items={visibleProjects} />
+          )}
         </div>
       </section>
 
@@ -146,7 +166,7 @@ export default function Home() {
                     {item.company === 'Siemens' && (
                       <Link
                         className="text-link small-link"
-                        to="/projects/siemens-ai-quotation-automation"
+                        to={projectUrl('siemens-ai-quotation-automation', focus)}
                       >
                         Bekijk het afstudeerproject
                         <ArrowRight size={15} aria-hidden="true" />
@@ -188,10 +208,15 @@ export default function Home() {
             number="04"
             eyebrow="Waar ik mee werk"
             title="Vaardigheden"
-            description="Een basis in verschillende technische vakgebieden, met een groeiende focus op toegepaste AI."
+            description={
+              selectedArea
+                ? `Technieken en werkwijzen voor ${selectedArea.title}.`
+                : 'Geordend per vakgebied, zodat je snel de relevante vaardigheden vindt.'
+            }
           />
-          <div className="skills-grid">
-            {skillGroups.map((group) => (
+          <FocusFilters focus={focus} section="skills" />
+          <div className={`skills-grid${focus === 'all' ? '' : ' is-focused'}`}>
+            {visibleSkills.map((group) => (
               <article className="skill-group" data-area={group.area} key={group.title}>
                 <h3>{group.title}</h3>
                 <ul>

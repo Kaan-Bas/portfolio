@@ -25,7 +25,7 @@ Use `npm run format` to format source files consistently.
 
 ```text
 src/
-  components/       Reusable layout, links, cards and workflow diagrams
+  components/       Reusable layout, focus navigation, cards and workflow diagrams
   data/
     portfolio.ts    Personal details, links, projects, skills and background
     siemens.ts      Case-study contributions, evaluation and learnings
@@ -37,6 +37,7 @@ src/
     NotFound.tsx    Custom 404
   App.tsx           Route definitions and shared layout
   main.tsx          React entry point and self-hosted font imports
+  hooks/useFocus.ts Shared URL-based discipline selection
   styles.css        Design tokens, components and responsive layouts
 public/
   favicon.svg       Custom KB favicon
@@ -52,18 +53,22 @@ tests/portfolio.spec.ts   Browser, navigation, responsive and accessibility chec
 Start in **`src/data/portfolio.ts`**:
 
 - `profile`: name, introduction, email, LinkedIn, GitHub and website origin.
+- `focusAreas`: descriptions and introductions for AI, data and software. The hero navigation and filters use these entries.
 - `featuredProject`: homepage Siemens card.
 - `projects`: IDCP, Waternet and any additional projects.
 - `previewTags`: a short selection of tags for the homepage; `tags` keeps the complete list for each case study.
+- `focusAreas` on a project: the matching filters (`ai`, `data` or `software`). `topics` describes the actual work displayed on cards and project pages.
 - `experience`, `education`, `skillGroups`, `about` and `interests`: homepage content.
 
 The contact email and social links are used throughout the site. Clear a social URL to show a labelled placeholder; an empty GitHub URL hides that optional link.
+
+Recruiters can choose a discipline in the hero or use the project and skill filters. The choice is preserved in the URL, for example `/?focus=data#work`, so it survives reloads, remains selected when returning from a case study and can be shared. AI shows Siemens and IDCP; data shows Waternet first, followed by IDCP; software shows the Endeavour internship as work experience. `Alles` restores the full overview. The three profile cards remain visible in every view.
 
 The Siemens story is laid out in **`src/pages/Siemens.tsx`**. Its reusable lists are in **`src/data/siemens.ts`**. Keep the metric tied to the evaluated test cases and describe the solution as a prototype. The architecture in `src/components/Diagrams.tsx` is conceptual and does not reproduce internal systems or confidential data.
 
 ## Add a project
 
-1. Add a `Project` object to `projects` in `src/data/portfolio.ts`, including a unique `slug`, the supplied facts and contribution descriptions.
+1. Add a `Project` object to `projects` in `src/data/portfolio.ts`, including a unique `slug`, matching `focusAreas`, `topics`, the supplied facts and contribution descriptions.
 2. Add a title and description for `/projects/your-slug` to `src/data/seo.json`.
 3. Reuse an existing `visual`, or add your own labelled conceptual diagram in `src/components/Diagrams.tsx` and update the `Project.visual` union.
 

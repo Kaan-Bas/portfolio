@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
-import { navigation, profile } from '../data/portfolio'
+import { focusUrl, navigation, profile } from '../data/portfolio'
 import { ExternalLink } from './ui'
+import { useFocus } from '../hooks/useFocus'
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const toggle = useRef<HTMLButtonElement>(null)
   const menu = useRef<HTMLElement>(null)
   const location = useLocation()
+  const { focus } = useFocus()
   useEffect(() => {
     if (!menuOpen) return
     const onKeyDown = (event: KeyboardEvent) => {
@@ -58,7 +60,7 @@ export function Header() {
             <Link
               key={id}
               className={id === 'contact' ? 'nav-contact' : ''}
-              to={`/#${id}`}
+              to={focusUrl(focus, id)}
               aria-current={location.hash === `#${id}` ? 'location' : undefined}
               onClick={() => setMenuOpen(false)}
             >
@@ -83,7 +85,7 @@ export function Contact() {
           </p>
           <h2 id="contact-title">Contact</h2>
           <p>
-            In gesprek over AI, software of data?
+            Heb je een passende vacature?
             <br />
             Ik zoek een startende engineeringfunctie waarin ik kan blijven leren en bruikbare
             oplossingen kan bouwen.
@@ -131,7 +133,7 @@ export function Footer() {
           {profile.name}
           <span aria-hidden="true">.</span>
         </Link>
-        <p>AI. Software. Data. Eén samenhangende aanpak.</p>
+        <p>HBO-ICT: Software Engineering · Hogeschool van Amsterdam</p>
         <span>
           © {new Date().getFullYear()} {profile.name}
         </span>

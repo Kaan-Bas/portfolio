@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
-import { profile } from '../data/portfolio'
+import { focusAreas, profile } from '../data/portfolio'
 import metadata from '../data/seo.json'
 
 function setMeta(selector: string, attributes: Record<string, string>, value: string) {
@@ -14,15 +14,21 @@ function setMeta(selector: string, attributes: Record<string, string>, value: st
 }
 
 export function RouteEffects() {
-  const { pathname, hash, key } = useLocation()
+  const { pathname, search, hash, key } = useLocation()
   const previousPath = useRef(pathname)
   useEffect(() => {
     const path = pathname.replace(/\/$/, '') || '/'
     const page = metadata[path as keyof typeof metadata] ?? metadata['404']
-    document.title = page.title
-    setMeta('meta[name="description"]', { name: 'description' }, page.description)
-    setMeta('meta[property="og:title"]', { property: 'og:title' }, page.title)
-    setMeta('meta[property="og:description"]', { property: 'og:description' }, page.description)
+    const focus =
+      path === '/'
+        ? focusAreas.find((area) => area.id === new URLSearchParams(search).get('focus'))
+        : undefined
+    const title = focus ? `${focus.title} — Kaan Bas` : page.title
+    const description = focus?.introduction ?? page.description
+    document.title = title
+    setMeta('meta[name="description"]', { name: 'description' }, description)
+    setMeta('meta[property="og:title"]', { property: 'og:title' }, title)
+    setMeta('meta[property="og:description"]', { property: 'og:description' }, description)
     setMeta(
       'meta[name="robots"]',
       { name: 'robots' },
@@ -57,6 +63,6 @@ export function RouteEffects() {
       previousPath.current = pathname
     })
     return () => cancelAnimationFrame(frame)
-  }, [pathname, hash, key])
+  }, [pathname, search, hash, key])
   return null
 }

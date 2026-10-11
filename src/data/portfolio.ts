@@ -1,13 +1,9 @@
 // Pas hier je persoonlijke gegevens en contactlinks aan. Lege links tonen een gelabelde placeholder.
 export const profile = {
   name: 'Kaan Bas',
-  headline: {
-    firstLine: 'Praktische oplossingen bouwen',
-    secondLine: 'met ',
-    emphasis: 'AI, software & data.',
-  },
+  headline: 'Toegepaste AI & machine learning.',
   introduction:
-    'Recent afgestudeerd in HBO-ICT: Software Engineering aan de Hogeschool van Amsterdam, met praktijkervaring in AI Engineering, machine learning, data en softwareontwikkeling.',
+    'Recent afgestudeerd in HBO-ICT: Software Engineering. Ervaring met LLM-toepassingen bij Siemens en machine-learningprojecten tijdens de minor Data Driven Business – AI Engineering.',
   email: 'kaan.bas762@gmail.com',
   linkedin: 'https://www.linkedin.com/in/kaan-bas-62225a420',
   github: 'https://github.com/Kaan-Bas',
@@ -22,26 +18,75 @@ export const navigation = [
   { label: 'Contact', id: 'contact' },
 ] as const
 
+export type FocusArea = 'ai' | 'data' | 'software'
+export type FocusFilter = 'all' | FocusArea
+
+export function focusUrl(focus: FocusFilter, section: (typeof navigation)[number]['id'] = 'work') {
+  return `/${focus === 'all' ? '' : `?focus=${focus}`}#${section}`
+}
+
+export function projectUrl(slug: string, focus: FocusFilter) {
+  return `/projects/${slug}${focus === 'all' ? '' : `?focus=${focus}`}`
+}
+
+// De vakgebiedkeuze bepaalt welke projecten, ervaring en vaardigheden zichtbaar zijn.
+export const focusAreas = [
+  {
+    id: 'ai',
+    title: 'AI Engineering',
+    summary: 'LLM-toepassingen & procesautomatisering',
+    proof: 'Siemens · offerteautomatisering',
+    introduction:
+      'Tijdens mijn afstudeerstage bij Siemens ontwikkelde ik een LLM-workflow voor offerteverwerking, met Python-validatie en menselijke controle. Mijn focus ligt op praktische AI-toepassingen.',
+    workDescription: 'LLM-extractie, procesautomatisering en gebruikersondersteuning met AI.',
+  },
+  {
+    id: 'data',
+    title: 'Data & Machine Learning',
+    summary: 'Data-analyse & voorspellende modellen',
+    proof: 'Waternet · leidingstoringen voorspellen',
+    introduction:
+      'Tijdens mijn AI Engineering-minor analyseerde ik historische storingsdata en ontwikkelde ik een classificatiemodel voor Waternet. Bij IDCP werkte ik aan een hybride aanbevelingssysteem in Python.',
+    workDescription: 'Datavoorbereiding, analyse, classificatie en aanbevelingssystemen in Python.',
+  },
+  {
+    id: 'software',
+    title: 'Software Engineering',
+    summary: 'Frontend, backend & API-ontwikkeling',
+    proof: 'Endeavour · softwareontwikkelstage',
+    introduction:
+      'Afgestudeerd in HBO-ICT: Software Engineering. Tijdens mijn stage bij Endeavour werkte ik aan frontend- en backendontwikkeling, API-endpoints en de koppeling van database- en CMS-data aan de frontend.',
+    workDescription:
+      'Praktijkervaring met frontend, backend, API-endpoints en database- en CMS-koppelingen.',
+  },
+] as const
+
 export const pillars = [
   {
     id: 'ai',
     number: '01',
     title: 'AI Engineering',
-    description: 'Informatie interpreteren. Praktisch werk automatiseren.',
+    description:
+      'LLM-extractie, validatie en procesautomatisering tijdens mijn afstudeerstage bij Siemens.',
+    linkLabel: 'Bekijk AI-projecten',
     skills: ['LLMs', 'AI-agents', 'Prompt Engineering', 'Automatisering', 'Human-in-the-Loop'],
   },
   {
     id: 'software',
     number: '02',
     title: 'Software Engineering',
-    description: 'Technische ideeën omzetten in bruikbare applicaties.',
+    description:
+      'Frontend- en backendontwikkeling, API-endpoints en database- en CMS-koppelingen bij Endeavour.',
+    linkLabel: 'Bekijk softwareervaring',
     skills: ['Python', 'Java', 'JavaScript', 'REST APIs', 'Git / CI/CD', 'Applicatieontwikkeling'],
   },
   {
     id: 'data',
     number: '03',
     title: 'Data & Machine Learning',
-    description: 'Patronen vinden. Data structureren en ervan leren.',
+    description:
+      'Historische storingsdata analyseren en een classificatiemodel ontwikkelen voor Waternet.',
+    linkLabel: 'Bekijk dataprojecten',
     skills: ['SQL', 'pandas', 'NumPy', 'scikit-learn', 'Data-analyse', 'Machine Learning'],
   },
 ] as const
@@ -54,7 +99,8 @@ export interface Project {
   description: string
   tags: string[]
   previewTags: string[]
-  areas: string[]
+  focusAreas: FocusArea[]
+  topics: string[]
   visual: 'recommendation' | 'water'
   overview: string
   contributions: { title: string; description: string }[]
@@ -78,7 +124,7 @@ export const featuredProject = {
     'Procesautomatisering',
   ],
   previewTags: ['Python', 'LLMs', 'Validatie', 'Human-in-the-Loop'],
-  areas: ['AI Engineering', 'Software', 'Proces- en dataverwerking'],
+  topics: ['LLM-extractie', 'Procesautomatisering', 'Validatie'],
   metric: '68,8%',
 }
 
@@ -98,7 +144,8 @@ export const projects: Project[] = [
       'Dataverwerking',
       'Agile/Scrum',
     ],
-    areas: ['AI Engineering', 'Data & Machine Learning'],
+    focusAreas: ['ai', 'data'],
+    topics: ['LLM-toepassingen', 'Aanbevelingssystemen'],
     previewTags: ['Python', 'LLMs', 'Machine Learning'],
     visual: 'recommendation',
     overview:
@@ -114,13 +161,13 @@ export const projects: Project[] = [
         description: 'Een hybride aanbevelingssysteem ontwikkeld met machine learning in Python.',
       },
       {
-        title: 'AI en data verbinden',
+        title: 'Gebruikers- en contentdata verwerken',
         description:
           'Data over gebruikers, interesses en content verwerkt voor gebruik binnen het aanbevelingssysteem en de chatbot.',
       },
     ],
     takeaway:
-      'Een project op het snijvlak van AI en data: informatie over gebruikers en content toepassen in zowel een chatbot als een aanbevelingssysteem.',
+      'Praktijkervaring met LLM-gebruikersondersteuning en een hybride aanbevelingssysteem op basis van gebruikersinteresses en content.',
   },
   {
     slug: 'waternet-pipe-failure-prediction',
@@ -130,7 +177,8 @@ export const projects: Project[] = [
     description:
       'Data over waterinfrastructuur voorbereid en geanalyseerd en een classificatiemodel ontwikkeld in Python/scikit-learn om leidingstoringen te voorspellen op basis van historische storingsdata.',
     tags: ['Python', 'pandas', 'scikit-learn', 'Machine Learning', 'Data-analyse', 'Classificatie'],
-    areas: ['Data & Machine Learning'],
+    focusAreas: ['data'],
+    topics: ['Data-analyse', 'Classificatie'],
     previewTags: ['Python', 'scikit-learn', 'Data-analyse'],
     visual: 'water',
     overview:
@@ -152,7 +200,7 @@ export const projects: Project[] = [
       },
     ],
     takeaway:
-      'Een praktisch project met data en machine learning, waarin datavoorbereiding en analyse samenkwamen in een classificatiemodel voor een infrastructuurvraagstuk.',
+      'Historische storingsdata voorbereiden, analyseren en gebruiken voor een classificatiemodel: de stappen van een praktisch machine-learningproject.',
   },
 ]
 
@@ -186,25 +234,36 @@ export const education = {
 export const skillGroups = [
   {
     area: 'ai',
-    title: 'AI & machine learning',
+    title: 'AI Engineering',
     skills: [
+      'Python',
       'Large Language Models',
       'AI-agents',
       'Prompt Engineering',
-      'Machine Learning',
+      'JSON',
       'Human-in-the-Loop',
       'Modelevaluatie',
     ],
   },
   {
     area: 'software',
-    title: 'Softwareontwikkeling',
+    title: 'Software Engineering',
     skills: ['Python', 'Java', 'JavaScript', 'REST APIs', 'JSON', 'Git', 'GitLab CI/CD'],
   },
   {
     area: 'data',
-    title: 'Data',
-    skills: ['SQL', 'NoSQL', 'pandas', 'NumPy', 'scikit-learn', 'Data-analyse', 'Power BI'],
+    title: 'Data & Machine Learning',
+    skills: [
+      'Python',
+      'SQL',
+      'NoSQL',
+      'pandas',
+      'NumPy',
+      'scikit-learn',
+      'Machine Learning',
+      'Data-analyse',
+      'Power BI',
+    ],
   },
   {
     area: 'automation',
@@ -215,7 +274,7 @@ export const skillGroups = [
 
 export const about = [
   'Ik ben recent afgestudeerd in HBO-ICT: Software Engineering aan de Hogeschool van Amsterdam. Tijdens mijn studie groeide mijn interesse in AI en data. Daarom volgde ik de minor Data Driven Business – AI Engineering.',
-  'Ik vind het interessant om te begrijpen hoe een proces werkt, te onderzoeken wat technologie kan verbeteren en dat vervolgens om te zetten in een praktische oplossing. Ik leer graag nieuwe technologieën en werk het liefst op het snijvlak van AI, software en data, met een bijzondere interesse in toegepaste AI en automatisering.',
+  'Ik verdiep me graag in een proces of vraagstuk voordat ik aan een oplossing begin. Mijn grootste interesse ligt bij praktische AI-toepassingen, automatisering en machine learning. Ik leer graag nieuwe technologieën en zoek een startende functie waarin ik me gericht verder kan ontwikkelen.',
 ]
 
 export const interests = [

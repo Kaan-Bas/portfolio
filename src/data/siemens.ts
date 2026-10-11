@@ -34,19 +34,19 @@ export const roleGroups = [
   },
 ]
 
-export const projectPillars = [
+export const pipelineComponents = [
   {
-    title: 'AI',
+    title: 'LLM-extractie',
     description:
       'Het LLM interpreteerde minder gestructureerde klantaanvragen en haalde er informatie uit.',
   },
   {
-    title: 'Software',
+    title: 'Python-pipeline',
     description:
       'Python stuurde de documentverwerking, validatielogica, foutafhandeling en workflow aan.',
   },
   {
-    title: 'Data',
+    title: 'Validatie tegen brondata',
     description:
       'Gegenereerde informatie werd gestructureerd en gecontroleerd aan de hand van betrouwbare brondata.',
   },

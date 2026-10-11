@@ -1,11 +1,11 @@
 {
   "404": {
     "title": "Pagina niet gevonden — Kaan Bas",
-    "description": "Deze pagina is niet gevonden. Bekijk de projecten van Kaan Bas op het gebied van AI, software engineering en data."
+    "description": "Deze pagina is niet gevonden. Bekijk de projecten en praktijkervaring van Kaan Bas per vakgebied."
   },
   "/": {
-    "title": "Kaan Bas — AI, Software & Data",
-    "description": "Kaan Bas — recent afgestudeerd in Software Engineering. Ik bouw praktische oplossingen met AI, software en data. Bekijk mijn projecten bij Siemens, IDCP en Waternet."
+    "title": "Kaan Bas — AI Engineering & Machine Learning",
+    "description": "Software Engineering afgestudeerd met AI-projecten bij Siemens en machine-learningprojecten bij Waternet en IDCP. Bekijk relevante projecten en vaardigheden per vakgebied."
   },
   "/projects/siemens-ai-quotation-automation": {
     "title": "Offertes automatiseren met AI · Siemens — Kaan Bas",

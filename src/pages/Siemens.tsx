@@ -8,19 +8,21 @@ import {
   ShieldCheck,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { featuredProject } from '../data/portfolio'
+import { featuredProject, focusUrl, projectUrl } from '../data/portfolio'
 import {
   caseSections,
   evaluationDimensions,
   learnings,
-  projectPillars,
+  pipelineComponents,
   roleGroups,
 } from '../data/siemens'
 import { ArchitectureDiagram } from '../components/Diagrams'
 import { Contact } from '../components/Layout'
 import { BackToWork, Tags } from '../components/ui'
+import { useFocus } from '../hooks/useFocus'
 
 export default function Siemens() {
+  const { focus } = useFocus()
   return (
     <main id="main-content" tabIndex={-1}>
       <section className="case-hero container">
@@ -71,7 +73,10 @@ export default function Siemens() {
           <nav aria-label="Inhoud van de casestudy">
             <span className="eyebrow">In dit project</span>
             {caseSections.map((section, index) => (
-              <Link to={`#${section.id}`} key={section.id}>
+              <Link
+                to={`${projectUrl(featuredProject.slug, focus)}#${section.id}`}
+                key={section.id}
+              >
                 <span>0{index + 1}</span>
                 {section.label}
               </Link>
@@ -168,12 +173,12 @@ export default function Siemens() {
               Python-validatie, betrouwbare brondata en menselijke controle bij onzekere resultaten.
             </p>
             <ArchitectureDiagram />
-            <div className="project-pillar-grid">
-              {projectPillars.map((pillar, index) => (
-                <div key={pillar.title}>
+            <div className="pipeline-components">
+              {pipelineComponents.map((component, index) => (
+                <div key={component.title}>
                   <span className="eyebrow">0{index + 1}</span>
-                  <h3>{pillar.title}</h3>
-                  <p>{pillar.description}</p>
+                  <h3>{component.title}</h3>
+                  <p>{component.description}</p>
                 </div>
               ))}
             </div>
@@ -288,11 +293,11 @@ export default function Siemens() {
             </p>
           </div>
           <div className="case-next">
-            <Link className="text-link" to="/#work">
+            <Link className="text-link" to={focusUrl(focus)}>
               Bekijk meer projecten
               <ArrowRight size={17} aria-hidden="true" />
             </Link>
-            <span>AI + Software + Data</span>
+            <span>LLM-extractie · Validatie · Procesautomatisering</span>
           </div>
         </article>
       </div>
