@@ -39,7 +39,7 @@ export default function Home() {
         <div className="hero-copy">
           <p className="eyebrow hero-eyebrow">
             <span className="status-dot" />
-            Open voor een startende engineeringfunctie
+            Open voor een startende functie
           </p>
           <h1 id="hero-title">
             {profile.name}
@@ -70,7 +70,7 @@ export default function Home() {
       <section className="pillars-section container" aria-labelledby="pillars-title">
         <div className="pillar-intro">
           <h2 id="pillars-title">Mijn technische achtergrond</h2>
-          <p>Per vakgebied: relevante ervaring en de technieken waarmee ik werk.</p>
+          <p>Algemene vaardigheden per vakgebied.</p>
         </div>
         <div className="pillar-grid">
           {pillars.map((pillar, index) => {
@@ -82,7 +82,6 @@ export default function Home() {
                 </div>
                 <h3>{pillar.title}</h3>
                 <p>{pillar.description}</p>
-                <p className="pillar-skills">{pillar.skills.join(' · ')}</p>
                 <Link className="pillar-link" to={focusUrl(pillar.id)}>
                   {pillar.linkLabel}
                   <ArrowRight size={15} aria-hidden="true" />

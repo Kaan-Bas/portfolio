@@ -452,11 +452,6 @@ section[tabindex='-1']:focus {
   margin-top: 9px;
   margin-bottom: 0;
 }
-.pillar .pillar-skills {
-  font-size: 11px;
-  line-height: 1.9;
-  margin-top: 18px;
-}
 .pillar-link {
   display: inline-flex;
   align-items: center;

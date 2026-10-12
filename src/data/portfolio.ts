@@ -61,27 +61,24 @@ export const pillars = [
     number: '01',
     title: 'AI Engineering',
     description:
-      'LLM-extractie, validatie en procesautomatisering tijdens mijn afstudeerstage bij Siemens.',
+      'Generatieve AI en AI-agents toepassen om informatie te verwerken en processen te automatiseren.',
     linkLabel: 'Bekijk AI-projecten',
-    skills: ['LLMs', 'AI-agents', 'Prompt Engineering', 'Automatisering', 'Human-in-the-Loop'],
   },
   {
     id: 'software',
     number: '02',
     title: 'Software Engineering',
     description:
-      'Frontend- en backendontwikkeling, API-endpoints en database- en CMS-koppelingen bij Endeavour.',
+      'Front-end- en back-endontwikkeling, API-integraties en CI/CD voor het bouwen van applicaties.',
     linkLabel: 'Bekijk softwareervaring',
-    skills: ['Python', 'Java', 'JavaScript', 'REST APIs', 'Git / CI/CD', 'Applicatieontwikkeling'],
   },
   {
     id: 'data',
     number: '03',
     title: 'Data & Machine Learning',
     description:
-      'Historische storingsdata analyseren en een classificatiemodel ontwikkelen voor Waternet.',
+      'Werken met databases, data verwerken en analyseren, en machine learning toepassen.',
     linkLabel: 'Bekijk dataprojecten',
-    skills: ['SQL', 'pandas', 'NumPy', 'scikit-learn', 'Data-analyse', 'Machine Learning'],
   },
 ] as const
 
