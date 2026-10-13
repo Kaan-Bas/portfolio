@@ -1,3 +1,5 @@
+import { idcpImages, siemensImages, type ProjectImage } from './projectImages'
+
 // Pas hier je persoonlijke gegevens en contactlinks aan. Lege links tonen een gelabelde placeholder.
 export const profile = {
   name: 'Kaan Bas',
@@ -88,6 +90,7 @@ export interface Project {
   title: string
   context: string
   description: string
+  images?: readonly ProjectImage[]
   tags: string[]
   previewTags: string[]
   focusAreas: FocusArea[]
@@ -117,12 +120,14 @@ export const featuredProject = {
   previewTags: ['Python', 'LLMs', 'Validatie', 'Human-in-the-Loop'],
   topics: ['LLM-extractie', 'Procesautomatisering', 'Validatie'],
   metric: '68,8%',
+  images: siemensImages,
 }
 
 export const projects: Project[] = [
   {
     slug: 'idcp-chatbot-recommendation',
     organization: 'IDCP',
+    images: idcpImages,
     title: 'LLM-chatbot & hybride aanbevelingssysteem',
     context: 'Minor Data Driven Business – AI Engineering',
     description:
@@ -266,15 +271,4 @@ export const skillGroups = [
 export const about = [
   'Ik ben recent afgestudeerd in HBO-ICT: Software Engineering aan de Hogeschool van Amsterdam. Tijdens mijn studie groeide mijn interesse in AI en data. Daarom volgde ik de minor Data Driven Business – AI Engineering.',
   'Ik verdiep me graag in een proces of vraagstuk voordat ik aan een oplossing begin. Mijn grootste interesse ligt bij praktische AI-toepassingen, automatisering en machine learning. Ik leer graag nieuwe technologieën en zoek een startende functie waarin ik me gericht verder kan ontwikkelen.',
-]
-
-export const interests = [
-  'Toegepaste AI',
-  'Generatieve AI',
-  'LLM-applicaties',
-  'AI-agents',
-  'Automatisering',
-  'Software-integraties',
-  'Machine learning',
-  'Data-analyse',
 ]

@@ -2,6 +2,7 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { experience, featuredProject, projects, projectUrl, type Project } from '../data/portfolio'
 import { Tags } from './ui'
+import { ProjectGallery } from './ProjectGallery'
 import { useFocus } from '../hooks/useFocus'
 
 export function FeaturedProject() {
@@ -29,20 +30,20 @@ export function FeaturedProject() {
           <ArrowRight size={17} aria-hidden="true" />
         </Link>
       </div>
-      <div className="featured-result">
-        <div className="result-label">
-          <span className="status-dot" />
-          GEMETEN RESULTAAT
+      <div className="featured-preview">
+        <ProjectGallery images={featuredProject.images} title={featuredProject.organization} />
+        <div className="featured-result">
+          <div className="result-label">
+            <span className="status-dot" />
+            GEMETEN RESULTAAT
+          </div>
+          <div className="metric">{featuredProject.metric}</div>
+          <p>
+            Minder verwerkingstijd
+            <br />
+            <span>bij de geëvalueerde testcases</span>
+          </p>
         </div>
-        <div className="metric">
-          {featuredProject.metric}
-          <span aria-hidden="true">↘</span>
-        </div>
-        <p>
-          Minder verwerkingstijd
-          <br />
-          <span>bij de geëvalueerde testcases</span>
-        </p>
       </div>
       <div className="featured-bottom">
         <div>
@@ -63,6 +64,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
   const path = projectUrl(project.slug, focus)
   return (
     <article className="project-card">
+      <ProjectGallery images={project.images} title={project.organization} />
       <div className="project-card-body">
         <div className="project-overline">
           <span>{project.organization}</span>

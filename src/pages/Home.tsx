@@ -5,7 +5,6 @@ import {
   education,
   experience,
   focusUrl,
-  interests,
   pillars,
   profile,
   skillGroups,
@@ -136,10 +135,6 @@ export default function Home() {
               {about.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
-              <div className="interests">
-                <h3>Mijn huidige interesses</h3>
-                <p>{interests.join(' · ')}</p>
-              </div>
             </div>
           </div>
         </div>

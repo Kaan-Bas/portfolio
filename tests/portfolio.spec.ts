@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, type Locator } from '@playwright/test'
 import axe from 'axe-core'
 import { readFile } from 'node:fs/promises'
 
@@ -15,6 +15,15 @@ const projectPaths = [
 ]
 
 const focusPaths = ['/?focus=ai', '/?focus=data', '/?focus=software']
+
+async function expectImageLoaded(image: Locator) {
+  await image.scrollIntoViewIfNeeded()
+  await expect
+    .poll(() =>
+      image.evaluate((element: HTMLImageElement) => element.complete && element.naturalWidth > 0),
+    )
+    .toBe(true)
+}
 
 test('recruiter flow: homepage → Siemens → work → contact', async ({ page }) => {
   await page.goto('/')
@@ -91,6 +100,102 @@ test('keyboard skip link and mobile navigation', async ({ page, isMobile }) => {
     await expect(page.getByRole('heading', { name: 'Vaardigheden', exact: true })).toBeVisible()
     await expect(toggle).toHaveAttribute('aria-expanded', 'false')
   }
+})
+
+test('project cards open an accessible gallery without inline controls', async ({
+  page,
+}, testInfo) => {
+  await page.goto('/#work')
+  const siemens = page.locator('.featured-project')
+  const cover = siemens.getByRole('figure', { name: 'Projectbeelden van Siemens Buildings' })
+  const siemensImage = cover.getByRole('img')
+  await expectImageLoaded(siemensImage)
+  await expect(siemensImage).toHaveAttribute('alt', /validatiestatussen/)
+  await expect(cover.locator('figcaption')).toHaveCount(0)
+  await expect(cover.getByRole('button')).toHaveCount(1)
+  await expect(cover.getByRole('button', { name: /afbeelding van/ })).toHaveCount(0)
+
+  const opener = cover.getByRole('button', { name: 'Open fotogalerij van Siemens Buildings' })
+  await opener.focus()
+  await page.keyboard.press('Enter')
+  const imageDialog = page.getByRole('dialog', { name: 'Projectbeelden van Siemens Buildings' })
+  await expect(imageDialog).toBeVisible()
+  await expect(imageDialog.getByRole('img')).toHaveAttribute('alt', /validatiestatussen/)
+  await expect(
+    imageDialog.getByRole('button', { name: 'Vorige afbeelding van Siemens Buildings' }),
+  ).toBeDisabled()
+  await imageDialog.getByRole('button', { name: 'Afbeelding sluiten' }).focus()
+  await page.keyboard.press('Tab')
+  await expect(
+    imageDialog.getByRole('button', { name: 'Vorige afbeelding van Siemens Buildings' }),
+  ).toBeFocused()
+  await page.keyboard.press('Tab')
+  await expect(
+    imageDialog.getByRole('button', { name: 'Volgende afbeelding van Siemens Buildings' }),
+  ).toBeFocused()
+  await page.keyboard.press('Enter')
+  await expect(imageDialog.getByRole('img')).toHaveAttribute('alt', /totaalprijs/)
+  await expectImageLoaded(imageDialog.getByRole('img'))
+  await expect(
+    imageDialog.getByRole('button', { name: 'Volgende afbeelding van Siemens Buildings' }),
+  ).toBeDisabled()
+  await page.keyboard.press('ArrowLeft')
+  await expect(imageDialog.getByRole('img')).toHaveAttribute('alt', /validatiestatussen/)
+  await page.keyboard.press('ArrowRight')
+  await expect(imageDialog.getByRole('img')).toHaveAttribute('alt', /totaalprijs/)
+
+  await page.addScriptTag({ content: axe.source })
+  const violations = await page.evaluate(async () => {
+    const result = await window.axe.run(document, {
+      runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] },
+    })
+    return result.violations.map((violation) => violation.id)
+  })
+  expect(violations).toEqual([])
+  await imageDialog.screenshot({ path: `.artifacts/project-dialog-${testInfo.project.name}.png` })
+  await page.keyboard.press('Escape')
+  await expect(imageDialog).toBeHidden()
+  await expect(opener).toBeFocused()
+  await expect(siemensImage).toHaveAttribute('alt', /validatiestatussen/)
+  await opener.click()
+  await expect(imageDialog.getByRole('img')).toHaveAttribute('alt', /validatiestatussen/)
+  await page.mouse.click(2, 2)
+  await expect(imageDialog).toBeHidden()
+
+  const idcp = page.getByRole('figure', { name: 'Projectbeelden van IDCP', exact: true })
+  const idcpImage = idcp.getByRole('img')
+  await expectImageLoaded(idcpImage)
+  await expect(idcpImage).toHaveAttribute('alt', /IDCP-dashboard/)
+  await expect(idcp.locator('figcaption')).toHaveCount(0)
+  await expect(idcp.getByRole('button')).toHaveCount(1)
+  const idcpOpener = idcp.getByRole('button', { name: 'Open fotogalerij van IDCP' })
+  await idcpOpener.click()
+  const chatbotDialog = page.getByRole('dialog', { name: 'Projectbeelden van IDCP', exact: true })
+  await expect(chatbotDialog).toBeVisible()
+  await chatbotDialog.getByRole('button', { name: 'Volgende afbeelding van IDCP' }).click()
+  await expect(chatbotDialog.getByRole('img')).toHaveAttribute('alt', /IDCP-chatbot/)
+  await expectImageLoaded(chatbotDialog.getByRole('img'))
+  await chatbotDialog.getByRole('button', { name: 'Vorige afbeelding van IDCP' }).click()
+  await expect(chatbotDialog.getByRole('img')).toHaveAttribute('alt', /IDCP-dashboard/)
+  await page.keyboard.press('ArrowRight')
+  await expect(chatbotDialog.getByRole('img')).toHaveAttribute('alt', /IDCP-chatbot/)
+  await chatbotDialog.getByRole('button', { name: 'Afbeelding sluiten' }).click()
+  await expect(chatbotDialog).toBeHidden()
+  await expect(idcpOpener).toBeFocused()
+  await expect(idcpImage).toHaveAttribute('alt', /IDCP-dashboard/)
+
+  const placeholder = page.getByRole('figure', { name: 'Projectbeeld van Waternet volgt' })
+  await expect(placeholder.getByText('Projectbeeld volgt', { exact: true })).toBeVisible()
+  await expect(placeholder.getByRole('button')).toHaveCount(0)
+  const screenshotStyle = '.site-header, .skip-link { visibility: hidden; }'
+  await siemens.screenshot({
+    path: `.artifacts/featured-project-${testInfo.project.name}.png`,
+    style: screenshotStyle,
+  })
+  await page.locator('.selected-projects').screenshot({
+    path: `.artifacts/selected-projects-${testInfo.project.name}.png`,
+    style: screenshotStyle,
+  })
 })
 
 test('recruiters can choose a discipline, reload it and reset the view', async ({

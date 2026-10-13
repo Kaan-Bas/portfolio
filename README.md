@@ -29,6 +29,7 @@ src/
   data/
     portfolio.ts    Personal details, links, projects, skills and background
     siemens.ts      Case-study contributions, evaluation and learnings
+    projectImages.ts Screenshot imports, captions, alt text and dimensions
     seo.json        Titles and descriptions for each route
   pages/
     Home.tsx        Recruiter-focused homepage
@@ -38,6 +39,7 @@ src/
   App.tsx           Route definitions and shared layout
   main.tsx          React entry point and self-hosted font imports
   hooks/useFocus.ts Shared URL-based discipline selection
+  media/            Original project PNGs and optimized WebP previews
   styles.css        Design tokens, components and responsive layouts
 public/
   favicon.svg       Custom KB favicon
@@ -45,6 +47,7 @@ public/
 scripts/
   build-metadata.mjs       Static route metadata, sitemap and robots.txt
   create-social-image.ps1  Recreates the typographic social image on Windows
+  optimize-project-images.mjs Creates WebP previews from the supplied PNGs
 tests/portfolio.spec.ts   Browser, navigation, responsive and accessibility checks
 ```
 
@@ -58,7 +61,7 @@ Start in **`src/data/portfolio.ts`**:
 - `projects`: IDCP, Waternet and any additional projects.
 - `previewTags`: a short selection of tags for the homepage; `tags` keeps the complete list for each case study.
 - `focusAreas` on a project: the matching filters (`ai`, `data` or `software`). `topics` describes the actual work displayed on cards and project pages.
-- `experience`, `education`, `skillGroups`, `about` and `interests`: homepage content.
+- `experience`, `education`, `skillGroups` and `about`: homepage content.
 
 The contact email and social links are used throughout the site. Clear a social URL to show a labelled placeholder; an empty GitHub URL hides that optional link.
 
@@ -67,6 +70,10 @@ Recruiters can choose a discipline from the technical-background cards or use th
 The hero uses `src/components/CodeVisual.tsx`: a decorative SVG with abstract coding symbols, layered panels and a subtle dot grid. It has no project-specific meaning, contains no actual source code and is hidden from assistive technology. Its styles are in `.code-visual` in `src/styles.css`.
 
 The Siemens story is laid out in **`src/pages/Siemens.tsx`**. Its reusable lists are in **`src/data/siemens.ts`**. Keep the metric tied to the evaluated test cases and describe the solution as a prototype. The architecture in `src/components/Diagrams.tsx` is conceptual and does not reproduce internal systems or confidential data.
+
+Homepage project images use **`src/components/ProjectGallery.tsx`**. The supplied PNG originals stay in **`src/media/`**; the site imports full-resolution WebP copies from **`src/media/optimized/`**. Edit captions, alt text and image imports in **`src/data/projectImages.ts`**, then assign an image array to a project's `images` field in `portfolio.ts`. A project without images gets a labelled placeholder. Cards show only the first photo inside an inset frame, with no captions or gallery controls. Clicking that photo opens the enlarged gallery at its first image. Previous/next arrows sit to the left and right of the photo; the image counter is below it. Captions and keyboard arrow navigation are available in the enlarged viewer. Closing it returns focus to the card photo. Case-study diagrams remain separate.
+
+To regenerate previews after replacing an original PNG, run `node scripts/optimize-project-images.mjs` with the Playwright Chromium browser installed. If you use the workspace's browser cache on Windows, first set `$env:PLAYWRIGHT_BROWSERS_PATH = Join-Path (Get-Location) '.artifacts\browsers'`. Update the width and height in `projectImages.ts` if the new image dimensions differ.
 
 ## Add a project
 
@@ -107,4 +114,4 @@ For a different domain, update `profile.siteUrl` and rebuild. On another static 
 - Approved, non-confidential project images or diagrams, and public repository links where sharing is allowed.
 - Your preferred public domain, when you are ready to share the portfolio with recruiters.
 
-The site is complete without a portrait or project screenshots. All current project visuals are labelled conceptual diagrams. No Siemens screenshots, internal data or source code are included.
+The homepage shows the supplied Siemens and IDCP project screenshots, with a labelled Waternet placeholder. Case-study workflow diagrams are conceptual; no source code is displayed.
