@@ -2,6 +2,8 @@ import siemensOverview from '../media/optimized/siemens-overview.webp'
 import siemensPricing from '../media/optimized/siemens-pricing.webp'
 import idcpDashboard from '../media/optimized/idcp-dashboard.webp'
 import idcpChatbot from '../media/optimized/idcp-chatbot.webp'
+import loods5Homepage from '../media/optimized/loods5-homepage.webp'
+import loods5Product from '../media/optimized/loods5-product.webp'
 
 export interface ProjectImage {
   src: string
@@ -42,5 +44,22 @@ export const idcpImages: ProjectImage[] = [
     caption: 'Chatbot',
     width: 1895,
     height: 896,
+  },
+]
+
+export const loods5Images: ProjectImage[] = [
+  {
+    src: loods5Homepage,
+    alt: 'De Loods 5-webshop met hoofdnavigatie en een campagnebeeld voor Color House.',
+    caption: 'Webshop homepage',
+    width: 1893,
+    height: 938,
+  },
+  {
+    src: loods5Product,
+    alt: 'Productdetailpagina van de Loods 5-webshop met productfoto, uitvoeringskeuze en bestelgegevens.',
+    caption: 'Productpagina',
+    width: 1894,
+    height: 836,
   },
 ]

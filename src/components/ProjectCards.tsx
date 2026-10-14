@@ -1,6 +1,13 @@
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { experience, featuredProject, projects, projectUrl, type Project } from '../data/portfolio'
+import {
+  endeavourProject,
+  experience,
+  featuredProject,
+  projects,
+  projectUrl,
+  type Project,
+} from '../data/portfolio'
 import { Tags } from './ui'
 import { ProjectGallery } from './ProjectGallery'
 import { useFocus } from '../hooks/useFocus'
@@ -104,21 +111,27 @@ export function SelectedProjects({ items = projects }: { items?: Project[] }) {
 export function SoftwareExperience() {
   const internship = experience.find((item) => item.company === 'Endeavour')!
   return (
-    <article className="software-experience">
-      <div className="project-overline">
-        <span>
-          {internship.type} · {internship.company}
-        </span>
-        <span>{internship.date}</span>
-      </div>
-      <p className="company-label">{internship.role}</p>
-      <h3>Frontend, backend en API-ontwikkeling</h3>
-      <p>{internship.description}</p>
-      <Tags items={['Frontend', 'Backend', 'REST APIs', 'Database / CMS']} />
-      <Link className="text-link" to="/?focus=software#experience">
-        Bekijk mijn werkervaring
-        <ArrowRight size={16} aria-hidden="true" />
-      </Link>
-    </article>
+    <div className="selected-projects is-single">
+      <article className="project-card">
+        <ProjectGallery images={endeavourProject.images} title={endeavourProject.title} />
+        <div className="project-card-body">
+          <div className="project-overline">
+            <span>{internship.company} · {internship.type}</span>
+            <span>{internship.date}</span>
+          </div>
+          <h3>{endeavourProject.title}</h3>
+          <p className="project-context">{internship.role}</p>
+          <p className="project-description">{endeavourProject.description}</p>
+          <Tags items={endeavourProject.tags} />
+          <div className="project-card-bottom">
+            <span>Softwareontwikkeling in teamverband</span>
+            <Link to="/?focus=software#experience">
+              Bekijk stage in tijdlijn
+              <ArrowRight size={15} aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </article>
+    </div>
   )
 }

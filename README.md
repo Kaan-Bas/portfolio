@@ -58,6 +58,7 @@ Start in **`src/data/portfolio.ts`**:
 - `profile`: name, introduction, email, LinkedIn, GitHub and website origin.
 - `focusAreas`: descriptions and introductions for AI, data and software. The profile cards and filters select these entries.
 - `featuredProject`: homepage Siemens card.
+- `endeavourProject`: the Loods 5 webshop card shown for the Software Engineering filter; its timeline entry is in `experience`.
 - `projects`: IDCP, Waternet and any additional projects.
 - `previewTags`: a short selection of tags for the homepage; `tags` keeps the complete list for each case study.
 - `focusAreas` on a project: the matching filters (`ai`, `data` or `software`). `topics` describes the actual work displayed on cards and project pages.
@@ -71,7 +72,7 @@ The hero uses `src/components/CodeVisual.tsx`: a decorative SVG with abstract co
 
 The Siemens story is laid out in **`src/pages/Siemens.tsx`**. Its reusable lists are in **`src/data/siemens.ts`**. Keep the metric tied to the evaluated test cases and describe the solution as a prototype. The architecture in `src/components/Diagrams.tsx` is conceptual and does not reproduce internal systems or confidential data.
 
-Homepage project images use **`src/components/ProjectGallery.tsx`**. The supplied PNG originals stay in **`src/media/`**; the site imports full-resolution WebP copies from **`src/media/optimized/`**. Edit captions, alt text and image imports in **`src/data/projectImages.ts`**, then assign an image array to a project's `images` field in `portfolio.ts`. A project without images gets a labelled placeholder. Cards show only the first photo inside an inset frame, with no captions or gallery controls. Clicking that photo opens the enlarged gallery at its first image. Previous/next arrows sit to the left and right of the photo; the image counter is below it. Captions and keyboard arrow navigation are available in the enlarged viewer. Closing it returns focus to the card photo. Case-study diagrams remain separate.
+Homepage project images use **`src/components/ProjectGallery.tsx`**. The supplied PNG originals stay in **`src/media/`**; the site imports full-resolution WebP copies from **`src/media/optimized/`**. Edit captions, alt text and image imports in **`src/data/projectImages.ts`**, then assign an image array to a project's `images` field in `portfolio.ts`. The Loods 5 gallery uses the same component and is assigned through `endeavourProject`. A project without images gets a labelled placeholder. Cards show only the first photo inside an inset frame with a dark preview tint, no captions and no gallery controls. Clicking that photo opens the enlarged gallery at its first image. Previous/next arrows sit to the left and right of the photo; the image counter is below it. Captions and keyboard arrow navigation are available in the enlarged viewer. Closing it returns focus to the card photo. Case-study diagrams remain separate.
 
 To regenerate previews after replacing an original PNG, run `node scripts/optimize-project-images.mjs` with the Playwright Chromium browser installed. If you use the workspace's browser cache on Windows, first set `$env:PLAYWRIGHT_BROWSERS_PATH = Join-Path (Get-Location) '.artifacts\browsers'`. Update the width and height in `projectImages.ts` if the new image dimensions differ.
 

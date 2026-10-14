@@ -230,14 +230,19 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
 
   await projectFilters.getByRole('link', { name: 'Software Engineering', exact: true }).click()
   await expect(work.getByRole('heading', { name: 'Praktijkervaring' })).toBeVisible()
-  await expect(work.getByText('Stage · Endeavour')).toBeVisible()
-  await expect(
-    work.getByRole('heading', { name: 'Frontend, backend en API-ontwikkeling' }),
-  ).toBeVisible()
+  await expect(work.getByText('Endeavour · Stage')).toBeVisible()
+  await expect(work.getByRole('heading', { name: 'Loods 5-webshop' })).toBeVisible()
+  await expect(work.getByText(/Als onderdeel van het team bij Endeavour/)).toBeVisible()
+  await work.getByRole('button', { name: 'Open fotogalerij van Loods 5-webshop' }).click()
+  const loods5Gallery = page.getByRole('dialog', { name: 'Projectbeelden van Loods 5-webshop' })
+  await expect(loods5Gallery.getByText('Webshop homepage')).toBeVisible()
+  await loods5Gallery.getByRole('button', { name: 'Volgende afbeelding van Loods 5-webshop' }).click()
+  await expect(loods5Gallery.getByText('Productpagina')).toBeVisible()
+  await loods5Gallery.getByRole('button', { name: 'Afbeelding sluiten' }).click()
   await expect(
     skills.getByRole('heading', { name: 'Software Engineering', exact: true }),
   ).toBeVisible()
-  await work.getByRole('link', { name: 'Bekijk mijn werkervaring' }).click()
+  await work.getByRole('link', { name: 'Bekijk stage in tijdlijn' }).click()
   await expect(page).toHaveURL(/\?focus=software#experience$/)
   await expect(
     page.locator('#experience').getByRole('heading', { name: 'Endeavour' }),

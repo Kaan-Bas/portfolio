@@ -494,33 +494,6 @@ section[tabindex='-1']:focus {
   grid-template-columns: 1fr;
   max-width: 760px;
 }
-.software-experience {
-  padding: 40px;
-  border: 1px solid var(--line);
-  background: var(--surface-soft);
-  border-radius: 12px;
-}
-.software-experience .company-label {
-  margin-top: 28px;
-}
-.software-experience h3 {
-  font-size: 28px;
-  line-height: 1.4;
-  letter-spacing: -0.8px;
-  margin-top: 12px;
-}
-.software-experience > p:not(.company-label) {
-  max-width: 620px;
-  font-size: 13px;
-  color: var(--muted);
-  margin-top: 18px;
-}
-.software-experience .tags {
-  margin-top: 24px;
-}
-.software-experience > a {
-  margin-top: 28px;
-}
 .skills-grid.is-focused {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   max-width: 760px;
@@ -2557,12 +2530,6 @@ html:has(.project-image-dialog[open]) {
   .focus-filters a {
     padding: 9px 12px;
     font-size: 11px;
-  }
-  .software-experience {
-    padding: 24px;
-  }
-  .software-experience h3 {
-    font-size: 23px;
   }
   .skills-grid.is-focused {
     grid-template-columns: 1fr;

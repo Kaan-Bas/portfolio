@@ -1,4 +1,4 @@
-import { idcpImages, siemensImages, type ProjectImage } from './projectImages'
+import { idcpImages, loods5Images, siemensImages, type ProjectImage } from './projectImages'
 
 // Pas hier je persoonlijke gegevens en contactlinks aan. Lege links tonen een gelabelde placeholder.
 export const profile = {
@@ -51,9 +51,9 @@ export const focusAreas = [
     id: 'software',
     title: 'Software Engineering',
     introduction:
-      'Afgestudeerd in HBO-ICT: Software Engineering. Tijdens mijn stage bij Endeavour werkte ik aan frontend- en backendontwikkeling, API-endpoints en de koppeling van database- en CMS-data aan de frontend.',
+      'Afgestudeerd in HBO-ICT: Software Engineering. Tijdens mijn stage bij Endeavour maakte ik deel uit van het team achter de Loods 5-webshop. Ik werkte aan frontend- en backendontwikkeling, API-endpoints en database- en CMS-koppelingen.',
     workDescription:
-      'Praktijkervaring met frontend, backend, API-endpoints en database- en CMS-koppelingen.',
+      'Frontend- en backendontwikkeling, API-endpoints en database- en CMS-koppelingen, toegepast aan de Loods 5-webshop.',
   },
 ] as const
 
@@ -200,6 +200,14 @@ export const projects: Project[] = [
   },
 ]
 
+export const endeavourProject = {
+  title: 'Loods 5-webshop',
+  description:
+    'Als onderdeel van het team bij Endeavour werkte ik aan de Loods 5-webshop. Mijn stagewerk omvatte frontend- en backendontwikkeling, API-endpoints en het koppelen van database- en CMS-data aan de frontend.',
+  tags: ['Frontend', 'Backend', 'REST APIs', 'Database / CMS'],
+  images: loods5Images,
+}
+
 export const experience = [
   {
     company: 'Siemens',
@@ -214,8 +222,7 @@ export const experience = [
     role: 'Software Developer',
     type: 'Stage',
     date: '2024–2025',
-    description:
-      'Gewerkt aan frontend- en backendontwikkeling, data uit een database/CMS gekoppeld aan de frontend en API-endpoints ontwikkeld.',
+    description: endeavourProject.description,
   },
 ]
 
