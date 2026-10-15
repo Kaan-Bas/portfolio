@@ -1,23 +1,26 @@
 import { ChevronLeft, ChevronRight, ImageIcon, X } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useRef, useState, type KeyboardEvent } from 'react'
 import type { ProjectImage } from '../data/projectImages'
 
 export function ProjectGallery({
   images,
   title,
+  variant = 'card',
 }: {
   images?: readonly ProjectImage[]
   title: string
+  variant?: 'card' | 'page'
 }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const dialog = useRef<HTMLDialogElement>(null)
   const preview = useRef<HTMLButtonElement>(null)
   const cover = images?.[0]
   const image = images?.[activeIndex] ?? cover
+  const galleryClass = `project-media${variant === 'page' ? ' project-page-gallery' : ''}`
 
   if (!cover || !image || !images?.length) {
     return (
-      <figure className="project-media" aria-label={`Projectbeeld van ${title} volgt`}>
+      <figure className={galleryClass} aria-label={`Projectbeeld van ${title} volgt`}>
         <div className="project-media-preview">
           <div className="project-media-placeholder">
             <ImageIcon size={36} strokeWidth={1.3} aria-hidden="true" />
@@ -30,11 +33,18 @@ export function ProjectGallery({
 
   const imageCount = images.length
 
-  function selectImage(index: number) {
-    setActiveIndex(Math.max(0, Math.min(imageCount - 1, index)))
+  function changeImage(direction: -1 | 1) {
+    setActiveIndex((current) => (current + direction + imageCount) % imageCount)
   }
 
-  const navigation = (
+  function handleArrowKeys(event: KeyboardEvent<HTMLElement>) {
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.preventDefault()
+      changeImage(event.key === 'ArrowLeft' ? -1 : 1)
+    }
+  }
+
+  const navigation = imageCount > 1 && (
     <div
       className="project-gallery-navigation"
       role="group"
@@ -44,10 +54,7 @@ export function ProjectGallery({
         className="project-gallery-previous"
         type="button"
         aria-label={`Vorige afbeelding van ${title}`}
-        aria-disabled={activeIndex === 0}
-        onClick={() => {
-          if (activeIndex > 0) selectImage(activeIndex - 1)
-        }}
+        onClick={() => changeImage(-1)}
       >
         <ChevronLeft size={24} aria-hidden="true" />
       </button>
@@ -55,10 +62,7 @@ export function ProjectGallery({
         className="project-gallery-next"
         type="button"
         aria-label={`Volgende afbeelding van ${title}`}
-        aria-disabled={activeIndex === imageCount - 1}
-        onClick={() => {
-          if (activeIndex < imageCount - 1) selectImage(activeIndex + 1)
-        }}
+        onClick={() => changeImage(1)}
       >
         <ChevronRight size={24} aria-hidden="true" />
       </button>
@@ -67,28 +71,36 @@ export function ProjectGallery({
 
   return (
     <>
-      <figure className="project-media" aria-label={`Projectbeelden van ${title}`}>
-        <div className="project-media-preview">
+      <figure className={galleryClass} aria-label={`Projectbeelden van ${title}`}>
+        <div className="project-media-preview" onKeyDown={handleArrowKeys}>
           <button
             ref={preview}
             className="project-media-stage"
+            style={
+              variant === 'page' ? { aspectRatio: `${cover.width} / ${cover.height}` } : undefined
+            }
             type="button"
             aria-label={`Open fotogalerij van ${title}`}
             aria-haspopup="dialog"
-            onClick={() => {
-              setActiveIndex(0)
-              dialog.current?.showModal()
-            }}
+            onClick={() => dialog.current?.showModal()}
           >
             <img
-              src={cover.src}
-              alt={cover.alt}
-              width={cover.width}
-              height={cover.height}
+              src={image.src}
+              alt={image.alt}
+              width={image.width}
+              height={image.height}
               loading="lazy"
               decoding="async"
             />
           </button>
+          {imageCount > 1 && (
+            <>
+              {navigation}
+              <span className="sr-only" role="status">
+                Afbeelding {activeIndex + 1} van {imageCount}: {image.caption}
+              </span>
+            </>
+          )}
         </div>
       </figure>
 
@@ -100,12 +112,7 @@ export function ProjectGallery({
         onClick={(event) => {
           if (event.target === event.currentTarget) dialog.current?.close()
         }}
-        onKeyDown={(event) => {
-          if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-            event.preventDefault()
-            selectImage(activeIndex + (event.key === 'ArrowLeft' ? -1 : 1))
-          }
-        }}
+        onKeyDown={handleArrowKeys}
       >
         <div className="project-image-dialog-header">
           <div>

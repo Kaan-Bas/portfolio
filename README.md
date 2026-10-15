@@ -34,7 +34,7 @@ src/
   pages/
     Home.tsx        Recruiter-focused homepage
     Siemens.tsx     Detailed graduation-project case study
-    ProjectPage.tsx Data-driven IDCP and Waternet project pages
+    ProjectPage.tsx Data-driven IDCP, Waternet and Loods 5 project pages
     NotFound.tsx    Custom 404
   App.tsx           Route definitions and shared layout
   main.tsx          React entry point and self-hosted font imports
@@ -58,15 +58,15 @@ Start in **`src/data/portfolio.ts`**:
 - `profile`: name, introduction, email, LinkedIn, GitHub and website origin.
 - `focusAreas`: descriptions and introductions for AI, data and software. The profile cards and filters select these entries.
 - `featuredProject`: homepage Siemens card.
-- `endeavourProject`: the Loods 5 webshop card shown for the Software Engineering filter; its timeline entry is in `experience`.
-- `projects`: IDCP, Waternet and any additional projects.
+- `endeavourProject`: the Loods 5 webshop project card and detail-page content; its timeline entry is in `experience`.
+- `projects`: IDCP, Waternet, Loods 5 and any additional projects. Projects appear in the full overview and in filters matching their `focusAreas`.
 - `previewTags`: a short selection of tags for the homepage; `tags` keeps the complete list for each case study.
 - `focusAreas` on a project: the matching filters (`ai`, `data` or `software`). `topics` describes the actual work displayed on cards and project pages.
 - `experience`, `education`, `skillGroups` and `about`: homepage content.
 
 The contact email and social links are used throughout the site. Clear a social URL to show a labelled placeholder; an empty GitHub URL hides that optional link.
 
-Recruiters can choose a discipline from the technical-background cards or use the project and skill filters. The choice is preserved in the URL, for example `/?focus=data#work`, so it survives reloads, remains selected when returning from a case study and can be shared. AI shows Siemens and IDCP; data shows Waternet first, followed by IDCP; software shows the Endeavour internship as work experience. `Alles` restores the full overview. The three profile cards remain visible in every view.
+Recruiters can choose a discipline from the technical-background cards or use the project and skill filters. The choice is preserved in the URL, for example `/?focus=data#work`, so it survives reloads, remains selected when returning from a case study and can be shared. AI shows Siemens and IDCP; data shows Waternet first, followed by IDCP; software shows the Loods 5 project from my Endeavour internship. `Alles` restores the full overview. The three profile cards remain visible in every view.
 
 The hero uses `src/components/CodeVisual.tsx`: a decorative SVG with abstract coding symbols, layered panels and a subtle dot grid. It has no project-specific meaning, contains no actual source code and is hidden from assistive technology. Its styles are in `.code-visual` in `src/styles.css`.
 

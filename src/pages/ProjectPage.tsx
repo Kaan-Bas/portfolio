@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { focusUrl, projects, projectUrl } from '../data/portfolio'
 import { BackToWork, Tags } from '../components/ui'
 import { ProjectVisual } from '../components/Diagrams'
+import { ProjectGallery } from '../components/ProjectGallery'
 import { Contact } from '../components/Layout'
 import NotFound from './NotFound'
 import { useFocus } from '../hooks/useFocus'
@@ -21,7 +22,7 @@ export default function ProjectPage() {
         <BackToWork />
         <p className="eyebrow case-eyebrow">
           {project.organization}
-          <span className="eyebrow-divider">/</span>Minorproject
+          <span className="eyebrow-divider">/</span>{project.projectType}
         </p>
         <h1>
           {project.title}
@@ -32,19 +33,20 @@ export default function ProjectPage() {
         <Tags items={project.tags} />
       </section>
       <div className="container simple-project-body">
-        <ProjectVisual type={project.visual} large />
+        <ProjectGallery images={project.images} title={project.title} variant="page" />
         <div className="simple-project-overview">
           <div>
             <p className="eyebrow">Het project</p>
-            <h2>
-              {project.visual === 'water'
-                ? 'Van historische data naar het voorspellen van storingen.'
-                : 'Gebruikersondersteuning en aanbevelingen verbinden.'}
-            </h2>
+            <h2>{project.overviewTitle}</h2>
             <Tags items={project.topics} />
           </div>
           <p>{project.overview}</p>
         </div>
+        {project.visual && (
+          <div className="project-page-workflow">
+            <ProjectVisual type={project.visual} large />
+          </div>
+        )}
         <section className="contributions-section">
           <p className="eyebrow">Mijn bijdrage</p>
           <h2>Mijn werk aan het project.</h2>

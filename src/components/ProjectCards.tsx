@@ -1,8 +1,6 @@
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import {
-  endeavourProject,
-  experience,
   featuredProject,
   projects,
   projectUrl,
@@ -71,7 +69,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
   const path = projectUrl(project.slug, focus)
   return (
     <article className="project-card">
-      <ProjectGallery images={project.images} title={project.organization} />
+        <ProjectGallery images={project.images} title={project.title} />
       <div className="project-card-body">
         <div className="project-overline">
           <span>{project.organization}</span>
@@ -100,7 +98,10 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
 
 export function SelectedProjects({ items = projects }: { items?: Project[] }) {
   return (
-    <div className={`selected-projects${items.length === 1 ? ' is-single' : ''}`}>
+    <div
+      className={`selected-projects${items.length === 1 ? ' is-single' : ''}`}
+      id="project-list"
+    >
       {items.map((project, index) => (
         <ProjectCard key={project.slug} project={project} index={index} />
       ))}
@@ -108,30 +109,3 @@ export function SelectedProjects({ items = projects }: { items?: Project[] }) {
   )
 }
 
-export function SoftwareExperience() {
-  const internship = experience.find((item) => item.company === 'Endeavour')!
-  return (
-    <div className="selected-projects is-single">
-      <article className="project-card">
-        <ProjectGallery images={endeavourProject.images} title={endeavourProject.title} />
-        <div className="project-card-body">
-          <div className="project-overline">
-            <span>{internship.company} · {internship.type}</span>
-            <span>{internship.date}</span>
-          </div>
-          <h3>{endeavourProject.title}</h3>
-          <p className="project-context">{internship.role}</p>
-          <p className="project-description">{endeavourProject.description}</p>
-          <Tags items={endeavourProject.tags} />
-          <div className="project-card-bottom">
-            <span>Softwareontwikkeling in teamverband</span>
-            <Link to="/?focus=software#experience">
-              Bekijk stage in tijdlijn
-              <ArrowRight size={15} aria-hidden="true" />
-            </Link>
-          </div>
-        </div>
-      </article>
-    </div>
-  )
-}

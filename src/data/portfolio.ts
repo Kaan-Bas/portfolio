@@ -89,13 +89,15 @@ export interface Project {
   organization: string
   title: string
   context: string
+  projectType: 'Minorproject' | 'Stageproject'
   description: string
   images?: readonly ProjectImage[]
   tags: string[]
   previewTags: string[]
   focusAreas: FocusArea[]
   topics: string[]
-  visual: 'recommendation' | 'water'
+  visual?: 'recommendation' | 'water'
+  overviewTitle: string
   overview: string
   contributions: { title: string; description: string }[]
   takeaway: string
@@ -123,12 +125,48 @@ export const featuredProject = {
   images: siemensImages,
 }
 
+export const endeavourProject: Project = {
+  slug: 'loods5-webshop',
+  organization: 'Endeavour',
+  title: 'Loods 5-webshop',
+  projectType: 'Stageproject',
+  context: 'Software Developer · Stage · 2024–2025',
+  description:
+    'Als onderdeel van het team bij Endeavour werkte ik aan de Loods 5-webshop. Mijn stagewerk omvatte frontend- en backendontwikkeling, API-endpoints en het koppelen van database- en CMS-data aan de frontend.',
+  images: loods5Images,
+  tags: ['Frontend', 'Backend', 'REST APIs', 'Database / CMS'],
+  previewTags: ['Frontend', 'Backend', 'REST APIs', 'Database / CMS'],
+  focusAreas: ['software'],
+  topics: ['Frontend', 'Backend', 'API-endpoints'],
+  overviewTitle: 'Bijdragen aan de Loods 5-webshop in een team.',
+  overview:
+    'Tijdens mijn stage bij Endeavour werkte ik als Software Developer mee aan de Loods 5-webshop. Ik maakte deel uit van het team en werkte aan frontend- en backendontwikkeling, API-endpoints en de koppeling van database- en CMS-data aan de frontend.',
+  contributions: [
+    {
+      title: 'Frontend- en backendontwikkeling',
+      description:
+        'Bijgedragen aan de webshopontwikkeling aan zowel de frontend- als de backendkant.',
+    },
+    {
+      title: 'API-endpoints',
+      description: 'API-endpoints ontwikkeld tijdens mijn stage bij Endeavour.',
+    },
+    {
+      title: 'Database- en CMS-koppelingen',
+      description: 'Database- en CMS-data gekoppeld aan de frontend.',
+    },
+  ],
+  takeaway:
+    'Dit project laat zien hoe ik als onderdeel van een team werkte aan frontend, backend, API-endpoints en koppelingen tussen database- en CMS-data en de frontend.',
+}
+
 export const projects: Project[] = [
   {
     slug: 'idcp-chatbot-recommendation',
     organization: 'IDCP',
     images: idcpImages,
     title: 'LLM-chatbot & hybride aanbevelingssysteem',
+    projectType: 'Minorproject',
     context: 'Minor Data Driven Business – AI Engineering',
     description:
       'Binnen een Agile/Scrum-team gewerkt aan een LLM-chatbot voor gebruikersondersteuning en een hybride aanbevelingssysteem ontwikkeld met machine learning in Python.',
@@ -144,6 +182,7 @@ export const projects: Project[] = [
     topics: ['LLM-toepassingen', 'Aanbevelingssystemen'],
     previewTags: ['Python', 'LLMs', 'Machine Learning'],
     visual: 'recommendation',
+    overviewTitle: 'Gebruikersondersteuning en aanbevelingen verbinden.',
     overview:
       'Dit minorproject combineerde een AI-chatbot met aanbevelingen op basis van machine learning. Data over gebruikers, hun interesses en beschikbare content werd verwerkt en gebruikt binnen het aanbevelingssysteem en de chatbot.',
     contributions: [
@@ -169,6 +208,7 @@ export const projects: Project[] = [
     slug: 'waternet-pipe-failure-prediction',
     organization: 'Waternet',
     title: 'Voorspellen van leidingstoringen',
+    projectType: 'Minorproject',
     context: 'Minor Data Driven Business – AI Engineering',
     description:
       'Data over waterinfrastructuur voorbereid en geanalyseerd en een classificatiemodel ontwikkeld in Python/scikit-learn om leidingstoringen te voorspellen op basis van historische storingsdata.',
@@ -177,6 +217,7 @@ export const projects: Project[] = [
     topics: ['Data-analyse', 'Classificatie'],
     previewTags: ['Python', 'scikit-learn', 'Data-analyse'],
     visual: 'water',
+    overviewTitle: 'Van historische data naar het voorspellen van storingen.',
     overview:
       'Dit project richtte zich op het voorspellen van leidingstoringen met historische storingsdata. Het werk combineerde de voorbereiding en analyse van data over waterinfrastructuur met de ontwikkeling van een classificatiemodel op basis van machine learning.',
     contributions: [
@@ -198,15 +239,8 @@ export const projects: Project[] = [
     takeaway:
       'Historische storingsdata voorbereiden, analyseren en gebruiken voor een classificatiemodel: de stappen van een praktisch machine-learningproject.',
   },
+  endeavourProject,
 ]
-
-export const endeavourProject = {
-  title: 'Loods 5-webshop',
-  description:
-    'Als onderdeel van het team bij Endeavour werkte ik aan de Loods 5-webshop. Mijn stagewerk omvatte frontend- en backendontwikkeling, API-endpoints en het koppelen van database- en CMS-data aan de frontend.',
-  tags: ['Frontend', 'Backend', 'REST APIs', 'Database / CMS'],
-  images: loods5Images,
-}
 
 export const experience = [
   {

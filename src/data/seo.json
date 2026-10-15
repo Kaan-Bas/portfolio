@@ -18,5 +18,9 @@
   "/projects/waternet-pipe-failure-prediction": {
     "title": "Voorspellen van leidingstoringen · Waternet — Kaan Bas",
     "description": "Een project binnen de minor Data Driven Business – AI Engineering: waterinfrastructuur analyseren en leidingstoringen voorspellen met Python, pandas en scikit-learn."
+  },
+  "/projects/loods5-webshop": {
+    "title": "Loods 5-webshop · Endeavour — Kaan Bas",
+    "description": "Een teamproject tijdens mijn stage bij Endeavour. Ik werkte aan de Loods 5-webshop met frontend- en backendontwikkeling, API-endpoints en database- en CMS-koppelingen."
   }
 }

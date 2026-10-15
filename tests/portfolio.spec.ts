@@ -12,6 +12,7 @@ const projectPaths = [
   '/projects/siemens-ai-quotation-automation',
   '/projects/idcp-chatbot-recommendation',
   '/projects/waternet-pipe-failure-prediction',
+  '/projects/loods5-webshop',
 ]
 
 const focusPaths = ['/?focus=ai', '/?focus=data', '/?focus=software']
@@ -102,7 +103,7 @@ test('keyboard skip link and mobile navigation', async ({ page, isMobile }) => {
   }
 })
 
-test('project cards open an accessible gallery without inline controls', async ({
+test('project cards support inline photo navigation and an accessible gallery', async ({
   page,
 }, testInfo) => {
   await page.goto('/#work')
@@ -112,8 +113,18 @@ test('project cards open an accessible gallery without inline controls', async (
   await expectImageLoaded(siemensImage)
   await expect(siemensImage).toHaveAttribute('alt', /validatiestatussen/)
   await expect(cover.locator('figcaption')).toHaveCount(0)
-  await expect(cover.getByRole('button')).toHaveCount(1)
-  await expect(cover.getByRole('button', { name: /afbeelding van/ })).toHaveCount(0)
+  await expect(cover.getByRole('button')).toHaveCount(3)
+  const previousSiemensImage = cover.getByRole('button', {
+    name: 'Vorige afbeelding van Siemens Buildings',
+  })
+  await expect(previousSiemensImage).toBeVisible()
+  await expect(previousSiemensImage).toBeEnabled()
+  await previousSiemensImage.click()
+  await expect(siemensImage).toHaveAttribute('alt', /totaalprijs/)
+  await expectImageLoaded(siemensImage)
+  await expect(page.getByRole('dialog')).toHaveCount(0)
+  await cover.getByRole('button', { name: 'Volgende afbeelding van Siemens Buildings' }).click()
+  await expect(siemensImage).toHaveAttribute('alt', /validatiestatussen/)
 
   const opener = cover.getByRole('button', { name: 'Open fotogalerij van Siemens Buildings' })
   await opener.focus()
@@ -123,7 +134,7 @@ test('project cards open an accessible gallery without inline controls', async (
   await expect(imageDialog.getByRole('img')).toHaveAttribute('alt', /validatiestatussen/)
   await expect(
     imageDialog.getByRole('button', { name: 'Vorige afbeelding van Siemens Buildings' }),
-  ).toBeDisabled()
+  ).toBeEnabled()
   await imageDialog.getByRole('button', { name: 'Afbeelding sluiten' }).focus()
   await page.keyboard.press('Tab')
   await expect(
@@ -138,10 +149,10 @@ test('project cards open an accessible gallery without inline controls', async (
   await expectImageLoaded(imageDialog.getByRole('img'))
   await expect(
     imageDialog.getByRole('button', { name: 'Volgende afbeelding van Siemens Buildings' }),
-  ).toBeDisabled()
-  await page.keyboard.press('ArrowLeft')
-  await expect(imageDialog.getByRole('img')).toHaveAttribute('alt', /validatiestatussen/)
+  ).toBeEnabled()
   await page.keyboard.press('ArrowRight')
+  await expect(imageDialog.getByRole('img')).toHaveAttribute('alt', /validatiestatussen/)
+  await page.keyboard.press('ArrowLeft')
   await expect(imageDialog.getByRole('img')).toHaveAttribute('alt', /totaalprijs/)
 
   await page.addScriptTag({ content: axe.source })
@@ -156,35 +167,58 @@ test('project cards open an accessible gallery without inline controls', async (
   await page.keyboard.press('Escape')
   await expect(imageDialog).toBeHidden()
   await expect(opener).toBeFocused()
-  await expect(siemensImage).toHaveAttribute('alt', /validatiestatussen/)
+  await expect(siemensImage).toHaveAttribute('alt', /totaalprijs/)
   await opener.click()
-  await expect(imageDialog.getByRole('img')).toHaveAttribute('alt', /validatiestatussen/)
+  await expect(imageDialog.getByRole('img')).toHaveAttribute('alt', /totaalprijs/)
   await page.mouse.click(2, 2)
   await expect(imageDialog).toBeHidden()
+  await previousSiemensImage.click()
 
-  const idcp = page.getByRole('figure', { name: 'Projectbeelden van IDCP', exact: true })
+  const idcpTitle = 'LLM-chatbot & hybride aanbevelingssysteem'
+  const idcp = page.getByRole('figure', { name: `Projectbeelden van ${idcpTitle}`, exact: true })
   const idcpImage = idcp.getByRole('img')
   await expectImageLoaded(idcpImage)
   await expect(idcpImage).toHaveAttribute('alt', /IDCP-dashboard/)
   await expect(idcp.locator('figcaption')).toHaveCount(0)
-  await expect(idcp.getByRole('button')).toHaveCount(1)
-  const idcpOpener = idcp.getByRole('button', { name: 'Open fotogalerij van IDCP' })
+  await expect(idcp.getByRole('button')).toHaveCount(3)
+  await idcp.getByRole('button', { name: `Volgende afbeelding van ${idcpTitle}` }).click()
+  await expect(idcpImage).toHaveAttribute('alt', /IDCP-chatbot/)
+  const idcpOpener = idcp.getByRole('button', { name: `Open fotogalerij van ${idcpTitle}` })
   await idcpOpener.click()
-  const chatbotDialog = page.getByRole('dialog', { name: 'Projectbeelden van IDCP', exact: true })
+  const chatbotDialog = page.getByRole('dialog', {
+    name: `Projectbeelden van ${idcpTitle}`,
+    exact: true,
+  })
   await expect(chatbotDialog).toBeVisible()
-  await chatbotDialog.getByRole('button', { name: 'Volgende afbeelding van IDCP' }).click()
   await expect(chatbotDialog.getByRole('img')).toHaveAttribute('alt', /IDCP-chatbot/)
   await expectImageLoaded(chatbotDialog.getByRole('img'))
-  await chatbotDialog.getByRole('button', { name: 'Vorige afbeelding van IDCP' }).click()
+  await chatbotDialog.getByRole('button', { name: `Vorige afbeelding van ${idcpTitle}` }).click()
   await expect(chatbotDialog.getByRole('img')).toHaveAttribute('alt', /IDCP-dashboard/)
   await page.keyboard.press('ArrowRight')
   await expect(chatbotDialog.getByRole('img')).toHaveAttribute('alt', /IDCP-chatbot/)
   await chatbotDialog.getByRole('button', { name: 'Afbeelding sluiten' }).click()
   await expect(chatbotDialog).toBeHidden()
   await expect(idcpOpener).toBeFocused()
+  await expect(idcpImage).toHaveAttribute('alt', /IDCP-chatbot/)
+  await idcp.getByRole('button', { name: `Vorige afbeelding van ${idcpTitle}` }).click()
   await expect(idcpImage).toHaveAttribute('alt', /IDCP-dashboard/)
 
-  const placeholder = page.getByRole('figure', { name: 'Projectbeeld van Waternet volgt' })
+  const loods5 = page.getByRole('figure', { name: 'Projectbeelden van Loods 5-webshop', exact: true })
+  const loods5Image = loods5.getByRole('img')
+  await expectImageLoaded(loods5Image)
+  const initialLoods5Bounds = await loods5.boundingBox()
+  await loods5.getByRole('button', { name: 'Volgende afbeelding van Loods 5-webshop' }).click()
+  await expect(loods5Image).toHaveAttribute('alt', /Productdetailpagina/)
+  await expectImageLoaded(loods5Image)
+  const updatedLoods5Bounds = await loods5.boundingBox()
+  expect(updatedLoods5Bounds!.height).toBeCloseTo(initialLoods5Bounds!.height, 0)
+  await page.keyboard.press('ArrowLeft')
+  await expect(loods5Image).toHaveAttribute('alt', /Color House/)
+
+  await page.getByRole('button', { name: 'Bekijk alle projecten' }).click()
+  const placeholder = page.getByRole('figure', {
+    name: 'Projectbeeld van Voorspellen van leidingstoringen volgt',
+  })
   await expect(placeholder.getByText('Projectbeeld volgt', { exact: true })).toBeVisible()
   await expect(placeholder.getByRole('button')).toHaveCount(0)
   const screenshotStyle = '.site-header, .skip-link { visibility: hidden; }'
@@ -198,11 +232,118 @@ test('project cards open an accessible gallery without inline controls', async (
   })
 })
 
+test('project detail pages show larger previews and navigable photo galleries', async ({
+  page,
+}, testInfo) => {
+  await page.goto('/#work')
+  const cardImage = page
+    .getByRole('figure', { name: 'Projectbeelden van Loods 5-webshop', exact: true })
+    .getByRole('img')
+  await expectImageLoaded(cardImage)
+  const cardBounds = await cardImage.boundingBox()
+  expect(cardBounds).not.toBeNull()
+
+  const galleries = [
+    {
+      slug: 'siemens-ai-quotation-automation',
+      title: 'Offertes automatiseren met AI',
+      firstImage: /validatiestatussen/,
+      nextImage: /totaalprijs/,
+    },
+    {
+      slug: 'idcp-chatbot-recommendation',
+      title: 'LLM-chatbot & hybride aanbevelingssysteem',
+      firstImage: /IDCP-dashboard/,
+      nextImage: /IDCP-chatbot/,
+    },
+    {
+      slug: 'loods5-webshop',
+      title: 'Loods 5-webshop',
+      firstImage: /Color House/,
+      nextImage: /Productdetailpagina/,
+    },
+  ]
+
+  for (const { slug, title, firstImage, nextImage } of galleries) {
+    await page.goto(`/projects/${slug}`)
+    const gallery = page.getByRole('figure', { name: `Projectbeelden van ${title}`, exact: true })
+    const previewImage = gallery.getByRole('img')
+    await expectImageLoaded(previewImage)
+    await expect(previewImage).toHaveAttribute('alt', firstImage)
+    if (slug === 'loods5-webshop') {
+      const pageBounds = await previewImage.boundingBox()
+      expect(pageBounds).not.toBeNull()
+      expect(pageBounds!.width).toBeGreaterThan(cardBounds!.width)
+    }
+    await gallery.screenshot({ path: `.artifacts/gallery-${slug}-${testInfo.project.name}.png` })
+    const previousImage = gallery.getByRole('button', { name: `Vorige afbeelding van ${title}` })
+    const nextImageButton = gallery.getByRole('button', { name: `Volgende afbeelding van ${title}` })
+    await expect(previousImage).toBeVisible()
+    await expect(previousImage).toBeEnabled()
+    await expect(nextImageButton).toBeVisible()
+    const initialBounds = await gallery.boundingBox()
+    await previousImage.click()
+    await expect(previewImage).toHaveAttribute('alt', nextImage)
+    await expectImageLoaded(previewImage)
+    await expect(nextImageButton).toBeEnabled()
+    await expect(gallery.getByRole('status')).toContainText('Afbeelding 2 van 2')
+    await nextImageButton.click()
+    await expect(previewImage).toHaveAttribute('alt', firstImage)
+    await previousImage.click()
+    await expect(previewImage).toHaveAttribute('alt', nextImage)
+    const updatedBounds = await gallery.boundingBox()
+    expect(updatedBounds!.height).toBeCloseTo(initialBounds!.height, 0)
+    const opener = gallery.getByRole('button', { name: `Open fotogalerij van ${title}` })
+    await opener.click()
+    const dialog = page.getByRole('dialog', { name: `Projectbeelden van ${title}`, exact: true })
+    await expect(dialog).toBeVisible()
+    await expect(dialog.getByRole('img')).toHaveAttribute('alt', nextImage)
+    await expectImageLoaded(dialog.getByRole('img'))
+    await page.keyboard.press('ArrowLeft')
+    await expect(dialog.getByRole('img')).toHaveAttribute('alt', firstImage)
+    await page.keyboard.press('Escape')
+    await expect(dialog).toBeHidden()
+    await expect(opener).toBeFocused()
+    await expect(previewImage).toHaveAttribute('alt', firstImage)
+    await page.keyboard.press('ArrowRight')
+    await expect(previewImage).toHaveAttribute('alt', nextImage)
+    await previousImage.click()
+    await expect(previewImage).toHaveAttribute('alt', firstImage)
+  }
+
+  await page.goto('/projects/waternet-pipe-failure-prediction')
+  const placeholder = page.getByRole('figure', {
+    name: 'Projectbeeld van Voorspellen van leidingstoringen volgt',
+  })
+  await expect(placeholder.getByText('Projectbeeld volgt', { exact: true })).toBeVisible()
+  await expect(placeholder.getByRole('button')).toHaveCount(0)
+})
+
 test('recruiters can choose a discipline, reload it and reset the view', async ({
   page,
   isMobile,
 }, testInfo) => {
   await page.goto('/')
+  const initialProjectCard = page.locator('#work .selected-projects .project-card').first()
+  await expect(initialProjectCard).toBeVisible()
+  const initialProjectCardBounds = await initialProjectCard.boundingBox()
+  expect(initialProjectCardBounds).not.toBeNull()
+  const normalProjectCardWidth = initialProjectCardBounds!.width
+  await expect(page.locator('#work .selected-projects .project-card')).toHaveCount(2)
+  await expect(page.getByRole('heading', { name: 'LLM-chatbot & hybride aanbevelingssysteem' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Loods 5-webshop' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(0)
+  const expandProjects = page.locator('#work .projects-toggle')
+  await expandProjects.click()
+  await expect(expandProjects).toHaveAttribute('aria-expanded', 'true')
+  await expect(page.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toBeVisible()
+  await expect(page.locator('#work .selected-projects .project-card h3')).toHaveText([
+    'LLM-chatbot & hybride aanbevelingssysteem',
+    'Loods 5-webshop',
+    'Voorspellen van leidingstoringen',
+  ])
+  await page.getByRole('button', { name: 'Toon minder projecten' }).click()
+  await expect(page.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(0)
   await page.getByRole('link', { name: 'Bekijk dataprojecten', exact: true }).click()
   await expect(page).toHaveURL(/\?focus=data#work$/)
   await expect(page).toHaveTitle('Data & Machine Learning — Kaan Bas')
@@ -219,6 +360,9 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   await expect(
     projectFilters.getByRole('link', { name: 'Data & Machine Learning' }),
   ).toHaveAttribute('aria-current', 'true')
+  const dataProjectCardBounds = await work.locator('.selected-projects .project-card').first().boundingBox()
+  expect(dataProjectCardBounds).not.toBeNull()
+  expect(dataProjectCardBounds!.width).toBeCloseTo(normalProjectCardWidth, 0)
   await work.screenshot({ path: `.artifacts/focus-data-${testInfo.project.name}.png` })
   await work
     .getByRole('link', { name: 'Bekijk project: Voorspellen van leidingstoringen', exact: true })
@@ -229,27 +373,41 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   await expect(work.getByRole('link', { name: 'Bekijk de casestudy' })).toHaveCount(0)
 
   await projectFilters.getByRole('link', { name: 'Software Engineering', exact: true }).click()
-  await expect(work.getByRole('heading', { name: 'Praktijkervaring' })).toBeVisible()
-  await expect(work.getByText('Endeavour · Stage')).toBeVisible()
+  await expect(work.getByRole('heading', { name: 'Projecten', exact: true })).toBeVisible()
+  await expect(work.getByText(/Software Developer .*Stage/)).toBeVisible()
   await expect(work.getByRole('heading', { name: 'Loods 5-webshop' })).toBeVisible()
   await expect(work.getByText(/Als onderdeel van het team bij Endeavour/)).toBeVisible()
+  const softwareProjectCard = work.locator('.selected-projects .project-card')
+  const softwareProjectCardBounds = await softwareProjectCard.boundingBox()
+  expect(softwareProjectCardBounds).not.toBeNull()
+  expect(softwareProjectCardBounds!.width).toBeCloseTo(normalProjectCardWidth, 0)
   await work.getByRole('button', { name: 'Open fotogalerij van Loods 5-webshop' }).click()
   const loods5Gallery = page.getByRole('dialog', { name: 'Projectbeelden van Loods 5-webshop' })
   await expect(loods5Gallery.getByText('Webshop homepage')).toBeVisible()
   await loods5Gallery.getByRole('button', { name: 'Volgende afbeelding van Loods 5-webshop' }).click()
   await expect(loods5Gallery.getByText('Productpagina')).toBeVisible()
   await loods5Gallery.getByRole('button', { name: 'Afbeelding sluiten' }).click()
+  await work.getByRole('link', { name: 'Bekijk project: Loods 5-webshop' }).click()
+  await expect(page).toHaveURL(/loods5-webshop\?focus=software$/)
+  await expect(page.getByRole('heading', { name: /^Loods 5-webshop/ })).toBeVisible()
+  await expect(page.locator('.case-eyebrow')).toContainText('Stageproject')
+  await expect(page.getByRole('heading', { name: 'Mijn werk aan het project.' })).toBeVisible()
+  await page.getByRole('link', { name: 'Terug naar projecten' }).click()
+  await expect(page).toHaveURL(/\?focus=software#work$/)
   await expect(
     skills.getByRole('heading', { name: 'Software Engineering', exact: true }),
   ).toBeVisible()
-  await work.getByRole('link', { name: 'Bekijk stage in tijdlijn' }).click()
-  await expect(page).toHaveURL(/\?focus=software#experience$/)
+  await page.goto('/?focus=software#experience')
   await expect(
     page.locator('#experience').getByRole('heading', { name: 'Endeavour' }),
   ).toBeVisible()
 
   await projectFilters.getByRole('link', { name: 'AI Engineering', exact: true }).click()
   await expect(work.getByRole('link', { name: 'Bekijk de casestudy' })).toBeVisible()
+  const aiProjectCard = work.locator('.selected-projects .project-card')
+  const aiProjectCardBounds = await aiProjectCard.boundingBox()
+  expect(aiProjectCardBounds).not.toBeNull()
+  expect(aiProjectCardBounds!.width).toBeCloseTo(normalProjectCardWidth, 0)
   await expect(
     work.getByRole('heading', { name: 'LLM-chatbot & hybride aanbevelingssysteem' }),
   ).toBeVisible()
@@ -280,7 +438,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   await expect(page).toHaveURL('/#skills')
   await expect(skills.getByRole('heading', { level: 3 })).toHaveCount(4)
   await expect(work.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(
-    1,
+    0,
   )
   await page.goBack()
   await expect(page).toHaveURL(/\?focus=ai#skills$/)

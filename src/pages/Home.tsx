@@ -1,4 +1,14 @@
-import { ArrowDown, ArrowRight, Braces, Database, GraduationCap, Sparkles } from 'lucide-react'
+import {
+  ArrowDown,
+  ArrowRight,
+  Braces,
+  ChevronDown,
+  ChevronUp,
+  Database,
+  GraduationCap,
+  Sparkles,
+} from 'lucide-react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   about,
@@ -13,7 +23,7 @@ import {
 } from '../data/portfolio'
 import { FocusFilters } from '../components/FocusNavigation'
 import { CodeVisual } from '../components/CodeVisual'
-import { FeaturedProject, SelectedProjects, SoftwareExperience } from '../components/ProjectCards'
+import { FeaturedProject, SelectedProjects } from '../components/ProjectCards'
 import { Contact } from '../components/Layout'
 import { ExternalLink, SectionHeading } from '../components/ui'
 import { useFocus } from '../hooks/useFocus'
@@ -22,11 +32,24 @@ const pillarIcons = [Sparkles, Braces, Database]
 
 export default function Home() {
   const { focus, selectedArea } = useFocus()
+  const [showAllProjects, setShowAllProjects] = useState(false)
   const visibleProjects = projects.filter(
     (project) => focus === 'all' || project.focusAreas.includes(focus),
   )
   if (focus === 'data')
     visibleProjects.sort((a, b) => Number(b.visual === 'water') - Number(a.visual === 'water'))
+  const previewProjectSlugs = ['idcp-chatbot-recommendation', 'loods5-webshop']
+  const previewProjects =
+    focus === 'all'
+      ? visibleProjects.filter((project) => previewProjectSlugs.includes(project.slug))
+      : visibleProjects
+  const remainingProjects = visibleProjects.filter(
+    (project) => !previewProjects.some((previewProject) => previewProject.slug === project.slug),
+  )
+  const projectsToShow = showAllProjects
+    ? [...previewProjects, ...remainingProjects]
+    : previewProjects
+  const hasMoreProjects = previewProjects.length < visibleProjects.length
   const visibleSkills = skillGroups.filter(
     (group) =>
       focus === 'all' || group.area === focus || (focus === 'ai' && group.area === 'automation'),
@@ -96,7 +119,7 @@ export default function Home() {
           <SectionHeading
             number="01"
             eyebrow="Mijn werk"
-            title={focus === 'software' ? 'Praktijkervaring' : 'Projecten'}
+            title="Projecten"
             description={
               selectedArea?.workDescription ??
               'Bekijk het werk dat relevant is voor jouw vakgebied.'
@@ -112,10 +135,22 @@ export default function Home() {
               <h3>{focus === 'ai' ? 'Meer AI-projecten' : 'Meer projecten'}</h3>
             </div>
           )}
-          {focus === 'software' ? (
-            <SoftwareExperience />
-          ) : (
-            <SelectedProjects items={visibleProjects} />
+          <SelectedProjects items={projectsToShow} />
+          {hasMoreProjects && (
+            <button
+              className="projects-toggle"
+              type="button"
+              aria-expanded={showAllProjects}
+              aria-controls="project-list"
+              onClick={() => setShowAllProjects((current) => !current)}
+            >
+              {showAllProjects ? 'Toon minder projecten' : 'Bekijk alle projecten'}
+              {showAllProjects ? (
+                <ChevronUp size={16} aria-hidden="true" />
+              ) : (
+                <ChevronDown size={16} aria-hidden="true" />
+              )}
+            </button>
           )}
         </div>
       </section>

@@ -17,6 +17,7 @@ import {
   roleGroups,
 } from '../data/siemens'
 import { ArchitectureDiagram } from '../components/Diagrams'
+import { ProjectGallery } from '../components/ProjectGallery'
 import { Contact } from '../components/Layout'
 import { BackToWork, Tags } from '../components/ui'
 import { useFocus } from '../hooks/useFocus'
@@ -67,6 +68,14 @@ export default function Siemens() {
         </div>
         <Tags items={featuredProject.tags} />
       </section>
+
+      <div className="container case-gallery">
+        <ProjectGallery
+          images={featuredProject.images}
+          title={featuredProject.title}
+          variant="page"
+        />
+      </div>
 
       <div className="case-body container">
         <aside className="case-sidebar">
