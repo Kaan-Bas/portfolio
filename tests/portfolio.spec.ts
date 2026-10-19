@@ -13,6 +13,7 @@ const projectPaths = [
   '/projects/idcp-chatbot-recommendation',
   '/projects/waternet-pipe-failure-prediction',
   '/projects/loods5-webshop',
+  '/projects/folio-pdf-knowledge-assistant',
 ]
 
 const focusPaths = ['/?focus=ai', '/?focus=data', '/?focus=software']
@@ -319,6 +320,56 @@ test('project detail pages show larger previews and navigable photo galleries', 
   await expect(placeholder.getByRole('button')).toHaveCount(0)
 })
 
+test('Folio is discoverable through the overview and relevant filters with an honest case study', async ({
+  page,
+}, testInfo) => {
+  const title = 'Folio — PDF Knowledge Assistant'
+  await page.goto('/#work')
+  const work = page.locator('#work')
+  const card = work.locator('.project-card').filter({
+    has: page.getByRole('heading', { name: title, exact: true }),
+  })
+  await expect(card).toHaveCount(0)
+  await page.getByRole('button', { name: 'Bekijk alle projecten' }).click()
+  await expect(card).toBeVisible()
+  await expect(card.getByText('RAG', { exact: true })).toBeVisible()
+
+  const filters = work.getByRole('navigation', { name: 'Filter projecten op vakgebied' })
+  for (const area of ['AI Engineering', 'Software Engineering']) {
+    await filters.getByRole('link', { name: area, exact: true }).click()
+    await expect(card).toBeVisible()
+  }
+  await card.getByRole('link', { name: `Bekijk project: ${title}` }).click()
+  await expect(page).toHaveURL('/projects/folio-pdf-knowledge-assistant?focus=software')
+  await expect(page).toHaveTitle('Folio — PDF Knowledge Assistant — Kaan Bas')
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(`${title}.`)
+  const placeholder = page.getByRole('figure', { name: `Projectbeeld van ${title} volgt` })
+  await expect(placeholder.getByText('Projectbeeld volgt', { exact: true })).toBeVisible()
+  await expect(placeholder.getByRole('button')).toHaveCount(0)
+  const workflow = page.getByRole('figure', { name: 'Gegevensstroom van het project' })
+  await expect(workflow.getByRole('heading')).toHaveText([
+    'PDF-upload',
+    'Tekst per pagina',
+    'Chunking',
+    'Lokale embeddings',
+    'FAISS vector search',
+    'Relevante context',
+    'Gemini',
+    'Antwoord met bronnen',
+  ])
+  const stack = page.getByRole('region', { name: 'Gebouwd met.' })
+  await expect(stack.getByText('intfloat/multilingual-e5-small', { exact: true })).toBeVisible()
+  await expect(stack.getByText('FastAPI', { exact: true })).toBeVisible()
+  const testing = page.getByRole('region', { name: 'Wat is gecontroleerd?' })
+  await expect(testing).toContainText('81 backend-testgevallen en 16 frontendtests')
+  await expect(testing).toContainText('niet opnieuw uitgevoerd')
+  await expect(page.locator('.simple-project-body a[href^="http"]')).toHaveCount(0)
+  await page.screenshot({ path: `.artifacts/folio-${testInfo.project.name}.png`, fullPage: true })
+  await page.getByRole('link', { name: 'Terug naar projecten' }).click()
+  await expect(page).toHaveURL('/?focus=software#work')
+  await expect(card).toBeVisible()
+})
+
 test('recruiters can choose a discipline, reload it and reset the view', async ({
   page,
   isMobile,
@@ -341,6 +392,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
     'LLM-chatbot & hybride aanbevelingssysteem',
     'Loods 5-webshop',
     'Voorspellen van leidingstoringen',
+    'Folio — PDF Knowledge Assistant',
   ])
   await page.getByRole('button', { name: 'Toon minder projecten' }).click()
   await expect(page.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(0)
@@ -377,7 +429,9 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   await expect(work.getByText(/Software Developer .*Stage/)).toBeVisible()
   await expect(work.getByRole('heading', { name: 'Loods 5-webshop' })).toBeVisible()
   await expect(work.getByText(/Als onderdeel van het team bij Endeavour/)).toBeVisible()
-  const softwareProjectCard = work.locator('.selected-projects .project-card')
+  const softwareProjectCard = work.locator('.selected-projects .project-card').filter({
+    has: page.getByRole('heading', { name: 'Loods 5-webshop', exact: true }),
+  })
   const softwareProjectCardBounds = await softwareProjectCard.boundingBox()
   expect(softwareProjectCardBounds).not.toBeNull()
   expect(softwareProjectCardBounds!.width).toBeCloseTo(normalProjectCardWidth, 0)
@@ -404,7 +458,9 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
 
   await projectFilters.getByRole('link', { name: 'AI Engineering', exact: true }).click()
   await expect(work.getByRole('link', { name: 'Bekijk de casestudy' })).toBeVisible()
-  const aiProjectCard = work.locator('.selected-projects .project-card')
+  const aiProjectCard = work.locator('.selected-projects .project-card').filter({
+    has: page.getByRole('heading', { name: 'LLM-chatbot & hybride aanbevelingssysteem', exact: true }),
+  })
   const aiProjectCardBounds = await aiProjectCard.boundingBox()
   expect(aiProjectCardBounds).not.toBeNull()
   expect(aiProjectCardBounds!.width).toBeCloseTo(normalProjectCardWidth, 0)
@@ -475,4 +531,8 @@ test('production route HTML includes metadata before JavaScript runs', async () 
   )
   expect(html).toMatch(/name="description"\s+content="Een afstudeerproject bij Siemens/)
   expect(html).toContain('property="og:locale" content="nl_NL"')
+  const folioHtml = await readFile('dist/projects/folio-pdf-knowledge-assistant/index.html', 'utf8')
+  expect(folioHtml).toContain('<title>Folio — PDF Knowledge Assistant — Kaan Bas</title>')
+  expect(folioHtml).toContain('property="og:title" content="Folio — PDF Knowledge Assistant — Kaan Bas"')
+  expect(folioHtml).toMatch(/name="description"\s+content="Een full-stack RAG-project/)
 })

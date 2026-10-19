@@ -19,6 +19,10 @@
     "title": "Voorspellen van leidingstoringen · Waternet — Kaan Bas",
     "description": "Een project binnen de minor Data Driven Business – AI Engineering: waterinfrastructuur analyseren en leidingstoringen voorspellen met Python, pandas en scikit-learn."
   },
+  "/projects/folio-pdf-knowledge-assistant": {
+    "title": "Folio — PDF Knowledge Assistant — Kaan Bas",
+    "description": "Een full-stack RAG-project met React, Python en FastAPI. Lokale embeddings en FAISS-retrieval geven Gemini context voor antwoorden met citaten en PDF-paginaverwijzingen."
+  },
   "/projects/loods5-webshop": {
     "title": "Loods 5-webshop · Endeavour — Kaan Bas",
     "description": "Een teamproject tijdens mijn stage bij Endeavour. Ik werkte aan de Loods 5-webshop met frontend- en backendontwikkeling, API-endpoints en database- en CMS-koppelingen."

@@ -2,7 +2,7 @@ import { ArrowRight } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
 import { focusUrl, projects, projectUrl } from '../data/portfolio'
 import { BackToWork, Tags } from '../components/ui'
-import { ProjectVisual } from '../components/Diagrams'
+import { ProjectVisual, ProjectWorkflow } from '../components/Diagrams'
 import { ProjectGallery } from '../components/ProjectGallery'
 import { Contact } from '../components/Layout'
 import NotFound from './NotFound'
@@ -42,6 +42,24 @@ export default function ProjectPage() {
           </div>
           <p>{project.overview}</p>
         </div>
+        {project.features && (
+          <section className="project-detail-section" aria-labelledby="project-features-title">
+            <p className="eyebrow">Functionaliteit</p>
+            <h2 id="project-features-title">Wat de applicatie doet.</h2>
+            <ul className="project-feature-list">
+              {project.features.map((feature) => (
+                <li key={feature}>{feature}</li>
+              ))}
+            </ul>
+          </section>
+        )}
+        {project.workflow && (
+          <section className="project-detail-section" aria-labelledby="project-workflow-title">
+            <p className="eyebrow">Architectuur</p>
+            <h2 id="project-workflow-title">De RAG-datastroom.</h2>
+            <ProjectWorkflow steps={project.workflow.steps} caption={project.workflow.caption} />
+          </section>
+        )}
         {project.visual && (
           <div className="project-page-workflow">
             <ProjectVisual type={project.visual} large />
@@ -60,6 +78,42 @@ export default function ProjectPage() {
             ))}
           </div>
         </section>
+        {project.techStack && (
+          <section className="project-detail-section" aria-labelledby="project-stack-title">
+            <p className="eyebrow">Tech stack</p>
+            <h2 id="project-stack-title">Gebouwd met.</h2>
+            <div className="project-tech-grid">
+              {project.techStack.map((group) => (
+                <div key={group.title}>
+                  <h3>{group.title}</h3>
+                  <Tags items={group.technologies} />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+        {project.testing && (
+          <section className="project-detail-section" aria-labelledby="project-testing-title">
+            <p className="eyebrow">Tests & betrouwbaarheid</p>
+            <h2 id="project-testing-title">Wat is gecontroleerd?</h2>
+            <p className="project-detail-copy">{project.testing.summary}</p>
+            <p className="project-detail-copy project-testing-note">{project.testing.note}</p>
+          </section>
+        )}
+        {project.considerations && (
+          <section className="project-detail-section" aria-labelledby="project-considerations-title">
+            <p className="eyebrow">Vervolgstappen</p>
+            <h2 id="project-considerations-title">Technische afwegingen & verbeteringen.</h2>
+            <div className="contributions-grid">
+              {project.considerations.map((item) => (
+                <article key={item.title}>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
         <div className="project-takeaway">
           <p className="eyebrow">Wat dit project laat zien</p>
           <p>{project.takeaway}</p>

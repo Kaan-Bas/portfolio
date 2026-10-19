@@ -125,6 +125,36 @@ export function ProjectVisual({
   )
 }
 
+export function ProjectWorkflow({
+  steps,
+  caption,
+}: {
+  steps: readonly { title: string; description: string }[]
+  caption: string
+}) {
+  return (
+    <figure className="project-workflow" aria-label="Gegevensstroom van het project">
+      <ol className="project-workflow-steps" aria-label="Stappen van de gegevensstroom">
+        {steps.map((step, index) => (
+          <li key={step.title}>
+            <span className="project-workflow-number" aria-hidden="true">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <div className="project-workflow-content">
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+            </div>
+            {index < steps.length - 1 && (
+              <ArrowDown className="project-workflow-arrow" size={15} aria-hidden="true" />
+            )}
+          </li>
+        ))}
+      </ol>
+      <figcaption>{caption}</figcaption>
+    </figure>
+  )
+}
+
 function FlowNode({
   icon,
   title,

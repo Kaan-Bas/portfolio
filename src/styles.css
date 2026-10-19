@@ -2114,6 +2114,136 @@ html:has(.project-image-dialog[open]) {
   margin-top: 15px;
   line-height: 1.85;
 }
+.project-detail-section {
+  border-top: 1px solid var(--line);
+  padding-block: clamp(32px, 4vw, 48px);
+}
+.project-detail-section > h2 {
+  font-size: clamp(25px, 3.1vw, 31px);
+  font-weight: 650;
+  letter-spacing: -1px;
+  line-height: 1.4;
+  margin-block: 15px 28px;
+}
+.project-feature-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 40px;
+  padding-left: 20px;
+  list-style: disc;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+.project-feature-list li::marker {
+  color: var(--accent);
+}
+.project-workflow {
+  padding: clamp(20px, 3vw, 36px);
+  border: 1px solid var(--accent-line);
+  border-radius: 12px;
+  background: var(--paper);
+}
+.project-workflow-steps > li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 18px;
+  padding-bottom: 24px;
+}
+.project-workflow-steps > li:last-child {
+  padding-bottom: 0;
+}
+.project-workflow-steps > li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: 38px;
+  bottom: 15px;
+  width: 1px;
+  background: var(--accent-line);
+}
+.project-workflow-number {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--accent-line);
+  border-radius: 50%;
+  background: var(--accent-surface);
+  color: var(--accent);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.project-workflow-content {
+  display: grid;
+  grid-template-columns: minmax(165px, 0.55fr) minmax(0, 1.45fr);
+  align-items: center;
+  gap: 20px;
+  min-height: 44px;
+}
+.project-workflow-content h3 {
+  font-size: 14px;
+  font-weight: 600;
+}
+.project-workflow-content p,
+.project-workflow figcaption {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+.project-workflow-arrow {
+  position: absolute;
+  left: 10px;
+  bottom: 4px;
+  color: var(--accent);
+}
+.project-workflow figcaption {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.project-tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 28px;
+}
+.project-tech-grid h3 {
+  margin-bottom: 14px;
+  color: var(--ink);
+  font-size: 15px;
+}
+.project-tech-grid .tags li {
+  overflow-wrap: anywhere;
+}
+.project-detail-copy {
+  max-width: 960px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.85;
+}
+.project-testing-note {
+  margin-top: 20px;
+  padding-left: 18px;
+  border-left: 2px solid var(--accent-line);
+  font-size: 12px;
+}
+.project-detail-section .contributions-grid {
+  margin-top: 0;
+}
+@media (max-width: 640px) {
+  .project-feature-list {
+    grid-template-columns: 1fr;
+    font-size: 13px;
+  }
+  .project-workflow-content {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+  .project-workflow-steps > li {
+    gap: 14px;
+  }
+}
 .project-takeaway {
   background: var(--accent-surface);
   border: 1px solid var(--line);
