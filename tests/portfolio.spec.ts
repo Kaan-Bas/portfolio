@@ -175,6 +175,7 @@ test('project cards support inline photo navigation and an accessible gallery', 
   await expect(imageDialog).toBeHidden()
   await previousSiemensImage.click()
 
+  await page.getByRole('button', { name: 'Bekijk alle projecten' }).click()
   const idcpTitle = 'LLM-chatbot & hybride aanbevelingssysteem'
   const idcp = page.getByRole('figure', { name: `Projectbeelden van ${idcpTitle}`, exact: true })
   const idcpImage = idcp.getByRole('img')
@@ -216,7 +217,6 @@ test('project cards support inline photo navigation and an accessible gallery', 
   await page.keyboard.press('ArrowLeft')
   await expect(loods5Image).toHaveAttribute('alt', /Color House/)
 
-  await page.getByRole('button', { name: 'Bekijk alle projecten' }).click()
   const placeholder = page.getByRole('figure', {
     name: 'Projectbeeld van Voorspellen van leidingstoringen volgt',
   })
@@ -320,17 +320,50 @@ test('project detail pages show larger previews and navigable photo galleries', 
   await expect(placeholder.getByRole('button')).toHaveCount(0)
 })
 
+test('project case studies offer numbered navigation and shareable section links', async ({
+  page,
+}, testInfo) => {
+  const cases = [
+    { slug: 'idcp-chatbot-recommendation', focus: 'ai' },
+    { slug: 'waternet-pipe-failure-prediction', focus: 'data' },
+    { slug: 'loods5-webshop', focus: 'software' },
+    { slug: 'folio-pdf-knowledge-assistant', focus: 'ai' },
+  ]
+
+  for (const { slug, focus } of cases) {
+    const route = `/projects/${slug}?focus=${focus}`
+    await page.goto(route)
+    const contents = page.getByRole('navigation', { name: 'Inhoud van de casestudy' })
+    await expect(contents).toBeVisible()
+    await contents.getByRole('link', { name: /02\s*Mijn bijdrage/ }).click()
+    await expect(page).toHaveURL(`${route}#role`)
+    await expect(page.locator('#role')).toBeFocused()
+    await expect(
+      page.locator('#role').getByRole('heading', { name: 'Mijn werk aan het project.' }),
+    ).toBeVisible()
+    await page.reload()
+    await expect(page.locator('#role')).toBeFocused()
+    await contents.getByRole('link', { name: /Tech stack/ }).click()
+    await expect(page).toHaveURL(`${route}#stack`)
+    await expect(page.locator('#stack')).toBeFocused()
+    await expect(page.locator('#stack').getByRole('heading', { name: 'Gebouwd met.' })).toBeVisible()
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }))
+    await page.screenshot({
+      path: `.artifacts/case-${slug}-${testInfo.project.name}.png`,
+      fullPage: true,
+    })
+  }
+})
+
 test('Folio is discoverable through the overview and relevant filters with an honest case study', async ({
   page,
 }, testInfo) => {
-  const title = 'Folio — PDF Knowledge Assistant'
+  const title = 'Folio - PDF Knowledge Assistant'
   await page.goto('/#work')
   const work = page.locator('#work')
   const card = work.locator('.project-card').filter({
     has: page.getByRole('heading', { name: title, exact: true }),
   })
-  await expect(card).toHaveCount(0)
-  await page.getByRole('button', { name: 'Bekijk alle projecten' }).click()
   await expect(card).toBeVisible()
   await expect(card.getByText('RAG', { exact: true })).toBeVisible()
 
@@ -360,10 +393,10 @@ test('Folio is discoverable through the overview and relevant filters with an ho
   const stack = page.getByRole('region', { name: 'Gebouwd met.' })
   await expect(stack.getByText('intfloat/multilingual-e5-small', { exact: true })).toBeVisible()
   await expect(stack.getByText('FastAPI', { exact: true })).toBeVisible()
-  const testing = page.getByRole('region', { name: 'Wat is gecontroleerd?' })
+  const testing = page.getByRole('region', { name: 'Hoe ik de applicatie test.' })
   await expect(testing).toContainText('81 backend-testgevallen en 16 frontendtests')
-  await expect(testing).toContainText('niet opnieuw uitgevoerd')
-  await expect(page.locator('.simple-project-body a[href^="http"]')).toHaveCount(0)
+  await expect(testing).toContainText('niet recent opnieuw gecontroleerd')
+  await expect(page.locator('.project-case-page .case-content a[href^="http"]')).toHaveCount(0)
   await page.screenshot({ path: `.artifacts/folio-${testInfo.project.name}.png`, fullPage: true })
   await page.getByRole('link', { name: 'Terug naar projecten' }).click()
   await expect(page).toHaveURL('/?focus=software#work')
@@ -381,7 +414,11 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   expect(initialProjectCardBounds).not.toBeNull()
   const normalProjectCardWidth = initialProjectCardBounds!.width
   await expect(page.locator('#work .selected-projects .project-card')).toHaveCount(2)
-  await expect(page.getByRole('heading', { name: 'LLM-chatbot & hybride aanbevelingssysteem' })).toBeVisible()
+  await expect(page.locator('#work .selected-projects .project-card h3')).toHaveText([
+    'Folio - PDF Knowledge Assistant',
+    'Loods 5-webshop',
+  ])
+  await expect(page.getByRole('heading', { name: 'LLM-chatbot & hybride aanbevelingssysteem' })).toHaveCount(0)
   await expect(page.getByRole('heading', { name: 'Loods 5-webshop' })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(0)
   const expandProjects = page.locator('#work .projects-toggle')
@@ -389,10 +426,10 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   await expect(expandProjects).toHaveAttribute('aria-expanded', 'true')
   await expect(page.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toBeVisible()
   await expect(page.locator('#work .selected-projects .project-card h3')).toHaveText([
-    'LLM-chatbot & hybride aanbevelingssysteem',
+    'Folio - PDF Knowledge Assistant',
     'Loods 5-webshop',
+    'LLM-chatbot & hybride aanbevelingssysteem',
     'Voorspellen van leidingstoringen',
-    'Folio — PDF Knowledge Assistant',
   ])
   await page.getByRole('button', { name: 'Toon minder projecten' }).click()
   await expect(page.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(0)

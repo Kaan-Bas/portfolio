@@ -29,7 +29,7 @@ export function FeaturedProject() {
         </h3>
         <p className="project-context">{featuredProject.context}</p>
         <p className="featured-description">{featuredProject.description}</p>
-        <Tags items={featuredProject.previewTags} />
+        <Tags items={featuredProject.previewTags} areas={featuredProject.focusAreas} />
         <Link className="button button-primary" to={path}>
           Bekijk de casestudy
           <ArrowRight size={17} aria-hidden="true" />
@@ -83,7 +83,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
         </h3>
         <p className="project-context">{project.context}</p>
         <p className="project-description">{project.description}</p>
-        <Tags items={project.previewTags} />
+        <Tags items={project.previewTags} areas={project.focusAreas} />
         <div className="project-card-bottom">
           <span>{project.topics.join(' · ')}</span>
           <Link to={path} aria-label={`Bekijk project: ${project.title}`}>

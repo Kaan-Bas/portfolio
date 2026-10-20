@@ -23,15 +23,15 @@
   --contact-surface: #1b1d2b;
   --diagram-line: #8c82a3;
   --feature-surface: var(--surface-soft);
-  --ai-ink: #b9a0ff;
-  --ai-surface: #28233c;
-  --ai-line: #51446e;
-  --software-ink: #67d9c2;
-  --software-surface: #1d3333;
-  --software-line: #37635c;
-  --data-ink: #e5c76b;
-  --data-surface: #322e21;
-  --data-line: #6a5c32;
+  --ai-ink: #67d9c2;
+  --ai-surface: #1d3333;
+  --ai-line: #37635c;
+  --software-ink: #e5c76b;
+  --software-surface: #322e21;
+  --software-line: #6a5c32;
+  --data-ink: #83cafa;
+  --data-surface: #1d2d40;
+  --data-line: #395d7a;
   --automation-ink: #8dbcf0;
   --automation-surface: #203043;
   --automation-line: #405c7e;
@@ -225,6 +225,12 @@ section[tabindex='-1']:focus {
   font-size: 10px;
   line-height: 1.4;
   font-weight: 450;
+}
+.tags .discipline-tag[data-area] {
+  background: var(--area-surface);
+  border-color: var(--area-line);
+  color: var(--area-ink);
+  font-weight: 600;
 }
 .sr-only {
   position: absolute;
@@ -814,6 +820,15 @@ section[tabindex='-1']:focus {
   color: var(--accent);
   background: var(--accent-surface);
   border-color: var(--accent-line);
+}
+.project-media:not(.project-page-gallery) .project-gallery-navigation {
+  inset: 24px;
+}
+.project-media:not(.project-page-gallery) .project-gallery-previous {
+  left: 10px;
+}
+.project-media:not(.project-page-gallery) .project-gallery-next {
+  right: 10px;
 }
 .project-media:not(.project-page-gallery) .project-gallery-navigation button {
   width: 36px;
@@ -1993,6 +2008,110 @@ html:has(.project-image-dialog[open]) {
 .simple-project-body + .contact-section {
   border-top: 1px solid var(--line);
   background: var(--surface-soft);
+}
+
+/* Shared case-study structure for the other project pages. */
+.project-case-page .case-facts {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.project-case-page .role-group p,
+.project-case-page .project-case-followups dd {
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--muted);
+}
+.project-case-page .project-case-subheading {
+  margin-block: 28px 16px;
+  font-size: 17px;
+  font-weight: 600;
+}
+.project-case-page .project-feature-list {
+  grid-template-columns: 1fr;
+  gap: 12px;
+  font-size: 13px;
+}
+.project-case-page .project-tech-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+.project-case-page .project-case-followups {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.project-case-page .project-case-followups > h3 {
+  margin-bottom: 24px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.project-case-page .project-case-followups dl {
+  display: grid;
+  gap: 24px;
+  margin: 0;
+}
+.project-case-page .project-case-followups dt {
+  font-size: 15px;
+  font-weight: 600;
+}
+.project-case-page .project-case-followups dd {
+  margin: 8px 0 0;
+}
+.project-case-page .case-section .project-testing-note {
+  font-size: 12px;
+}
+.project-case-page .visual-large {
+  min-height: 0;
+  padding: clamp(16px, 2vw, 24px);
+}
+.project-case-page .visual-large .recommendation-diagram {
+  width: auto;
+  margin-top: 32px;
+  transform: none;
+}
+.project-case-page .case-next {
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.project-case-page .case-next a {
+  max-width: 100%;
+}
+@media (max-width: 640px) {
+  .project-case-page .case-facts {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .project-case-page .recommendation-diagram {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .project-case-page .recommendation-diagram .source-stack,
+  .project-case-page .recommendation-diagram .visual-node {
+    width: min(100%, 200px);
+    min-height: 70px;
+  }
+  .project-case-page .recommendation-diagram .source-stack > span {
+    width: 100%;
+  }
+  .project-case-page .recommendation-diagram > .visual-connector {
+    display: block;
+    width: 1px;
+    height: 20px;
+    padding: 0;
+    background: var(--diagram-line);
+  }
+  .project-case-page .recommendation-diagram > .visual-connector > i {
+    display: none;
+  }
+  .project-case-page .recommendation-diagram > .visual-connector::after {
+    content: '';
+    position: absolute;
+    left: -3px;
+    bottom: 0;
+    width: 7px;
+    height: 7px;
+    border-right: 1px solid var(--diagram-line);
+    border-bottom: 1px solid var(--diagram-line);
+    transform: rotate(45deg);
+  }
 }
 
 /* Smaller projects */

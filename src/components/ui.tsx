@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { focusUrl } from '../data/portfolio'
+import { focusUrl, pillars, type FocusArea } from '../data/portfolio'
 import { useFocus } from '../hooks/useFocus'
 
 export function SectionHeading({
@@ -29,9 +29,24 @@ export function SectionHeading({
   )
 }
 
-export function Tags({ items, className = '' }: { items: readonly string[]; className?: string }) {
+export function Tags({
+  items,
+  areas = [],
+  className = '',
+}: {
+  items: readonly string[]
+  areas?: readonly FocusArea[]
+  className?: string
+}) {
   return (
     <ul className={`tags ${className}`} aria-label="Technologieën en aandachtsgebieden">
+      {pillars
+        .filter((pillar) => areas.includes(pillar.id))
+        .map((pillar) => (
+          <li className="discipline-tag" data-area={pillar.id} key={`area-${pillar.id}`}>
+            {pillar.title}
+          </li>
+        ))}
       {items.map((item) => (
         <li key={item}>{item}</li>
       ))}

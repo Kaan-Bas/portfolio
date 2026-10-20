@@ -29,16 +29,20 @@ import { ExternalLink, SectionHeading } from '../components/ui'
 import { useFocus } from '../hooks/useFocus'
 
 const pillarIcons = [Sparkles, Braces, Database]
+const previewProjectSlugs = ['folio-pdf-knowledge-assistant', 'loods5-webshop']
+const homeProjects = [
+  ...previewProjectSlugs.flatMap((slug) => projects.filter((project) => project.slug === slug)),
+  ...projects.filter((project) => !previewProjectSlugs.includes(project.slug)),
+]
 
 export default function Home() {
   const { focus, selectedArea } = useFocus()
   const [showAllProjects, setShowAllProjects] = useState(false)
-  const visibleProjects = projects.filter(
+  const visibleProjects = homeProjects.filter(
     (project) => focus === 'all' || project.focusAreas.includes(focus),
   )
   if (focus === 'data')
     visibleProjects.sort((a, b) => Number(b.visual === 'water') - Number(a.visual === 'water'))
-  const previewProjectSlugs = ['idcp-chatbot-recommendation', 'loods5-webshop']
   const previewProjects =
     focus === 'all'
       ? visibleProjects.filter((project) => previewProjectSlugs.includes(project.slug))

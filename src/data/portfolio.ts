@@ -130,6 +130,7 @@ export const featuredProject = {
     'Procesautomatisering',
   ],
   previewTags: ['Python', 'LLMs', 'Validatie', 'Human-in-the-Loop'],
+  focusAreas: ['ai'] as const,
   topics: ['LLM-extractie', 'Procesautomatisering', 'Validatie'],
   metric: '68,8%',
   images: siemensImages,
@@ -144,7 +145,7 @@ export const endeavourProject: Project = {
   description:
     'Als onderdeel van het team bij Endeavour werkte ik aan de Loods 5-webshop. Mijn stagewerk omvatte frontend- en backendontwikkeling, API-endpoints en het koppelen van database- en CMS-data aan de frontend.',
   images: loods5Images,
-  tags: ['Frontend', 'Backend', 'REST APIs', 'Database / CMS'],
+  tags: ['React', 'TypeScript', 'SCSS', 'PHP', 'Laravel', 'REST APIs', 'Strapi CMS', 'MySQL'],
   previewTags: ['Frontend', 'Backend', 'REST APIs', 'Database / CMS'],
   focusAreas: ['software'],
   topics: ['Frontend', 'Backend', 'API-endpoints'],
@@ -165,6 +166,11 @@ export const endeavourProject: Project = {
       title: 'Database- en CMS-koppelingen',
       description: 'Database- en CMS-data gekoppeld aan de frontend.',
     },
+  ],
+  techStack: [
+    { title: 'Frontend', technologies: ['React', 'TypeScript', 'SCSS'] },
+    { title: 'Backend & API', technologies: ['PHP', 'Laravel', 'REST APIs'] },
+    { title: 'CMS & database', technologies: ['Strapi CMS', 'MySQL'] },
   ],
   takeaway:
     'Dit project laat zien hoe ik als onderdeel van een team werkte aan frontend, backend, API-endpoints en koppelingen tussen database- en CMS-data en de frontend.',
@@ -257,7 +263,7 @@ export const projects: Project[] = [
     projectType: 'Eigen project',
     context: 'AI Engineering · Full-stack RAG-applicatie',
     description:
-      'Een lokale webapplicatie om vragen te stellen over één PDF. Een expliciete Python-RAG-pipeline combineert lokale embeddings en FAISS-retrieval met Google Gemini voor antwoorden met tekstcitaten en paginaverwijzingen.',
+      'Folio is een lokale webapplicatie om vragen te stellen over een PDF en de bijbehorende bronnen terug te vinden. Een expliciete Python-RAG-pipeline combineert lokale embeddings en FAISS-retrieval met Google Gemini voor antwoorden met tekstcitaten en paginaverwijzingen.',
     tags: [
       'Python',
       'RAG',
@@ -273,7 +279,7 @@ export const projects: Project[] = [
     topics: ['Retrieval-Augmented Generation', 'Full-stack development'],
     overviewTitle: 'Vragen stellen over een PDF, met de bronnen erbij.',
     overview:
-      'Folio verbindt een React-chatinterface met een Python-backend voor Retrieval-Augmented Generation (RAG). De backend haalt relevante tekstfragmenten uit het document op en geeft deze als context aan Gemini voor antwoordgeneratie. Uitklapbare citaten en links naar de oorspronkelijke PDF-pagina’s helpen de gebruiker de bronnen na te lopen.',
+      'Ik ontwikkelde zowel de React-chatinterface als de Python-backend van Folio. De RAG-pipeline haalt relevante tekstfragmenten uit een PDF op en geeft die als context aan Gemini. Antwoorden worden getoond met uitklapbare citaten en links naar de oorspronkelijke PDF-pagina’s, zodat de gebruiker de bronnen kan nalopen.',
     features: [
       'Eén PDF uploaden via een bestandsdialoog of drag-and-drop, met validatie en begrijpelijke foutmeldingen.',
       'Vragen stellen via een chatinterface en relevante documentfragmenten semantisch ophalen.',
@@ -285,62 +291,62 @@ export const projects: Project[] = [
       steps: [
         {
           title: 'PDF-upload',
-          description: 'Een document kiezen of slepen en vóór verwerking valideren.',
+          description: 'Een PDF kiezen of slepen, met validatie vóór de verwerking start.',
         },
         {
           title: 'Tekst per pagina',
           description:
-            'PyMuPDF extraheert tekst met behoud van de oorspronkelijke paginanummers.',
+            'PyMuPDF extraheert tekst per pagina, met behoud van de oorspronkelijke paginanummers.',
         },
         {
           title: 'Chunking',
           description:
-            'Standaard 1.200 tekens per chunk en 200 tekens overlap, zonder paginagrenzen te overschrijden.',
+            'De tekst wordt verdeeld in chunks van standaard 1.200 tekens met 200 tekens overlap, binnen de paginagrenzen.',
         },
         {
           title: 'Lokale embeddings',
           description:
-            'Het E5-model draait op de CPU: documenten met passage: en zoekvragen met query: als prefix.',
+            'Het E5-model draait lokaal op de CPU, met passage: voor documenttekst en query: voor zoekvragen.',
         },
         {
           title: 'FAISS vector search',
           description:
-            'IndexFlatIP zoekt met genormaliseerde vectoren de fragmenten die bij de vraag passen.',
+            'FAISS IndexFlatIP zoekt met genormaliseerde vectoren de fragmenten die bij de vraag passen.',
         },
         {
           title: 'Relevante context',
           description:
-            'De opgehaalde fragmenten en hun bronmetadata vormen de context voor het antwoord.',
+            'De gevonden fragmenten en hun bronmetadata vormen de context voor het antwoord.',
         },
         {
           title: 'Gemini',
           description:
-            'Antwoordgeneratie via google-genai; het model is instelbaar met GEMINI_MODEL.',
+            'Gemini genereert het antwoord via google-genai. Het model is instelbaar met GEMINI_MODEL.',
         },
         {
           title: 'Antwoord met bronnen',
           description:
-            'Tekstcitaten en PDF-paginaverwijzingen tonen waar de context vandaan komt.',
+            'Tekstcitaten en PDF-paginaverwijzingen helpen de gebruiker de bronnen terug te vinden.',
         },
       ],
       caption:
-        'De RAG-stappen zijn expliciet in Python geïmplementeerd. Embeddings worden lokaal met sentence-transformers gemaakt; Gemini wordt gebruikt voor antwoordgeneratie.',
+        'Elke RAG-stap is expliciet in Python geïmplementeerd. sentence-transformers maakt de embeddings lokaal op de CPU; Gemini verzorgt de antwoordgeneratie.',
     },
     contributions: [
       {
         title: 'Expliciete RAG-implementatie',
         description:
-          'De pipeline is opgezet zonder LangChain of LlamaIndex. Aparte Python-modules verzorgen PDF-verwerking, chunking, embeddings, retrieval, LLM-contracten, Gemini-integratie en de RAG-service.',
+          'Ik implementeerde de pipeline rechtstreeks in Python, zonder LangChain of LlamaIndex. Aparte modules verzorgen PDF-verwerking, chunking, embeddings, retrieval, LLM-contracten, Gemini-integratie en de RAG-service.',
       },
       {
         title: 'Lokale retrieval en bronmetadata',
         description:
-          'sentence-transformers met intfloat/multilingual-e5-small maakt embeddings lokaal op de CPU. Passage- en query-prefixen onderscheiden documenttekst van vragen. Genormaliseerde vectoren worden doorzocht met FAISS IndexFlatIP; chunks behouden hun paginanummers.',
+          'Voor lokale embeddings koos ik sentence-transformers met intfloat/multilingual-e5-small op de CPU. Passage- en query-prefixen onderscheiden documenttekst van vragen. FAISS IndexFlatIP doorzoekt de genormaliseerde vectoren; de chunks behouden hun paginanummers.',
       },
       {
         title: 'Full-stack API-contracten',
         description:
-          'De React- en TypeScript-interface sluit aan op een FastAPI-backend met Pydantic-contracten. Limieten en foutafhandeling dekken onder meer bestandsgrootte, pagina-aantal, ontbrekende configuratie, quota, timeouts en providerfouten.',
+          'Ik koppelde de React- en TypeScript-interface aan een FastAPI-backend met Pydantic-contracten. Limieten en foutafhandeling dekken bestandsgrootte, pagina-aantal, ontbrekende configuratie, quota, timeouts en providerfouten.',
       },
     ],
     techStack: [
@@ -356,29 +362,29 @@ export const projects: Project[] = [
     ],
     testing: {
       summary:
-        'De aangeleverde projectsamenvatting noemt 81 backend-testgevallen en 16 frontendtests. Volgens de README zijn deze tests en een frontendbuild eerder geslaagd. De tests richten zich op documentverwerking, retrieval, API-contracten, foutscenario’s en gebruikersinteracties.',
+        'De testsuite bevat 81 backend-testgevallen en 16 frontendtests voor documentverwerking, retrieval, API-contracten, foutscenario’s en gebruikersinteracties. Bij een eerdere controle zijn deze tests en de frontendbuild geslaagd.',
       note:
-        'Deze Folio-controles zijn voor deze portfolio-uitbreiding niet opnieuw uitgevoerd. De aangeleverde inspectiesamenvatting bevat ook geen verificatie van een live Gemini-antwoord.',
+        'Deze resultaten komen uit een eerdere testrun en zijn niet recent opnieuw gecontroleerd. Als vervolgstap wil ik de volledige flow opnieuw testen met een live Gemini-antwoord.',
     },
     considerations: [
       {
         title: 'RAG-kwaliteit evalueren',
         description:
-          'Er zijn nog geen metingen van RAG-kwaliteit, retrieval-recall, latentie of kosten. Bronverwijzingen helpen bij controle, maar garanderen niet dat elke bewering door een bron wordt ondersteund. Een gerichte RAG-evaluatie is een vervolgstap.',
+          'Ik wil de kwaliteit van retrieval en antwoorden gericht evalueren, naast latentie en kosten. Daar zijn nog geen metingen voor beschikbaar. Bronverwijzingen helpen bij controle, maar garanderen niet dat elke bewering door de bron wordt ondersteund.',
       },
       {
         title: 'Meer PDF-inhoud verwerken',
         description:
-          'De huidige verwerking richt zich op tekst. OCR, beeldinterpretatie en gespecialiseerde tabelverwerking zijn niet geïmplementeerd. OCR en ondersteuning voor complexere documenten zijn mogelijke uitbreidingen.',
+          'De huidige versie richt zich op tekst uit PDF’s. OCR, beeldinterpretatie en gespecialiseerde tabelverwerking vallen buiten die scope. Ondersteuning voor complexere documenten is een mogelijke uitbreiding.',
       },
       {
         title: 'Persistent documentbeheer',
         description:
-          'Er is één actieve documentindex per backendproces, zonder accounts of persistente documentbibliotheek. Productie-deployment, authenticatie en belastingtests zijn niet aangetoond. Persistent documentbeheer en productiecontroles zijn toekomstig werk.',
+          'Folio gebruikt één actieve documentindex per backendproces, zonder accounts of persistente documentbibliotheek. Voor een eventuele productiestap wil ik documentopslag, authenticatie en belastingtests uitwerken.',
       },
     ],
     takeaway:
-      'Een React-interface en Python-API verbonden via duidelijke contracten, met een expliciete RAG-pipeline die tekstfragmenten en paginametadata tot aan het antwoord behoudt.',
+      'Folio combineert een React-interface en Python-API met een expliciete RAG-pipeline. De onderdelen werken samen via duidelijke API-contracten; tekstfragmenten en paginametadata blijven tot aan het antwoord behouden.',
   },
 ]
 
