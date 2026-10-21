@@ -358,7 +358,7 @@ test('project case studies offer numbered navigation and shareable section links
 test('Folio is discoverable through the overview and relevant filters with an honest case study', async ({
   page,
 }, testInfo) => {
-  const title = 'Folio - PDF Knowledge Assistant'
+  const title = 'PDF Knowledge Assistant'
   await page.goto('/#work')
   const work = page.locator('#work')
   const card = work.locator('.project-card').filter({
@@ -374,11 +374,12 @@ test('Folio is discoverable through the overview and relevant filters with an ho
   }
   await card.getByRole('link', { name: `Bekijk project: ${title}` }).click()
   await expect(page).toHaveURL('/projects/folio-pdf-knowledge-assistant?focus=software')
-  await expect(page).toHaveTitle('Folio — PDF Knowledge Assistant — Kaan Bas')
+  await expect(page).toHaveTitle('PDF Knowledge Assistant — Kaan Bas')
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(`${title}.`)
-  const placeholder = page.getByRole('figure', { name: `Projectbeeld van ${title} volgt` })
-  await expect(placeholder.getByText('Projectbeeld volgt', { exact: true })).toBeVisible()
-  await expect(placeholder.getByRole('button')).toHaveCount(0)
+  const gallery = page.getByRole('figure', { name: `Projectbeelden van ${title}`, exact: true })
+  const previewImage = gallery.getByRole('img')
+  await expectImageLoaded(previewImage)
+  await expect(previewImage).toHaveAttribute('alt', /Folio-startscherm/)
   const workflow = page.getByRole('figure', { name: 'Gegevensstroom van het project' })
   await expect(workflow.getByRole('heading')).toHaveText([
     'PDF-upload',
@@ -415,7 +416,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   const normalProjectCardWidth = initialProjectCardBounds!.width
   await expect(page.locator('#work .selected-projects .project-card')).toHaveCount(2)
   await expect(page.locator('#work .selected-projects .project-card h3')).toHaveText([
-    'Folio - PDF Knowledge Assistant',
+    'PDF Knowledge Assistant',
     'Loods 5-webshop',
   ])
   await expect(page.getByRole('heading', { name: 'LLM-chatbot & hybride aanbevelingssysteem' })).toHaveCount(0)
@@ -426,7 +427,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   await expect(expandProjects).toHaveAttribute('aria-expanded', 'true')
   await expect(page.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toBeVisible()
   await expect(page.locator('#work .selected-projects .project-card h3')).toHaveText([
-    'Folio - PDF Knowledge Assistant',
+    'PDF Knowledge Assistant',
     'Loods 5-webshop',
     'LLM-chatbot & hybride aanbevelingssysteem',
     'Voorspellen van leidingstoringen',
@@ -529,13 +530,13 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
     .getByRole('link', { name: 'Alles', exact: true })
     .click()
   await expect(page).toHaveURL('/#skills')
-  await expect(skills.getByRole('heading', { level: 3 })).toHaveCount(4)
+  await expect(skills.getByRole('heading', { level: 3 })).toHaveCount(3)
   await expect(work.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(
     0,
   )
   await page.goBack()
   await expect(page).toHaveURL(/\?focus=ai#skills$/)
-  await expect(skills.getByRole('heading', { level: 3 })).toHaveCount(2)
+  await expect(skills.getByRole('heading', { level: 3 })).toHaveCount(1)
 })
 
 test('all portfolio pages have no WCAG A/AA violations', async ({ page }) => {
@@ -569,7 +570,7 @@ test('production route HTML includes metadata before JavaScript runs', async () 
   expect(html).toMatch(/name="description"\s+content="Een afstudeerproject bij Siemens/)
   expect(html).toContain('property="og:locale" content="nl_NL"')
   const folioHtml = await readFile('dist/projects/folio-pdf-knowledge-assistant/index.html', 'utf8')
-  expect(folioHtml).toContain('<title>Folio — PDF Knowledge Assistant — Kaan Bas</title>')
-  expect(folioHtml).toContain('property="og:title" content="Folio — PDF Knowledge Assistant — Kaan Bas"')
+  expect(folioHtml).toContain('<title>PDF Knowledge Assistant — Kaan Bas</title>')
+  expect(folioHtml).toContain('property="og:title" content="PDF Knowledge Assistant — Kaan Bas"')
   expect(folioHtml).toMatch(/name="description"\s+content="Een full-stack RAG-project/)
 })

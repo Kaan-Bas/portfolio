@@ -55,8 +55,7 @@ export default function Home() {
     : previewProjects
   const hasMoreProjects = previewProjects.length < visibleProjects.length
   const visibleSkills = skillGroups.filter(
-    (group) =>
-      focus === 'all' || group.area === focus || (focus === 'ai' && group.area === 'automation'),
+    (group) => focus === 'all' || group.area === focus,
   )
   const showFeatured = focus === 'all' || focus === 'ai'
   return (
@@ -244,7 +243,7 @@ export default function Home() {
             title="Vaardigheden"
             description={
               selectedArea
-                ? `Technieken en werkwijzen voor ${selectedArea.title}.`
+                ? `Technieken voor ${selectedArea.title}.`
                 : 'Geordend per vakgebied, zodat je snel de relevante vaardigheden vindt.'
             }
           />

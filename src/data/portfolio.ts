@@ -1,4 +1,4 @@
-import { idcpImages, loods5Images, siemensImages, type ProjectImage } from './projectImages'
+import { folioImages, idcpImages, loods5Images, siemensImages, type ProjectImage } from './projectImages'
 
 // Pas hier je persoonlijke gegevens en contactlinks aan. Lege links tonen een gelabelde placeholder.
 export const profile = {
@@ -63,7 +63,7 @@ export const pillars = [
     number: '01',
     title: 'AI Engineering',
     description:
-      'Generatieve AI en AI-agents toepassen om informatie te verwerken en processen te automatiseren.',
+      'Generatieve AI, Retrieval-Augmented Generation (RAG) en AI-agents toepassen om informatie te verwerken en processen te automatiseren.',
     linkLabel: 'Bekijk AI-projecten',
   },
   {
@@ -72,7 +72,7 @@ export const pillars = [
     title: 'Software Engineering',
     description:
       'Front-end- en back-endontwikkeling, API-integraties en CI/CD voor het bouwen van applicaties.',
-    linkLabel: 'Bekijk softwareervaring',
+    linkLabel: 'Bekijk softwareprojecten',
   },
   {
     id: 'data',
@@ -258,8 +258,9 @@ export const projects: Project[] = [
   endeavourProject,
   {
     slug: 'folio-pdf-knowledge-assistant',
-    organization: 'Folio',
-    title: 'Folio - PDF Knowledge Assistant',
+    images: folioImages,
+    organization: 'Persoonlijk project',
+    title: 'PDF Knowledge Assistant',
     projectType: 'Eigen project',
     context: 'AI Engineering · Full-stack RAG-applicatie',
     description:
@@ -421,11 +422,11 @@ export const skillGroups = [
     skills: [
       'Python',
       'Large Language Models',
+      'Retrieval-Augmented Generation (RAG)',
       'AI-agents',
       'Prompt Engineering',
-      'JSON',
-      'Human-in-the-Loop',
-      'Modelevaluatie',
+      'Embeddings',
+      'Semantisch zoeken (FAISS)',
     ],
   },
   {
@@ -447,11 +448,6 @@ export const skillGroups = [
       'Data-analyse',
       'Power BI',
     ],
-  },
-  {
-    area: 'automation',
-    title: 'Automatisering & werkwijzen',
-    skills: ['Power Automate', 'Agile / Scrum'],
   },
 ]
 

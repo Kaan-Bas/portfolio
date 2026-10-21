@@ -500,10 +500,7 @@ section[tabindex='-1']:focus {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .skills-grid.is-focused {
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  max-width: 760px;
-}
-.skills-grid.is-focused .skill-group:only-child {
+  grid-template-columns: minmax(0, 1fr);
   max-width: 430px;
 }
 
@@ -1314,28 +1311,35 @@ html:has(.project-image-dialog[open]) {
 }
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: 40px;
-  gap: 16px;
+  gap: 24px;
 }
 .skill-group {
-  padding: 24px;
+  padding: 28px;
   border: 1px solid var(--area-line);
+  border-top: 3px solid var(--area-ink);
   border-radius: 12px;
   background: var(--area-surface);
 }
 .skill-group h3 {
-  margin: 0 0 19px;
+  margin: 0 0 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--area-line);
   font-family: 'DM Sans Variable', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.6;
   font-weight: 600;
   color: var(--area-ink);
 }
+.skill-group ul {
+  display: grid;
+  gap: 12px;
+}
 .skill-group li {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted);
-  line-height: 2.5;
+  line-height: 1.6;
 }
 
 /* Contact and footer */
@@ -2646,11 +2650,14 @@ html:has(.project-image-dialog[open]) {
     padding: 25px;
   }
   .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-    row-gap: 35px;
+    grid-template-columns: minmax(0, 1fr);
   }
-  .skill-group:nth-child(3) {
-    padding-left: 24px;
+  .skill-group ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 24px;
+  }
+  .skills-grid.is-focused .skill-group ul {
+    grid-template-columns: minmax(0, 1fr);
   }
   .contact-inner {
     gap: 35px;
@@ -3084,15 +3091,14 @@ html:has(.project-image-dialog[open]) {
   .skill-group {
     padding: 18px;
   }
-  .skill-group:nth-child(3) {
-    padding-left: 18px;
+  .skill-group ul {
+    grid-template-columns: minmax(0, 1fr);
   }
   .skill-group h3 {
-    font-size: 13px;
+    font-size: 15px;
   }
   .skill-group li {
-    font-size: 12px;
-    line-height: 2.6;
+    font-size: 13px;
   }
   .contact-section {
     padding-block: 64px;

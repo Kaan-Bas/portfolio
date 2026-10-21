@@ -4,6 +4,9 @@ import idcpDashboard from '../media/optimized/idcp-dashboard.webp'
 import idcpChatbot from '../media/optimized/idcp-chatbot.webp'
 import loods5Homepage from '../media/optimized/loods5-homepage.webp'
 import loods5Product from '../media/optimized/loods5-product.webp'
+import folioUpload from '../media/folio-1.png'
+import folioAnswer from '../media/folio-2.png'
+import folioSources from '../media/folio-3.png'
 
 export interface ProjectImage {
   src: string
@@ -12,6 +15,30 @@ export interface ProjectImage {
   width: number
   height: number
 }
+
+export const folioImages: ProjectImage[] = [
+  {
+    src: folioUpload,
+    alt: 'Folio-startscherm met PDF-upload en een chatinterface om vragen over een document te stellen.',
+    caption: 'PDF uploaden',
+    width: 1895,
+    height: 933,
+  },
+  {
+    src: folioAnswer,
+    alt: 'Folio-chat met een geüploade PDF, een antwoord op een vraag en bronverwijzingen naar PDF-pagina’s.',
+    caption: 'Antwoord met bronverwijzingen',
+    width: 1890,
+    height: 935,
+  },
+  {
+    src: folioSources,
+    alt: 'Folio-antwoord met een uitgeklapt bronfragment en verwijzingen naar de oorspronkelijke PDF-pagina’s.',
+    caption: 'Bronfragment bekijken',
+    width: 1889,
+    height: 931,
+  },
+]
 
 export const siemensImages: ProjectImage[] = [
   {
