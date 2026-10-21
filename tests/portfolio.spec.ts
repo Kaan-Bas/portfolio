@@ -59,7 +59,7 @@ test('pages load directly with correct titles and no horizontal overflow', async
     await expect(page.locator('html')).toHaveAttribute('lang', 'nl')
     await expect(page.locator('main h1')).toHaveCount(1)
     await expect(page).toHaveTitle(
-      route === '/missing-page' ? 'Pagina niet gevonden — Kaan Bas' : /Kaan Bas/,
+      route === '/missing-page' ? 'Pagina niet gevonden - Kaan Bas' : /Kaan Bas/,
     )
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth > window.innerWidth,
@@ -374,7 +374,7 @@ test('Folio is discoverable through the overview and relevant filters with an ho
   }
   await card.getByRole('link', { name: `Bekijk project: ${title}` }).click()
   await expect(page).toHaveURL('/projects/folio-pdf-knowledge-assistant?focus=software')
-  await expect(page).toHaveTitle('PDF Knowledge Assistant — Kaan Bas')
+  await expect(page).toHaveTitle('PDF Knowledge Assistant - Kaan Bas')
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(`${title}.`)
   const gallery = page.getByRole('figure', { name: `Projectbeelden van ${title}`, exact: true })
   const previewImage = gallery.getByRole('img')
@@ -436,7 +436,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   await expect(page.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(0)
   await page.getByRole('link', { name: 'Bekijk dataprojecten', exact: true }).click()
   await expect(page).toHaveURL(/\?focus=data#work$/)
-  await expect(page).toHaveTitle('Data & Machine Learning — Kaan Bas')
+  await expect(page).toHaveTitle('Kaan Bas')
   const work = page.locator('#work')
   const skills = page.locator('#skills')
   const projectFilters = page.getByRole('navigation', { name: 'Filter projecten op vakgebied' })
@@ -563,14 +563,14 @@ test('all portfolio pages have no WCAG A/AA violations', async ({ page }) => {
 
 test('production route HTML includes metadata before JavaScript runs', async () => {
   const html = await readFile('dist/projects/siemens-ai-quotation-automation/index.html', 'utf8')
-  expect(html).toContain('<title>Offertes automatiseren met AI · Siemens — Kaan Bas</title>')
+  expect(html).toContain('<title>Offertes automatiseren met AI · Siemens - Kaan Bas</title>')
   expect(html).toContain(
-    'property="og:title" content="Offertes automatiseren met AI · Siemens — Kaan Bas"',
+    'property="og:title" content="Offertes automatiseren met AI · Siemens - Kaan Bas"',
   )
   expect(html).toMatch(/name="description"\s+content="Een afstudeerproject bij Siemens/)
   expect(html).toContain('property="og:locale" content="nl_NL"')
   const folioHtml = await readFile('dist/projects/folio-pdf-knowledge-assistant/index.html', 'utf8')
-  expect(folioHtml).toContain('<title>PDF Knowledge Assistant — Kaan Bas</title>')
-  expect(folioHtml).toContain('property="og:title" content="PDF Knowledge Assistant — Kaan Bas"')
+  expect(folioHtml).toContain('<title>PDF Knowledge Assistant - Kaan Bas</title>')
+  expect(folioHtml).toContain('property="og:title" content="PDF Knowledge Assistant - Kaan Bas"')
   expect(folioHtml).toMatch(/name="description"\s+content="Een full-stack RAG-project/)
 })

@@ -23,7 +23,7 @@ export function RouteEffects() {
       path === '/'
         ? focusAreas.find((area) => area.id === new URLSearchParams(search).get('focus'))
         : undefined
-    const title = focus ? `${focus.title} — Kaan Bas` : page.title
+    const title = page.title
     const description = focus?.introduction ?? page.description
     document.title = title
     setMeta('meta[name="description"]', { name: 'description' }, description)

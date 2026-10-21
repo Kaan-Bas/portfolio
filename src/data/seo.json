@@ -1,30 +1,30 @@
 {
   "404": {
-    "title": "Pagina niet gevonden — Kaan Bas",
+    "title": "Pagina niet gevonden - Kaan Bas",
     "description": "Deze pagina is niet gevonden. Bekijk de projecten en praktijkervaring van Kaan Bas per vakgebied."
   },
   "/": {
-    "title": "Kaan Bas — AI Engineering & Machine Learning",
+    "title": "Kaan Bas",
     "description": "Software Engineering afgestudeerd met AI-projecten bij Siemens en machine-learningprojecten bij Waternet en IDCP. Bekijk relevante projecten en vaardigheden per vakgebied."
   },
   "/projects/siemens-ai-quotation-automation": {
-    "title": "Offertes automatiseren met AI · Siemens — Kaan Bas",
+    "title": "Offertes automatiseren met AI · Siemens - Kaan Bas",
     "description": "Een afstudeerproject bij Siemens met LLM-extractie, Python-validatie en menselijke controle. 68,8% minder verwerkingstijd bij de geëvalueerde testcases."
   },
   "/projects/idcp-chatbot-recommendation": {
-    "title": "LLM-chatbot & hybride aanbevelingssysteem — Kaan Bas",
+    "title": "LLM-chatbot & hybride aanbevelingssysteem - Kaan Bas",
     "description": "Een project binnen de minor AI Engineering: een LLM-chatbot en een hybride aanbevelingssysteem in Python met data over gebruikers, interesses en content."
   },
   "/projects/waternet-pipe-failure-prediction": {
-    "title": "Voorspellen van leidingstoringen · Waternet — Kaan Bas",
+    "title": "Voorspellen van leidingstoringen · Waternet - Kaan Bas",
     "description": "Een project binnen de minor Data Driven Business – AI Engineering: waterinfrastructuur analyseren en leidingstoringen voorspellen met Python, pandas en scikit-learn."
   },
   "/projects/folio-pdf-knowledge-assistant": {
-    "title": "PDF Knowledge Assistant — Kaan Bas",
+    "title": "PDF Knowledge Assistant - Kaan Bas",
     "description": "Een full-stack RAG-project met React, Python en FastAPI. Lokale embeddings en FAISS-retrieval geven Gemini context voor antwoorden met citaten en PDF-paginaverwijzingen."
   },
   "/projects/loods5-webshop": {
-    "title": "Loods 5-webshop · Endeavour — Kaan Bas",
+    "title": "Loods 5-webshop · Endeavour - Kaan Bas",
     "description": "Een teamproject tijdens mijn stage bij Endeavour. Ik werkte aan de Loods 5-webshop met frontend- en backendontwikkeling, API-endpoints en database- en CMS-koppelingen."
   }
 }
