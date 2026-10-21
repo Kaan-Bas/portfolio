@@ -1,11 +1,6 @@
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import {
-  featuredProject,
-  projects,
-  projectUrl,
-  type Project,
-} from '../data/portfolio'
+import { featuredProject, projects, projectUrl, type Project } from '../data/portfolio'
 import { Tags } from './ui'
 import { ProjectGallery } from './ProjectGallery'
 import { useFocus } from '../hooks/useFocus'
@@ -20,20 +15,25 @@ export function FeaturedProject() {
           <span>UITGELICHT PROJECT</span>
           <span>2026</span>
         </div>
-        <p className="company-label">{featuredProject.organization}</p>
-        <h3>
-          <Link to={path}>
-            {featuredProject.title}
-            <ArrowUpRight className="featured-title-arrow" aria-hidden="true" />
-          </Link>
-        </h3>
-        <p className="project-context">{featuredProject.context}</p>
-        <p className="featured-description">{featuredProject.description}</p>
-        <Tags items={featuredProject.previewTags} areas={featuredProject.focusAreas} />
-        <Link className="button button-primary" to={path}>
-          Bekijk de casestudy
-          <ArrowRight size={17} aria-hidden="true" />
-        </Link>
+        <div className="featured-copy">
+          <p className="company-label">{featuredProject.organization}</p>
+          <h3>
+            <Link to={path}>
+              {featuredProject.title}
+              <ArrowUpRight className="featured-title-arrow" aria-hidden="true" />
+            </Link>
+          </h3>
+          <p className="featured-description">{featuredProject.description}</p>
+        </div>
+        <div className="featured-actions">
+          <Tags items={featuredProject.previewTags} areas={featuredProject.focusAreas} />
+          <div className="featured-cta">
+            <Link className="button button-primary" to={path}>
+              Bekijk de casestudy
+              <ArrowRight size={17} aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
       </div>
       <div className="featured-preview">
         <ProjectGallery images={featuredProject.images} title={featuredProject.organization} />
@@ -50,16 +50,6 @@ export function FeaturedProject() {
           </p>
         </div>
       </div>
-      <div className="featured-bottom">
-        <div>
-          {featuredProject.topics.map((topic, i) => (
-            <span key={topic}>
-              {i > 0 && <b aria-hidden="true">·</b>}
-              {topic}
-            </span>
-          ))}
-        </div>
-      </div>
     </article>
   )
 }
@@ -69,7 +59,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
   const path = projectUrl(project.slug, focus)
   return (
     <article className="project-card">
-        <ProjectGallery images={project.images} title={project.title} />
+      <ProjectGallery images={project.images} title={project.title} />
       <div className="project-card-body">
         <div className="project-overline">
           <span>{project.organization}</span>
@@ -81,11 +71,9 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
             <ArrowUpRight size={22} aria-hidden="true" />
           </Link>
         </h3>
-        <p className="project-context">{project.context}</p>
         <p className="project-description">{project.description}</p>
         <Tags items={project.previewTags} areas={project.focusAreas} />
         <div className="project-card-bottom">
-          <span>{project.topics.join(' · ')}</span>
           <Link to={path} aria-label={`Bekijk project: ${project.title}`}>
             Bekijk project
             <ArrowRight size={15} aria-hidden="true" />

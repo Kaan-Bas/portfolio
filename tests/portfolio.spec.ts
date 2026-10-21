@@ -464,7 +464,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
 
   await projectFilters.getByRole('link', { name: 'Software Engineering', exact: true }).click()
   await expect(work.getByRole('heading', { name: 'Projecten', exact: true })).toBeVisible()
-  await expect(work.getByText(/Software Developer .*Stage/)).toBeVisible()
+  await expect(work.getByText(/Software Developer .*Stage/)).toHaveCount(0)
   await expect(work.getByRole('heading', { name: 'Loods 5-webshop' })).toBeVisible()
   await expect(work.getByText(/Als onderdeel van het team bij Endeavour/)).toBeVisible()
   const softwareProjectCard = work.locator('.selected-projects .project-card').filter({

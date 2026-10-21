@@ -546,6 +546,9 @@ section[tabindex='-1']:focus {
   color: var(--ink);
 }
 .featured-main {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
   padding: 37px 39px 36px;
 }
 .project-overline {
@@ -561,7 +564,6 @@ section[tabindex='-1']:focus {
   color: var(--muted);
 }
 .company-label {
-  margin-top: 32px;
   color: var(--accent);
   font-size: 12px;
   font-weight: 500;
@@ -575,6 +577,9 @@ section[tabindex='-1']:focus {
   max-width: 385px;
 }
 .featured-main h3 a {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
   transition: color 0.18s;
 }
 .featured-main h3 a:hover {
@@ -583,28 +588,29 @@ section[tabindex='-1']:focus {
 .featured-title-arrow {
   width: 23px;
   height: 23px;
-  margin-left: 12px;
-  vertical-align: middle;
+  margin-top: 8px;
   color: var(--muted);
-}
-.project-context {
-  font-size: 10px;
-  color: var(--muted);
-  line-height: 1.7;
-}
-.featured-main .project-context {
-  color: var(--muted);
-  margin-top: 13px;
 }
 .featured-description {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
   line-height: 1.85;
-  margin-top: 19px;
+  margin-top: 20px;
   max-width: 420px;
 }
+.featured-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  margin-top: auto;
+}
+.featured-cta {
+  width: 100%;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
 .featured-main .tags {
-  margin-top: 23px;
   max-width: 430px;
 }
 .featured-main .tags li {
@@ -613,7 +619,6 @@ section[tabindex='-1']:focus {
   font-size: 11px;
 }
 .featured-main .button {
-  margin-top: 28px;
   font-size: 11px;
   min-height: 43px;
 }
@@ -670,27 +675,6 @@ section[tabindex='-1']:focus {
 .featured-result > p > span {
   font-size: 11px;
   color: var(--muted);
-}
-.featured-bottom {
-  grid-column: 1/-1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 24px;
-  padding: 19px 39px;
-  border-top: 1px solid var(--line);
-}
-.featured-bottom > div {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  font-size: 9px;
-  color: var(--muted);
-}
-.featured-bottom b {
-  font-weight: 400;
-  color: var(--accent);
-  margin-right: 16px;
 }
 .selected-heading {
   display: flex;
@@ -863,15 +847,20 @@ html:has(.project-image-dialog[open]) {
   overflow: hidden;
 }
 .project-image-dialog {
-  width: min(1280px, calc(100% - 32px));
+  width: calc(100% - 24px);
+  height: calc(100dvh - 24px);
   max-width: none;
-  max-height: calc(100dvh - 32px);
+  max-height: calc(100dvh - 24px);
   margin: auto;
   padding: 0;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: var(--surface-soft);
   color: var(--ink);
+}
+.project-image-dialog[open] {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
 }
 .project-image-dialog::backdrop {
   background: rgba(5, 6, 10, 0.9);
@@ -905,15 +894,20 @@ html:has(.project-image-dialog[open]) {
 }
 .project-image-dialog-stage {
   position: relative;
-  padding: 12px 72px;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding: 12px;
   background: var(--paper);
 }
 .project-image-dialog-stage img {
   display: block;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
   max-width: 100%;
-  max-height: calc(100dvh - 220px);
+  max-height: 100%;
   object-fit: contain;
   margin-inline: auto;
 }
@@ -925,7 +919,7 @@ html:has(.project-image-dialog[open]) {
 }
 @media (max-width: 600px) {
   .project-image-dialog-stage {
-    padding-inline: 44px;
+    padding: 8px;
   }
   .project-gallery-navigation button {
     width: 36px;
@@ -1108,13 +1102,10 @@ html:has(.project-image-dialog[open]) {
 .project-card h3 a:hover svg {
   transform: translate(2px, -2px);
 }
-.project-card .project-context {
-  margin-top: 10px;
-}
 .project-description {
   color: var(--muted);
   font-size: 14px;
-  margin-block: 17px 22px;
+  margin-block: 16px 24px;
 }
 .project-card .tags {
   margin-top: auto;
@@ -1125,14 +1116,11 @@ html:has(.project-image-dialog[open]) {
 }
 .project-card-bottom {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  gap: 15px;
   margin-top: 25px;
   padding-top: 18px;
   border-top: 1px solid var(--line);
-  font-size: 8px;
-  color: var(--muted);
 }
 .project-card-bottom a {
   display: inline-flex;
@@ -2457,9 +2445,6 @@ html:has(.project-image-dialog[open]) {
   .featured-result {
     padding: 24px;
   }
-  .featured-bottom {
-    padding-inline: 30px;
-  }
   .metric {
     font-size: 60px;
   }
@@ -2482,9 +2467,6 @@ html:has(.project-image-dialog[open]) {
   }
   .project-card h3 {
     font-size: 20px;
-  }
-  .project-card-bottom {
-    align-items: flex-start;
   }
   .about-grid {
     gap: 55px;
@@ -2569,7 +2551,7 @@ html:has(.project-image-dialog[open]) {
     font-size: 27px;
   }
   .featured-description {
-    font-size: 11px;
+    font-size: 13px;
   }
   .featured-result {
     padding: 22px;
@@ -2583,16 +2565,6 @@ html:has(.project-image-dialog[open]) {
   }
   .featured-result > p > span {
     font-size: 9px;
-  }
-  .featured-bottom {
-    gap: 18px;
-  }
-  .featured-bottom > div {
-    font-size: 8px;
-    gap: 10px;
-  }
-  .featured-bottom b {
-    margin-right: 10px;
   }
   .project-visual {
     min-height: 210px;
@@ -2627,15 +2599,8 @@ html:has(.project-image-dialog[open]) {
   .project-card h3 {
     font-size: 18px;
   }
-  .project-card .project-context {
-    font-size: 9px;
-  }
   .project-description {
     font-size: 11px;
-  }
-  .project-card-bottom {
-    flex-direction: column;
-    gap: 12px;
   }
   .about-grid {
     gap: 40px;
@@ -2918,13 +2883,13 @@ html:has(.project-image-dialog[open]) {
     border-top: 1px solid var(--line);
   }
   .featured-main {
+    gap: 24px;
     padding: 28px 25px;
   }
   .featured-main .project-overline {
     font-size: 8px;
   }
   .company-label {
-    margin-top: 27px;
     font-size: 12px;
   }
   .featured-main h3 {
@@ -2935,17 +2900,14 @@ html:has(.project-image-dialog[open]) {
     width: 21px;
     height: 21px;
   }
-  .featured-main .project-context {
-    font-size: 10px;
-  }
   .featured-description {
-    font-size: 12px;
+    font-size: 13px;
   }
-  .featured-main .tags {
-    margin-top: 21px;
+  .featured-actions {
+    gap: 20px;
   }
-  .featured-main .button {
-    margin-top: 25px;
+  .featured-cta {
+    padding-top: 20px;
   }
   .featured-result {
     padding: 24px 25px;
@@ -2961,19 +2923,6 @@ html:has(.project-image-dialog[open]) {
   }
   .featured-result > p > span {
     font-size: 10px;
-  }
-  .featured-bottom {
-    padding: 20px 25px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .featured-bottom > div {
-    gap: 10px;
-    font-size: 8px;
-  }
-  .featured-bottom b {
-    margin-right: 10px;
   }
   .selected-heading {
     display: block;
@@ -3034,19 +2983,8 @@ html:has(.project-image-dialog[open]) {
   .project-card h3 {
     font-size: 22px;
   }
-  .project-card .project-context {
-    font-size: 10px;
-  }
   .project-description {
     font-size: 12px;
-  }
-  .project-card-bottom {
-    flex-direction: row;
-    gap: 15px;
-    align-items: center;
-  }
-  .project-card-bottom > span {
-    font-size: 8px;
   }
   .about-grid {
     grid-template-columns: 1fr;
@@ -3447,9 +3385,6 @@ html:has(.project-image-dialog[open]) {
   }
   .project-card-body {
     padding: 22px;
-  }
-  .featured-bottom > div {
-    font-size: 7px;
   }
   .result-panel > strong {
     font-size: 65px;
