@@ -123,10 +123,7 @@ export default function Home() {
             number="01"
             eyebrow="Mijn werk"
             title="Projecten"
-            description={
-              selectedArea?.workDescription ??
-              'Bekijk het werk dat relevant is voor jouw vakgebied.'
-            }
+            description={selectedArea?.workDescription}
           />
           <FocusFilters focus={focus} />
           <p className="focus-status" role="status">
