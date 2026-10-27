@@ -23,24 +23,24 @@
   --contact-surface: #1b1d2b;
   --diagram-line: #8c82a3;
   --feature-surface: var(--surface-soft);
-  --ai-ink: #67d9c2;
-  --ai-surface: #1d3333;
-  --ai-line: #37635c;
-  --software-ink: #e5c76b;
-  --software-surface: #322e21;
-  --software-line: #6a5c32;
-  --data-ink: #769cf0;
-  --data-surface: #1b2842;
-  --data-line: #3c5380;
-  --automation-ink: #8dbcf0;
-  --automation-surface: #203043;
-  --automation-line: #405c7e;
-  --success-surface: #20382e;
-  --success-line: #47715e;
-  --success-ink: #a1e0bc;
-  --warning-surface: #3b3023;
-  --warning-line: #826c49;
-  --warning-ink: #f0cc8d;
+  --ai-ink: var(--accent);
+  --ai-surface: var(--surface);
+  --ai-line: var(--line);
+  --software-ink: var(--accent);
+  --software-surface: var(--surface);
+  --software-line: var(--line);
+  --data-ink: var(--accent);
+  --data-surface: var(--surface);
+  --data-line: var(--line);
+  --automation-ink: var(--accent);
+  --automation-surface: var(--surface);
+  --automation-line: var(--line);
+  --success-surface: var(--surface);
+  --success-line: var(--line);
+  --success-ink: var(--ink);
+  --warning-surface: var(--accent-surface);
+  --warning-line: var(--accent-line);
+  --warning-ink: var(--accent);
   --heading: 'Manrope Variable', 'Segoe UI', sans-serif;
 }
 
@@ -431,7 +431,7 @@ section[tabindex='-1']:focus {
   padding: 28px 27px;
   background: var(--area-surface);
   border: 1px solid var(--area-line);
-  border-top: 4px solid var(--area-ink);
+  border-top: 2px solid var(--accent-line);
   border-radius: 12px;
 }
 .pillar-top {
@@ -449,7 +449,7 @@ section[tabindex='-1']:focus {
   font-weight: 650;
   letter-spacing: -0.4px;
   margin-top: 23px;
-  color: var(--area-ink);
+  color: var(--ink);
 }
 .pillar > p {
   color: var(--muted);
@@ -1306,7 +1306,7 @@ html:has(.project-image-dialog[open]) {
 .skill-group {
   padding: 28px;
   border: 1px solid var(--area-line);
-  border-top: 3px solid var(--area-ink);
+  border-top: 2px solid var(--accent-line);
   border-radius: 12px;
   background: var(--area-surface);
 }
@@ -1318,7 +1318,7 @@ html:has(.project-image-dialog[open]) {
   font-size: 16px;
   line-height: 1.6;
   font-weight: 600;
-  color: var(--area-ink);
+  color: var(--ink);
 }
 .skill-group ul {
   display: grid;
@@ -2840,7 +2840,7 @@ html:has(.project-image-dialog[open]) {
     position: relative;
   }
   .pillar + .pillar {
-    border-top: 4px solid var(--area-ink);
+    border-top: 2px solid var(--accent-line);
   }
   .pillar-top > svg {
     width: 21px;
