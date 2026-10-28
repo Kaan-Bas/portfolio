@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUpRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { featuredProject, projects, projectUrl, type Project } from '../data/portfolio'
 import { Tags } from './ui'
@@ -17,10 +17,7 @@ export function FeaturedProject() {
         <div className="featured-copy">
           <p className="company-label">{featuredProject.cardLabel}</p>
           <h3>
-            <Link to={path}>
-              {featuredProject.title}
-              <ArrowUpRight className="featured-title-arrow" aria-hidden="true" />
-            </Link>
+            <Link to={path}>{featuredProject.title}</Link>
           </h3>
           <p className="featured-description">{featuredProject.description}</p>
         </div>
@@ -64,17 +61,14 @@ export function ProjectCard({ project }: { project: Project }) {
           <span>{project.cardLabel ?? project.organization}</span>
         </div>
         <h3>
-          <Link to={path}>
-            {project.title}
-            <ArrowUpRight size={22} aria-hidden="true" />
-          </Link>
+          <Link to={path}>{project.title}</Link>
         </h3>
         <p className="project-description">{project.description}</p>
         <Tags items={project.previewTags} areas={project.focusAreas} />
         <div className="project-card-bottom">
           <Link to={path} aria-label={`Bekijk project: ${project.title}`}>
             Bekijk project
-            <ArrowRight size={15} aria-hidden="true" />
+            <ArrowRight size={17} aria-hidden="true" />
           </Link>
         </div>
       </div>
