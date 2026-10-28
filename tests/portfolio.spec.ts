@@ -210,7 +210,7 @@ test('project cards support inline photo navigation and an accessible gallery', 
   await expectImageLoaded(loods5Image)
   const initialLoods5Bounds = await loods5.boundingBox()
   await loods5.getByRole('button', { name: 'Volgende afbeelding van Loods 5-webshop' }).click()
-  await expect(loods5Image).toHaveAttribute('alt', /Productdetailpagina/)
+  await expect(loods5Image).toHaveAttribute('alt', /Productoverzicht/)
   await expectImageLoaded(loods5Image)
   const updatedLoods5Bounds = await loods5.boundingBox()
   expect(updatedLoods5Bounds!.height).toBeCloseTo(initialLoods5Bounds!.height, 0)
@@ -261,11 +261,13 @@ test('project detail pages show larger previews and navigable photo galleries', 
       slug: 'loods5-webshop',
       title: 'Loods 5-webshop',
       firstImage: /Color House/,
-      nextImage: /Productdetailpagina/,
+      nextImage: /Productoverzicht/,
+      lastImage: /Productdetailpagina/,
+      imageCount: 3,
     },
   ]
 
-  for (const { slug, title, firstImage, nextImage } of galleries) {
+  for (const { slug, title, firstImage, nextImage, lastImage = nextImage, imageCount = 2 } of galleries) {
     await page.goto(`/projects/${slug}`)
     const gallery = page.getByRole('figure', { name: `Projectbeelden van ${title}`, exact: true })
     const previewImage = gallery.getByRole('img')
@@ -284,23 +286,23 @@ test('project detail pages show larger previews and navigable photo galleries', 
     await expect(nextImageButton).toBeVisible()
     const initialBounds = await gallery.boundingBox()
     await previousImage.click()
-    await expect(previewImage).toHaveAttribute('alt', nextImage)
+    await expect(previewImage).toHaveAttribute('alt', lastImage)
     await expectImageLoaded(previewImage)
     await expect(nextImageButton).toBeEnabled()
-    await expect(gallery.getByRole('status')).toContainText('Afbeelding 2 van 2')
+    await expect(gallery.getByRole('status')).toContainText(`Afbeelding ${imageCount} van ${imageCount}`)
     await nextImageButton.click()
     await expect(previewImage).toHaveAttribute('alt', firstImage)
     await previousImage.click()
-    await expect(previewImage).toHaveAttribute('alt', nextImage)
+    await expect(previewImage).toHaveAttribute('alt', lastImage)
     const updatedBounds = await gallery.boundingBox()
     expect(updatedBounds!.height).toBeCloseTo(initialBounds!.height, 0)
     const opener = gallery.getByRole('button', { name: `Open fotogalerij van ${title}` })
     await opener.click()
     const dialog = page.getByRole('dialog', { name: `Projectbeelden van ${title}`, exact: true })
     await expect(dialog).toBeVisible()
-    await expect(dialog.getByRole('img')).toHaveAttribute('alt', nextImage)
+    await expect(dialog.getByRole('img')).toHaveAttribute('alt', lastImage)
     await expectImageLoaded(dialog.getByRole('img'))
-    await page.keyboard.press('ArrowLeft')
+    await page.keyboard.press('ArrowRight')
     await expect(dialog.getByRole('img')).toHaveAttribute('alt', firstImage)
     await page.keyboard.press('Escape')
     await expect(dialog).toBeHidden()
@@ -498,7 +500,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   const loods5Gallery = page.getByRole('dialog', { name: 'Projectbeelden van Loods 5-webshop' })
   await expect(loods5Gallery.getByText('Webshop homepage')).toBeVisible()
   await loods5Gallery.getByRole('button', { name: 'Volgende afbeelding van Loods 5-webshop' }).click()
-  await expect(loods5Gallery.getByText('Productpagina')).toBeVisible()
+  await expect(loods5Gallery.getByText('Productoverzicht')).toBeVisible()
   await loods5Gallery.getByRole('button', { name: 'Afbeelding sluiten' }).click()
   await work.getByRole('link', { name: 'Bekijk project: Loods 5-webshop' }).click()
   await expect(page).toHaveURL(/loods5-webshop\?focus=software$/)

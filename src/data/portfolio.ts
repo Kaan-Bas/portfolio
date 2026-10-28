@@ -41,19 +41,19 @@ export const focusAreas = [
     workDescription: 'LLM-extractie, procesautomatisering en gebruikersondersteuning met AI.',
   },
   {
-    id: 'data',
-    title: 'Data & Machine Learning',
-    introduction:
-      'Tijdens mijn AI Engineering-minor analyseerde ik historische storingsdata en ontwikkelde ik een classificatiemodel voor Waternet. Bij IDCP werkte ik aan een hybride aanbevelingssysteem in Python.',
-    workDescription: 'Datavoorbereiding, analyse, classificatie en aanbevelingssystemen in Python.',
-  },
-  {
     id: 'software',
     title: 'Software Engineering',
     introduction:
       'Afgestudeerd in HBO-ICT: Software Engineering. Tijdens mijn stage bij Endeavour maakte ik deel uit van het team achter de Loods 5-webshop. Ik werkte aan frontend- en backendontwikkeling, API-endpoints en database- en CMS-koppelingen.',
     workDescription:
       'Frontend- en backendontwikkeling, API-endpoints en database- en CMS-koppelingen, toegepast aan de Loods 5-webshop.',
+  },
+  {
+    id: 'data',
+    title: 'Data & Machine Learning',
+    introduction:
+      'Tijdens mijn AI Engineering-minor analyseerde ik historische storingsdata en ontwikkelde ik een classificatiemodel voor Waternet. Bij IDCP werkte ik aan een hybride aanbevelingssysteem in Python.',
+    workDescription: 'Datavoorbereiding, analyse, classificatie en aanbevelingssystemen in Python.',
   },
 ] as const
 

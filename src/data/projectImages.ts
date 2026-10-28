@@ -3,6 +3,7 @@ import siemensPricing from '../media/optimized/siemens-pricing.webp'
 import idcpDashboard from '../media/optimized/idcp-dashboard.webp'
 import idcpChatbot from '../media/optimized/idcp-chatbot.webp'
 import loods5Homepage from '../media/optimized/loods5-homepage.webp'
+import loods5Products from '../media/optimized/loods5-products.webp'
 import loods5Product from '../media/optimized/loods5-product.webp'
 import folioDocumentChat from '../media/folio-1.png'
 import folioAgentLibrary from '../media/folio-2.png'
@@ -87,14 +88,21 @@ export const loods5Images: ProjectImage[] = [
     src: loods5Homepage,
     alt: 'De Loods 5-webshop met hoofdnavigatie en een campagnebeeld voor Color House.',
     caption: 'Webshop homepage',
-    width: 1893,
-    height: 938,
+    width: 1573,
+    height: 890,
+  },
+  {
+    src: loods5Products,
+    alt: 'Productoverzicht van de Loods 5-webshop met banken, categoriefilters en sorteermogelijkheden.',
+    caption: 'Productoverzicht',
+    width: 1575,
+    height: 888,
   },
   {
     src: loods5Product,
     alt: 'Productdetailpagina van de Loods 5-webshop met productfoto, uitvoeringskeuze en bestelgegevens.',
     caption: 'Productpagina',
-    width: 1894,
-    height: 836,
+    width: 1571,
+    height: 887,
   },
 ]

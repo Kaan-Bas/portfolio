@@ -11,7 +11,8 @@ const images = [
   ['idcp-1.png', 'idcp-dashboard.webp'],
   ['idcp-2.png', 'idcp-chatbot.webp'],
   ['loods5-1.png', 'loods5-homepage.webp'],
-  ['loods5-2.png', 'loods5-product.webp'],
+  ['loods5-2.png', 'loods5-products.webp'],
+  ['loods5-3.png', 'loods5-product.webp'],
 ]
 
 await mkdir(outputDirectory, { recursive: true })
