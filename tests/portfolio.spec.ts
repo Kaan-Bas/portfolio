@@ -11,7 +11,6 @@ declare global {
 const projectPaths = [
   '/siemens',
   '/idcp',
-  '/waternet',
   '/loods5',
   '/folio',
 ]
@@ -176,7 +175,7 @@ test('project cards support inline photo navigation and an accessible gallery', 
   await previousSiemensImage.click()
 
   await page.getByRole('button', { name: 'Bekijk alle projecten' }).click()
-  const idcpTitle = 'Gebruikers linken met ML & Data'
+  const idcpTitle = 'AI-Powered CRM Analytics & Recommendation System'
   const idcp = page.getByRole('figure', { name: `Projectbeelden van ${idcpTitle}`, exact: true })
   const idcpImage = idcp.getByRole('img')
   await expectImageLoaded(idcpImage)
@@ -217,11 +216,6 @@ test('project cards support inline photo navigation and an accessible gallery', 
   await page.keyboard.press('ArrowLeft')
   await expect(loods5Image).toHaveAttribute('alt', /Color House/)
 
-  const placeholder = page.getByRole('figure', {
-    name: 'Projectbeeld van Voorspellen van leidingstoringen volgt',
-  })
-  await expect(placeholder.getByText('Projectbeeld volgt', { exact: true })).toBeVisible()
-  await expect(placeholder.getByRole('button')).toHaveCount(0)
   const screenshotStyle = '.site-header, .skip-link { visibility: hidden; }'
   await siemens.screenshot({
     path: `.artifacts/featured-project-${testInfo.project.name}.png`,
@@ -253,7 +247,7 @@ test('project detail pages show larger previews and navigable photo galleries', 
     },
     {
       slug: 'idcp',
-      title: 'Gebruikers linken met ML & Data',
+      title: 'AI-Powered CRM Analytics & Recommendation System',
       firstImage: /IDCP-dashboard/,
       nextImage: /IDCP-chatbot/,
     },
@@ -314,12 +308,6 @@ test('project detail pages show larger previews and navigable photo galleries', 
     await expect(previewImage).toHaveAttribute('alt', firstImage)
   }
 
-  await page.goto('/waternet')
-  const placeholder = page.getByRole('figure', {
-    name: 'Projectbeeld van Voorspellen van leidingstoringen volgt',
-  })
-  await expect(placeholder.getByText('Projectbeeld volgt', { exact: true })).toBeVisible()
-  await expect(placeholder.getByRole('button')).toHaveCount(0)
 })
 
 test('project case studies offer numbered navigation and shareable section links', async ({
@@ -327,7 +315,6 @@ test('project case studies offer numbered navigation and shareable section links
 }, testInfo) => {
   const cases = [
     { slug: 'idcp', focus: 'ai' },
-    { slug: 'waternet', focus: 'data' },
     { slug: 'loods5', focus: 'software' },
     { slug: 'folio', focus: 'ai' },
   ]
@@ -349,6 +336,25 @@ test('project case studies offer numbered navigation and shareable section links
     await expect(page).toHaveURL(`${route}#stack`)
     await expect(page.locator('#stack')).toBeFocused()
     await expect(page.locator('#stack').getByRole('heading', { name: 'Gebouwd met.' })).toBeVisible()
+    if (slug === 'idcp') {
+      await contents.getByRole('link', { name: /Machine Learning/ }).click()
+      await expect(page).toHaveURL(`${route}#recommendations`)
+      const recommendations = page.locator('#recommendations')
+      await expect(recommendations).toBeFocused()
+      await expect(recommendations.getByRole('heading', { level: 3 })).toHaveText([
+        '01 / Content-Based Filtering',
+        '02 / Collaborative Filtering',
+        '03 / Hybrid Recommendation System',
+      ])
+      await expect(recommendations.getByRole('figure')).toContainText('α = 0,7')
+      await expect(recommendations).toContainText('niet rechtstreeks geïntegreerd')
+      await contents.getByRole('link', { name: /Architectuur/ }).click()
+      await expect(page).toHaveURL(`${route}#workflow`)
+      const architecture = page.locator('#workflow').getByRole('figure')
+      await expect(architecture.getByRole('heading', { name: 'Interactieve webapplicatie' })).toBeVisible()
+      await expect(architecture.getByRole('heading', { name: 'Afzonderlijke Python-analyse' })).toBeVisible()
+      await expect(architecture.getByRole('listitem')).toHaveCount(6)
+    }
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }))
     await page.screenshot({
       path: `.artifacts/case-${slug}-${testInfo.project.name}.png`,
@@ -442,21 +448,17 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
     'Folio',
     'Loods 5-webshop',
   ])
-  await expect(page.getByRole('heading', { name: 'Gebruikers linken met ML & Data' })).toHaveCount(0)
+  await expect(page.getByRole('heading', { name: 'AI-Powered CRM Analytics & Recommendation System' })).toHaveCount(0)
   await expect(page.getByRole('heading', { name: 'Loods 5-webshop' })).toBeVisible()
-  await expect(page.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(0)
   const expandProjects = page.locator('#work .projects-toggle')
   await expandProjects.click()
   await expect(expandProjects).toHaveAttribute('aria-expanded', 'true')
-  await expect(page.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toBeVisible()
   await expect(page.locator('#work .selected-projects .project-card h3')).toHaveText([
     'Folio',
     'Loods 5-webshop',
-    'Gebruikers linken met ML & Data',
-    'Voorspellen van leidingstoringen',
+    'AI-Powered CRM Analytics & Recommendation System',
   ])
   await page.getByRole('button', { name: 'Toon minder projecten' }).click()
-  await expect(page.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(0)
   await page.getByRole('link', { name: 'Bekijk dataprojecten', exact: true }).click()
   await expect(page).toHaveURL(/\?focus=data#work$/)
   await expect(page).toHaveTitle('Kaan Bas')
@@ -464,7 +466,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   const skills = page.locator('#skills')
   const projectFilters = page.getByRole('navigation', { name: 'Filter projecten op vakgebied' })
   await expect(work.getByRole('heading', { level: 3 }).first()).toHaveText(
-    'Voorspellen van leidingstoringen',
+    'AI-Powered CRM Analytics & Recommendation System',
   )
   await expect(work.getByRole('link', { name: 'Bekijk de casestudy' })).toHaveCount(0)
   await expect(skills.getByRole('heading', { level: 3 })).toHaveCount(1)
@@ -478,9 +480,9 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   expect(dataProjectCardBounds!.width).toBeCloseTo(normalProjectCardWidth, 0)
   await work.screenshot({ path: `.artifacts/focus-data-${testInfo.project.name}.png` })
   await work
-    .getByRole('link', { name: 'Bekijk project: Voorspellen van leidingstoringen', exact: true })
+    .getByRole('link', { name: 'Bekijk project: AI-Powered CRM Analytics & Recommendation System', exact: true })
     .click()
-  await expect(page).toHaveURL(/waternet\?focus=data$/)
+  await expect(page).toHaveURL(/idcp\?focus=data$/)
   await page.getByRole('link', { name: 'Terug naar projecten' }).click()
   await expect(page).toHaveURL(/\?focus=data#work$/)
   await expect(work.getByRole('link', { name: 'Bekijk de casestudy' })).toHaveCount(0)
@@ -520,26 +522,20 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   await projectFilters.getByRole('link', { name: 'AI Engineering', exact: true }).click()
   await expect(work.getByRole('link', { name: 'Bekijk de casestudy' })).toBeVisible()
   const aiProjectCard = work.locator('.selected-projects .project-card').filter({
-    has: page.getByRole('heading', { name: 'Gebruikers linken met ML & Data', exact: true }),
+    has: page.getByRole('heading', { name: 'AI-Powered CRM Analytics & Recommendation System', exact: true }),
   })
   const aiProjectCardBounds = await aiProjectCard.boundingBox()
   expect(aiProjectCardBounds).not.toBeNull()
   expect(aiProjectCardBounds!.width).toBeCloseTo(normalProjectCardWidth, 0)
   await expect(
-    work.getByRole('heading', { name: 'Gebruikers linken met ML & Data' }),
+    work.getByRole('heading', { name: 'AI-Powered CRM Analytics & Recommendation System' }),
   ).toBeVisible()
-  await expect(work.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(
-    0,
-  )
   await work.getByRole('link', { name: 'Bekijk de casestudy' }).click()
   await expect(page).toHaveURL(/siemens\?focus=ai$/)
   await page.getByRole('link', { name: '03 De workflow' }).click()
   await expect(page).toHaveURL(/\?focus=ai#architecture$/)
   await page.getByRole('link', { name: 'Terug naar projecten' }).click()
   await expect(page).toHaveURL(/\?focus=ai#work$/)
-  await expect(work.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(
-    0,
-  )
   if (isMobile) await page.getByRole('button', { name: 'Navigatie openen' }).click()
   await page
     .getByRole('navigation', { name: 'Hoofdnavigatie' })
@@ -554,9 +550,6 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
     .click()
   await expect(page).toHaveURL('/#skills')
   await expect(skills.getByRole('heading', { level: 3 })).toHaveCount(3)
-  await expect(work.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(
-    0,
-  )
   await page.goBack()
   await expect(page).toHaveURL(/\?focus=ai#skills$/)
   await expect(skills.getByRole('heading', { level: 3 })).toHaveCount(1)

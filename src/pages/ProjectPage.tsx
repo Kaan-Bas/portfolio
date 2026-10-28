@@ -2,7 +2,7 @@ import { ArrowRight } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
 import { focusUrl, projects, projectUrl } from '../data/portfolio'
 import { BackToWork, Tags } from '../components/ui'
-import { ProjectVisual, ProjectWorkflow } from '../components/Diagrams'
+import { ProjectArchitecture, ProjectVisual, ProjectWorkflow } from '../components/Diagrams'
 import { ProjectGallery } from '../components/ProjectGallery'
 import { Contact } from '../components/Layout'
 import NotFound from './NotFound'
@@ -55,13 +55,56 @@ export default function ProjectPage() {
         </div>
       ),
     },
-    ...(project.workflow || project.visual
+    ...(project.detailSections ?? []).map((section) => ({
+      id: section.id,
+      label: section.label,
+      title: section.title,
+      content: (
+        <>
+          <p>{section.introduction}</p>
+          {section.items && (
+            <div className="project-detail-items">
+              {section.items.map((item) => (
+                <div key={item.title}>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  {item.details && (
+                    <ul className="project-feature-list">
+                      {item.details.map((detail) => (
+                        <li key={detail}>{detail}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+          {section.formula && (
+            <figure
+              className="project-formula"
+              aria-label="Berekening van de hybride aanbevelingsscore"
+            >
+              <p>{section.formula.expression}</p>
+              <figcaption>{section.formula.explanation}</figcaption>
+            </figure>
+          )}
+          {section.note && <p className="project-testing-note">{section.note}</p>}
+        </>
+      ),
+    })),
+    ...(project.architecture || project.workflow || project.visual
       ? [
           {
             id: 'workflow',
-            label: 'De workflow',
-            title: project.workflow ? 'De RAG-datastroom.' : 'Van input naar resultaat.',
-            content: project.workflow ? (
+            label: project.architecture ? 'Architectuur' : 'De workflow',
+            title: project.architecture
+              ? 'Twee routes, één CRM-database.'
+              : project.workflow
+                ? 'De RAG-datastroom.'
+                : 'Van input naar resultaat.',
+            content: project.architecture ? (
+              <ProjectArchitecture {...project.architecture} />
+            ) : project.workflow ? (
               <ProjectWorkflow steps={project.workflow.steps} caption={project.workflow.caption} />
             ) : project.visual ? (
               <ProjectVisual type={project.visual} large />

@@ -5,19 +5,15 @@
   },
   "/": {
     "title": "Kaan Bas",
-    "description": "Software Engineering afgestudeerd met AI-projecten bij Siemens en machine-learningprojecten bij Waternet en IDCP. Bekijk relevante projecten en vaardigheden per vakgebied."
+    "description": "Software Engineering afgestudeerd met AI-projecten bij Siemens en machine-learningprojecten bij IDCP. Bekijk relevante projecten en vaardigheden per vakgebied."
   },
   "/siemens": {
     "title": "Offertes automatiseren met AI · Siemens - Kaan Bas",
     "description": "Een afstudeerproject bij Siemens met LLM-extractie, Python-validatie en menselijke controle. 68,8% minder verwerkingstijd bij de geëvalueerde testcases."
   },
   "/idcp": {
-    "title": "Gebruikers linken met ML & Data - Kaan Bas",
-    "description": "Een project binnen de minor AI Engineering: een LLM-chatbot en een hybride aanbevelingssysteem in Python met data over gebruikers, interesses en content."
-  },
-  "/waternet": {
-    "title": "Voorspellen van leidingstoringen · Waternet - Kaan Bas",
-    "description": "Een project binnen de minor Data Driven Business – AI Engineering: waterinfrastructuur analyseren en leidingstoringen voorspellen met Python, pandas en scikit-learn."
+    "title": "AI-Powered CRM Analytics & Recommendation System - Kaan Bas",
+    "description": "Een IDCP-minorproject met CRM-data-analyse, drie Python-aanbevelingsprototypes, een React/Spring Boot-dashboard en een AI Sales Assistant met function calling."
   },
   "/folio": {
     "title": "Folio - Agentic AI & Document Intelligence Platform - Kaan Bas",

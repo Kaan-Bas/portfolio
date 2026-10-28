@@ -1,4 +1,10 @@
-import { folioImages, idcpImages, loods5Images, siemensImages, type ProjectImage } from './projectImages'
+import {
+  folioImages,
+  idcpImages,
+  loods5Images,
+  siemensImages,
+  type ProjectImage,
+} from './projectImages'
 
 // Pas hier je persoonlijke gegevens en contactlinks aan. Lege links tonen een gelabelde placeholder.
 export const profile = {
@@ -52,7 +58,7 @@ export const focusAreas = [
     id: 'data',
     title: 'Data & Machine Learning',
     introduction:
-      'Tijdens mijn AI Engineering-minor analyseerde ik historische storingsdata en ontwikkelde ik een classificatiemodel voor Waternet. Bij IDCP werkte ik aan een hybride aanbevelingssysteem in Python.',
+      'Tijdens mijn AI Engineering-minor werkte ik bij IDCP aan CRM-data-analyse en aanbevelingssystemen in Python, met content-based, collaborative en hybrid filtering.',
     workDescription: 'Datavoorbereiding, analyse, classificatie en aanbevelingssystemen in Python.',
   },
 ] as const
@@ -89,6 +95,16 @@ interface ProjectDetailItem {
   description: string
 }
 
+interface ProjectDetailSection {
+  id: string
+  label: string
+  title: string
+  introduction: string
+  items?: (ProjectDetailItem & { details?: string[] })[]
+  formula?: { expression: string; explanation: string }
+  note?: string
+}
+
 export interface Project {
   slug: string
   organization: string
@@ -107,6 +123,12 @@ export interface Project {
   overviewTitle: string
   overview: string
   contributions: ProjectDetailItem[]
+  detailSections?: ProjectDetailSection[]
+  architecture?: {
+    source: ProjectDetailItem
+    branches: { title: string; steps: ProjectDetailItem[] }[]
+    caption: string
+  }
   features?: string[]
   workflow?: { steps: ProjectDetailItem[]; caption: string }
   agents?: ProjectDetailItem[]
@@ -185,84 +207,255 @@ export const endeavourProject: Project = {
 export const projects: Project[] = [
   {
     slug: 'idcp',
-    organization: 'IDCP',
+    organization: 'IDCP B.V.',
     cardLabel: 'IDCP - MINOR',
     images: idcpImages,
-    title: 'Gebruikers linken met ML & Data',
+    title: 'AI-Powered CRM Analytics & Recommendation System',
     projectType: 'Minorproject',
     context: 'Minor Data Driven Business – AI Engineering',
     description:
-      'Binnen een Agile/Scrum-team gewerkt aan een LLM-chatbot voor gebruikersondersteuning en een hybride aanbevelingssysteem ontwikkeld met machine learning in Python.',
+      'Historische CRM-data omzetten in inzichten voor sales en marketing. Drie Python-aanbevelingsprototypes onderzoeken relevante bedrijfsmatches; een full-stack dashboard en AI Sales Assistant maken klantgegevens toegankelijk.',
     tags: [
       'Python',
-      'LLM',
+      'pandas',
+      'scikit-learn',
       'Machine Learning',
-      'Aanbevelingssystemen',
-      'Dataverwerking',
-      'Agile/Scrum',
+      'Recommendation Systems',
+      'Data-analyse',
+      'React',
+      'TypeScript',
+      'Java',
+      'Spring Boot',
+      'MySQL',
+      'OpenAI API',
+      'Function Calling',
     ],
-    focusAreas: ['ai', 'data'],
-    previewAreas: ['data'],
-    topics: ['LLM-toepassingen', 'Aanbevelingssystemen'],
-    previewTags: ['Python', 'LLM', 'Machine Learning'],
-    visual: 'recommendation',
-    overviewTitle: 'Gebruikersondersteuning en aanbevelingen verbinden.',
+    focusAreas: ['data', 'software', 'ai'],
+    previewAreas: ['data', 'software'],
+    topics: ['Recommendation Systems', 'Data-analyse', 'Full-stack development', 'Generatieve AI'],
+    previewTags: ['Python', 'Machine Learning', 'Recommendation Systems', 'pandas', 'Spring Boot'],
+    overviewTitle: 'Van historische CRM-data naar bruikbare klantinzichten.',
     overview:
-      'Dit minorproject combineerde een AI-chatbot met aanbevelingen op basis van machine learning. Data over gebruikers, hun interesses en beschikbare content werd verwerkt en gebruikt binnen het aanbevelingssysteem en de chatbot.',
+      'IDCP B.V. distribueert innovatieve digitale producten en had ongeveer twintig jaar aan CRM-data opgebouwd. Informatie over bedrijven, contactpersonen, sectoren, bedrijfscategorieën en interesses was beschikbaar, maar werd nog onvoldoende benut voor klantselectie en commerciële inzichten. Binnen de minor Data Driven Business – AI Engineering werkte ik in een Agile/Scrum-team aan een datagedreven platform. Het doel: bestaande klantgroepen en marktsegmenten begrijpen, overeenkomsten ontdekken en sales en marketing helpen relevante bedrijven en contactpersonen te vinden.',
+    features: [
+      'Drie afzonderlijke recommendation-systemprototypes: content-based, collaborative en hybrid filtering.',
+      'Een interactief dashboard voor klantgroepen, geografische spreiding, bedrijfstypen en marktsegmenten.',
+      'Een AI Sales Assistant die via natuurlijke taal CRM-informatie ophaalt uit de backend.',
+    ],
     contributions: [
       {
-        title: 'Gebruikersondersteuning met een LLM',
+        title: 'CRM-data voorbereiden voor analyse',
         description:
-          'Binnen een Agile/Scrum-team gewerkt aan een chatbot die een LLM gebruikte voor gebruikersondersteuning.',
+          'Gegevens over contactpersonen, interesses, bedrijfscategorieën en bedrijven verwerkt in Python. De relationele verbanden vormden de basis voor profielkenmerken, gewichten en aanbevelingen.',
       },
       {
-        title: 'Hybride aanbevelingen',
-        description: 'Een hybride aanbevelingssysteem ontwikkeld met machine learning in Python.',
+        title: 'Aanbevelingsmethoden ontwikkelen',
+        description:
+          'Gewerkt aan de Python-aanbevelingssystemen, waaronder een hybride methode die profielovereenkomsten en CRM-relatiepatronen combineert. Rankings, scoretabellen en heatmaps maken de uitkomsten onderzoekbaar.',
       },
       {
-        title: 'Gebruikers- en contentdata verwerken',
+        title: 'AI-ondersteuning binnen een teamapplicatie',
         description:
-          'Data over gebruikers, interesses en content verwerkt voor gebruik binnen het aanbevelingssysteem en de chatbot.',
+          'Binnen het Agile/Scrum-team gewerkt aan de LLM-chatbot voor toegang tot CRM-informatie. De Sales Assistant en het dashboard horen bij de full-stack applicatie; de Python-aanbevelingsprototypes zijn aparte analytische onderdelen.',
+      },
+    ],
+    detailSections: [
+      {
+        id: 'data',
+        label: 'Data & voorbereiding',
+        title: 'Relationele data geschikt maken voor analyse.',
+        introduction:
+          'De CRM-informatie stond verspreid over MySQL-tabellen voor bedrijven, contactpersonen, interesses en bedrijfscategorieën, met koppeltabellen voor de many-to-many-relaties. De belangrijkste stap was deze relaties om te zetten in vergelijkbare profielen en gewogen interacties.',
+        items: [
+          {
+            title: 'Extractie, transformatie en aggregatie',
+            description:
+              'SQL en MySQL Connector halen de gegevens op. Met pandas worden DataFrames samengevoegd, relaties geanalyseerd en interesses en bedrijfscategorieën per contactpersoon of bedrijf geaggregeerd.',
+          },
+          {
+            title: 'Van relatieketen naar kenmerken',
+            description:
+              'Contactpersoon → Interesse → Bedrijfscategorie → Bedrijf. Uit deze keten ontstaan gewogen interesseprofielen en een User–Company-matrix. Gewichten houden rekening met het aantal gekoppelde interesses, categorieën en bedrijven, zodat brede categorieën niet vanzelf het resultaat domineren.',
+          },
+          {
+            title: 'Representaties voor de algoritmen',
+            description:
+              'Tekstuele categorieën worden gevectoriseerd met TF-IDF. SciPy sparse matrices representeren de CRM-relaties efficiënt. Deze feature engineering maakt cosine similarity, scoreberekening en ranking mogelijk.',
+          },
+        ],
+      },
+      {
+        id: 'recommendations',
+        label: 'Machine Learning',
+        title: 'Drie manieren om relevante bedrijven te vinden.',
+        introduction:
+          'Voor een geselecteerde contactpersoon berekenen drie afzonderlijke Python-implementaties een gerangschikte lijst van bedrijven met relevantiematen. De methoden onderzoeken twee invalshoeken: inhoudelijke profielovereenkomsten en patronen in bestaande CRM-relaties.',
+        items: [
+          {
+            title: '01 / Content-Based Filtering',
+            description:
+              'Deze methode vergelijkt het interesseprofiel van een contactpersoon met de categorieën van bedrijven. TF-IDF zet tekstuele bedrijfscategorieën om in vectoren; gekoppelde interesses en categorieën vormen een gewogen gebruikersprofiel. Cosine similarity bepaalt vervolgens welke bedrijfsprofielen het beste aansluiten.',
+            details: [
+              'Feature engineering en TF-IDF-vectorisatie van bedrijfscategorieën.',
+              'Gewogen gebruikersprofielen op basis van interesses en relaties.',
+              'Similarity-based ranking met een score per aanbevolen bedrijf.',
+            ],
+          },
+          {
+            title: '02 / Collaborative Filtering',
+            description:
+              'Item-based collaborative filtering vergelijkt bedrijven op hun relatiepatronen in de gewogen User–Company-matrix. Met SciPy en cosine similarity worden bedrijfsovereenkomsten berekend. Weighted interaction scores leveren daarna een Top-N-ranking voor de contactpersoon op.',
+            details: [
+              'De matrix is afgeleid van CRM-relaties, zonder aankoopgeschiedenis of gebruikersratings.',
+              'Normaliserende relatiegewichten beperken de invloed van algemene categorieën.',
+              'Vergelijkbare relatiepatronen kunnen bedrijven opleveren die niet exact op dezelfde profielkenmerken matchen.',
+            ],
+          },
+          {
+            title: '03 / Hybrid Recommendation System',
+            description:
+              'De hybride methode combineert de twee rankings. Eerst brengt Min-Max Normalization beide scoreverdelingen naar een schaal van 0 tot 1. Daarna bepaalt de parameter α hoeveel gewicht elke methode krijgt. De implementatie gebruikt onder andere 70% content-based en 30% collaborative filtering om te onderzoeken hoe beide signalen elkaar aanvullen.',
+            details: [
+              'Afzonderlijke scores berekenen en normaliseren vóór de combinatie.',
+              'Een instelbare weging tussen profielinhoud en relatiepatronen.',
+              'Bedrijven opnieuw rangschikken op de gecombineerde hybrid score.',
+            ],
+          },
+        ],
+        formula: {
+          expression:
+            'Hybrid Score = α × Content-Based Score + (1 − α) × Collaborative Filtering Score',
+          explanation:
+            'Bij α = 0,7 telt de content-based score voor 70% mee en de collaborative score voor 30%. Dit is een algoritmeweging, geen gemeten kwaliteitsresultaat.',
+        },
+        note: 'De aanbevelingssystemen zijn analytische prototypes. Ze zijn niet rechtstreeks geïntegreerd in het dashboard of de Sales Assistant. Er is geen bewezen verbetering in aanbevelingskwaliteit of commerciële conversie vastgesteld.',
+      },
+      {
+        id: 'analytics',
+        label: 'Data-analyse',
+        title: 'CRM-patronen zichtbaar maken in een dashboard.',
+        introduction:
+          'Het React-dashboard haalt CRM-gegevens op via een Java Spring Boot REST API. Chart.js vertaalt deze gegevens naar interactieve statistieken en visualisaties, zodat medewerkers verdelingen kunnen onderzoeken zonder zelf SQL-query’s te schrijven.',
+        items: [
+          {
+            title: 'Klantgroepen en marktsegmenten',
+            description:
+              'Overzichten van aantallen bedrijven en contactpersonen, beschikbare interesses en categorieën, bedrijfstypen en marktsegmenten helpen de samenstelling van de CRM-database te begrijpen.',
+          },
+          {
+            title: 'Spreiding en relaties',
+            description:
+              'Visualisaties tonen de geografische spreiding van bedrijven per land, de verdeling van contactpersonen over bedrijfstypen en welke bedrijven de meeste geregistreerde contactpersonen hebben.',
+          },
+        ],
+      },
+      {
+        id: 'sales-assistant',
+        label: 'Generatieve AI',
+        title: 'CRM-informatie opvragen in natuurlijke taal.',
+        introduction:
+          'De AI Sales Assistant gebruikt de OpenAI API met function calling. Een medewerker stelt bijvoorbeeld de vraag: “Welke contactpersonen kunnen interessant zijn voor een nieuw technologisch product?” De assistent gebruikt vooraf gedefinieerde functies om relevante CRM-informatie op te halen.',
+        items: [
+          {
+            title: 'Van vraag naar API-verzoek',
+            description:
+              'De vraag komt binnen via React. Het LLM interpreteert de vraag en kiest een vooraf gedefinieerde functie. Die functie haalt de benodigde gegevens over bedrijven, contactpersonen of interesses op via de Spring Boot REST API.',
+          },
+          {
+            title: 'Van gestructureerde data naar antwoord',
+            description:
+              'De opgehaalde CRM-gegevens gaan terug naar het taalmodel, dat ze verwerkt tot een begrijpelijk antwoord. Conversatiecontext ondersteunt vervolgvragen. De assistent biedt zo een natuurlijke-taalinterface bovenop de gestructureerde backend.',
+          },
+        ],
+        note: 'Function calling / tool calling verzorgt de toegang tot CRM-data. De assistent voert de afzonderlijke Python-aanbevelingsalgoritmen niet uit.',
+      },
+    ],
+    architecture: {
+      source: {
+        title: 'MySQL / CRM-data',
+        description:
+          'Bedrijven, contactpersonen, interesses en bedrijfscategorieën met koppeltabellen.',
+      },
+      branches: [
+        {
+          title: 'Interactieve webapplicatie',
+          steps: [
+            {
+              title: 'Spring Boot REST API',
+              description:
+                'Controller → Service → Repository → Database, met Spring Data JPA en Hibernate.',
+            },
+            {
+              title: 'React & Chart.js',
+              description: 'Dashboard voor CRM-statistieken, klantgroepen en verdelingen.',
+            },
+            {
+              title: 'AI Sales Assistant',
+              description:
+                'Vragen via React → OpenAI function calling → REST API → CRM-data → LLM-antwoord.',
+            },
+          ],
+        },
+        {
+          title: 'Afzonderlijke Python-analyse',
+          steps: [
+            {
+              title: 'SQL & pandas',
+              description:
+                'Data ophalen, combineren, transformeren en omzetten naar gewogen kenmerken.',
+            },
+            {
+              title: 'Drie aanbevelingsmethoden',
+              description:
+                'Content-based, collaborative en hybrid filtering op profielen en relatiepatronen.',
+            },
+            {
+              title: 'Rankings & visualisaties',
+              description:
+                'Aanbevolen bedrijven met scores, pandas-tabellen en Matplotlib-heatmaps.',
+            },
+          ],
+        },
+      ],
+      caption:
+        'Beide onderdelen gebruiken dezelfde CRM-database. De Python-prototypes vormen een aparte analyseroute; er is geen directe integratie met het dashboard of de Sales Assistant.',
+    },
+    techStack: [
+      {
+        title: 'Machine Learning & analyse',
+        technologies: ['Python', 'pandas', 'NumPy', 'scikit-learn', 'SciPy', 'Matplotlib'],
+      },
+      {
+        title: 'Dataverwerking',
+        technologies: ['MySQL', 'SQL', 'MySQL Connector', 'Relationele datamodellering'],
+      },
+      {
+        title: 'Frontend',
+        technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Chart.js'],
+      },
+      {
+        title: 'Backend',
+        technologies: [
+          'Java 21',
+          'Spring Boot',
+          'Spring Data JPA',
+          'Hibernate',
+          'Maven',
+          'REST APIs',
+        ],
+      },
+      {
+        title: 'Generatieve AI',
+        technologies: [
+          'OpenAI API',
+          'LLM',
+          'Function Calling / Tool Calling',
+          'Conversatiecontext',
+        ],
       },
     ],
     takeaway:
-      'Praktijkervaring met LLM-gebruikersondersteuning en een hybride aanbevelingssysteem op basis van gebruikersinteresses en content.',
-  },
-  {
-    slug: 'waternet',
-    organization: 'Waternet',
-    cardLabel: 'WATERNET - MINOR',
-    title: 'Voorspellen van leidingstoringen',
-    projectType: 'Minorproject',
-    context: 'Minor Data Driven Business – AI Engineering',
-    description:
-      'Data over waterinfrastructuur voorbereid en geanalyseerd en een classificatiemodel ontwikkeld in Python/scikit-learn om leidingstoringen te voorspellen op basis van historische storingsdata.',
-    tags: ['Python', 'pandas', 'scikit-learn', 'Machine Learning', 'Data-analyse', 'Classificatie'],
-    focusAreas: ['data'],
-    topics: ['Data-analyse', 'Classificatie'],
-    previewTags: ['Python', 'scikit-learn', 'Data-analyse'],
-    visual: 'water',
-    overviewTitle: 'Van historische data naar het voorspellen van storingen.',
-    overview:
-      'Dit project richtte zich op het voorspellen van leidingstoringen met historische storingsdata. Het werk combineerde de voorbereiding en analyse van data over waterinfrastructuur met de ontwikkeling van een classificatiemodel op basis van machine learning.',
-    contributions: [
-      {
-        title: 'Datavoorbereiding',
-        description:
-          'Data over waterinfrastructuur voorbereid voor analyse en classificatie in Python.',
-      },
-      {
-        title: 'Verkennende data-analyse',
-        description: 'Historische storingsdata geanalyseerd met Python en pandas.',
-      },
-      {
-        title: 'Storingen classificeren',
-        description:
-          'Een classificatiemodel ontwikkeld met scikit-learn om leidingstoringen te voorspellen op basis van historische storingsdata.',
-      },
-    ],
-    takeaway:
-      'Historische storingsdata voorbereiden, analyseren en gebruiken voor een classificatiemodel: de stappen van een praktisch machine-learningproject.',
+      'Het project leverde een full-stack applicatiestructuur voor CRM-analytics, een dashboard, een AI Sales Assistant en drie afzonderlijke aanbevelingsprototypes op. Met pandas-tabellen en Matplotlib-heatmaps kunnen de rankings en similarityscores van de methoden worden onderzocht. De belangrijkste technische leerervaring was relationele bedrijfsdata omzetten in bruikbare analytische representaties: van koppeltabellen en gewichten naar vectoren, sparse matrices en gerangschikte bedrijfsmatches. Er zijn geen gemeten modelprestaties of bedrijfsresultaten vastgesteld.',
   },
   endeavourProject,
   {

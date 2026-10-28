@@ -46,8 +46,6 @@ export default function Home() {
   const visibleProjects = homeProjects.filter(
     (project) => focus === 'all' || project.focusAreas.includes(focus),
   )
-  if (focus === 'data')
-    visibleProjects.sort((a, b) => Number(b.visual === 'water') - Number(a.visual === 'water'))
   const previewProjects =
     focus === 'all'
       ? visibleProjects.filter((project) => previewProjectSlugs.includes(project.slug))

@@ -125,6 +125,46 @@ export function ProjectVisual({
   )
 }
 
+export function ProjectArchitecture({
+  source,
+  branches,
+  caption,
+}: {
+  source: { title: string; description: string }
+  branches: readonly { title: string; steps: readonly { title: string; description: string }[] }[]
+  caption: string
+}) {
+  return (
+    <figure
+      className="project-architecture"
+      aria-label="Architectuur van de CRM-applicatie en aanbevelingsprototypes"
+    >
+      <div className="project-architecture-source">
+        <Database size={22} aria-hidden="true" />
+        <h3>{source.title}</h3>
+        <p>{source.description}</p>
+      </div>
+      <div className="project-architecture-branches">
+        {branches.map((branch) => (
+          <div className="project-architecture-branch" key={branch.title}>
+            <ArrowDown size={18} aria-hidden="true" />
+            <h3>{branch.title}</h3>
+            <ol>
+              {branch.steps.map((step) => (
+                <li key={step.title}>
+                  <h4>{step.title}</h4>
+                  <p>{step.description}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))}
+      </div>
+      <figcaption>{caption}</figcaption>
+    </figure>
+  )
+}
+
 export function ProjectWorkflow({
   steps,
   caption,
