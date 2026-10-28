@@ -1238,11 +1238,12 @@ html:has(.project-image-dialog[open]) {
   border: 1px solid var(--line);
   border-left: 4px solid var(--accent);
   border-radius: 12px;
-  padding: 29px;
+  padding: 28px;
 }
 .education-card > svg {
+  display: block;
   color: var(--accent);
-  margin-bottom: 19px;
+  margin-bottom: 20px;
 }
 .education-institution {
   color: var(--muted);
@@ -1272,8 +1273,8 @@ html:has(.project-image-dialog[open]) {
 }
 .minor {
   border-top: 1px solid var(--line);
-  margin-top: 23px;
-  padding-top: 23px;
+  margin-top: 24px;
+  padding-top: 24px;
 }
 .minor > .eyebrow {
   font-size: 8px;
@@ -1288,11 +1289,6 @@ html:has(.project-image-dialog[open]) {
   font-size: 10px;
   color: var(--muted);
   margin-top: 8px;
-}
-.education-note {
-  margin-top: 24px;
-  font-size: 10px;
-  color: var(--muted);
 }
 .skills-section {
   background: var(--paper);
@@ -1311,6 +1307,9 @@ html:has(.project-image-dialog[open]) {
   background: var(--area-surface);
 }
 .skill-group h3 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin: 0 0 20px;
   padding-bottom: 18px;
   border-bottom: 1px solid var(--area-line);
@@ -1319,6 +1318,16 @@ html:has(.project-image-dialog[open]) {
   line-height: 1.6;
   font-weight: 600;
   color: var(--ink);
+}
+.skill-heading-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--accent-surface);
+  color: var(--accent);
 }
 .skill-group ul {
   display: grid;

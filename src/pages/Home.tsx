@@ -20,6 +20,7 @@ import {
   skillGroups,
   projects,
   projectUrl,
+  type FocusArea,
 } from '../data/portfolio'
 import { FocusFilters } from '../components/FocusNavigation'
 import { CodeVisual } from '../components/CodeVisual'
@@ -28,7 +29,11 @@ import { Contact } from '../components/Layout'
 import { ExternalLink, SectionHeading } from '../components/ui'
 import { useFocus } from '../hooks/useFocus'
 
-const pillarIcons = [Sparkles, Braces, Database]
+const areaIcons: Record<FocusArea, typeof Sparkles> = {
+  ai: Sparkles,
+  software: Braces,
+  data: Database,
+}
 const previewProjectSlugs = ['folio-pdf-knowledge-assistant', 'loods5-webshop']
 const homeProjects = [
   ...previewProjectSlugs.flatMap((slug) => projects.filter((project) => project.slug === slug)),
@@ -98,8 +103,8 @@ export default function Home() {
           <p>Algemene vaardigheden per vakgebied.</p>
         </div>
         <div className="pillar-grid">
-          {pillars.map((pillar, index) => {
-            const Icon = pillarIcons[index]
+          {pillars.map((pillar) => {
+            const Icon = areaIcons[pillar.id]
             return (
               <article className="pillar" data-area={pillar.id} key={pillar.id}>
                 <div className="pillar-top">
@@ -221,11 +226,6 @@ export default function Home() {
                   <h4>{education.minor}</h4>
                   <p>{education.minorPeriod}</p>
                 </div>
-                <p className="education-note">
-                  Software Engineering als basis.
-                  <br />
-                  AI Engineering als verdere verdieping.
-                </p>
               </article>
             </div>
           </div>
@@ -238,24 +238,27 @@ export default function Home() {
             number="04"
             eyebrow="Waar ik mee werk"
             title="Vaardigheden"
-            description={
-              selectedArea
-                ? `Technieken voor ${selectedArea.title}.`
-                : 'Geordend per vakgebied, zodat je snel de relevante vaardigheden vindt.'
-            }
           />
           <FocusFilters focus={focus} section="skills" />
           <div className={`skills-grid${focus === 'all' ? '' : ' is-focused'}`}>
-            {visibleSkills.map((group) => (
-              <article className="skill-group" data-area={group.area} key={group.title}>
-                <h3>{group.title}</h3>
-                <ul>
-                  {group.skills.map((skill) => (
-                    <li key={skill}>{skill}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
+            {visibleSkills.map((group) => {
+              const Icon = areaIcons[group.area]
+              return (
+                <article className="skill-group" data-area={group.area} key={group.title}>
+                  <h3>
+                    <span className="skill-heading-icon">
+                      <Icon size={20} aria-hidden="true" />
+                    </span>
+                    {group.title}
+                  </h3>
+                  <ul>
+                    {group.skills.map((skill) => (
+                      <li key={skill}>{skill}</li>
+                    ))}
+                  </ul>
+                </article>
+              )
+            })}
           </div>
         </div>
       </section>

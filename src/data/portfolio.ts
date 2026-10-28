@@ -415,7 +415,7 @@ export const education = {
   minorPeriod: '2025–2026',
 }
 
-export const skillGroups = [
+export const skillGroups: { area: FocusArea; title: string; skills: string[] }[] = [
   {
     area: 'ai',
     title: 'AI Engineering',

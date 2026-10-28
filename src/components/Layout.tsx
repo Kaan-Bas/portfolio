@@ -133,7 +133,7 @@ export function Footer() {
           {profile.name}
           <span aria-hidden="true">.</span>
         </Link>
-        <p>HBO-ICT: Software Engineering · Hogeschool van Amsterdam</p>
+        <p>HBO-ICT · Hogeschool van Amsterdam</p>
         <span>
           © {new Date().getFullYear()} {profile.name}
         </span>
