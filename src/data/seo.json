@@ -7,6 +7,10 @@
     "title": "Kaan Bas",
     "description": "Software Engineering afgestudeerd met AI-projecten bij Siemens en machine-learningprojecten bij IDCP. Bekijk relevante projecten en vaardigheden per vakgebied."
   },
+  "/projects": {
+    "title": "Projecten - Kaan Bas",
+    "description": "Bekijk de projecten van Kaan Bas in AI Engineering, Software Engineering en Data & Machine Learning."
+  },
   "/siemens": {
     "title": "Offertes automatiseren met AI · Siemens - Kaan Bas",
     "description": "Een afstudeerproject bij Siemens met LLM-extractie, Python-validatie en menselijke controle. 68,8% minder verwerkingstijd bij de geëvalueerde testcases."

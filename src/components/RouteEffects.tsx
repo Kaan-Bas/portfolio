@@ -20,7 +20,7 @@ export function RouteEffects() {
     const path = pathname.replace(/\/$/, '') || '/'
     const page = metadata[path as keyof typeof metadata] ?? metadata['404']
     const focus =
-      path === '/'
+      path === '/' || path === '/projects'
         ? focusAreas.find((area) => area.id === new URLSearchParams(search).get('focus'))
         : undefined
     const title = page.title
@@ -36,7 +36,7 @@ export function RouteEffects() {
     )
     if (profile.siteUrl) {
       const siteUrl = profile.siteUrl.replace(/\/$/, '')
-      const url = `${siteUrl}/#${path}`
+      const url = `${siteUrl}${path}`
       setMeta('meta[property="og:url"]', { property: 'og:url' }, url)
       setMeta('meta[property="og:image"]', { property: 'og:image' }, `${siteUrl}/og-image.png`)
       let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
@@ -45,12 +45,12 @@ export function RouteEffects() {
         canonical.rel = 'canonical'
         document.head.appendChild(canonical)
       }
-      // Hash routes share one indexable HTML entry point.
-      canonical.href = `${siteUrl}/`
+      canonical.href = url
     }
     const frame = requestAnimationFrame(() => {
-      if (hash) {
-        const target = document.getElementById(decodeURIComponent(hash.slice(1)))
+      const section = hash || (path === '/projects' ? '#work' : '')
+      if (section) {
+        const target = document.getElementById(decodeURIComponent(section.slice(1)))
         target?.scrollIntoView({ behavior: 'instant' })
         target?.focus({ preventScroll: true })
       } else {

@@ -17,6 +17,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/projects" element={<Home />} />
         <Route path="/siemens" element={<Siemens />} />
         <Route path="/:slug" element={<ProjectPage />} />
         <Route path="*" element={<NotFound />} />
