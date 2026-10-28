@@ -55,16 +55,18 @@ export function ProjectCard({ project }: { project: Project }) {
   const path = projectUrl(project.slug, focus)
   return (
     <article className="project-card">
-      <ProjectGallery images={project.images} title={project.title} />
-      <div className="project-card-body">
+      <div className="project-card-header">
         <div className="project-overline">
           <span>{project.cardLabel ?? project.organization}</span>
         </div>
         <h3>
           <Link to={path}>{project.title}</Link>
         </h3>
+      </div>
+      <ProjectGallery images={project.images} title={project.title} />
+      <div className="project-card-body">
         <p className="project-description">{project.description}</p>
-        <Tags items={project.previewTags} areas={project.focusAreas} />
+        <Tags items={project.previewTags} areas={project.previewAreas ?? project.focusAreas} />
         <div className="project-card-bottom">
           <Link to={path} aria-label={`Bekijk project: ${project.title}`}>
             Bekijk project

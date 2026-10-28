@@ -12,7 +12,7 @@
     "description": "Een afstudeerproject bij Siemens met LLM-extractie, Python-validatie en menselijke controle. 68,8% minder verwerkingstijd bij de geëvalueerde testcases."
   },
   "/projects/idcp-chatbot-recommendation": {
-    "title": "LLM-chatbot & hybride aanbevelingssysteem - Kaan Bas",
+    "title": "Gebruikers linken met ML & Data - Kaan Bas",
     "description": "Een project binnen de minor AI Engineering: een LLM-chatbot en een hybride aanbevelingssysteem in Python met data over gebruikers, interesses en content."
   },
   "/projects/waternet-pipe-failure-prediction": {

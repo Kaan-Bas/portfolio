@@ -100,6 +100,7 @@ export interface Project {
   images?: readonly ProjectImage[]
   tags: string[]
   previewTags: string[]
+  previewAreas?: FocusArea[]
   focusAreas: FocusArea[]
   topics: string[]
   visual?: 'recommendation' | 'water'
@@ -187,7 +188,7 @@ export const projects: Project[] = [
     organization: 'IDCP',
     cardLabel: 'IDCP - MINOR',
     images: idcpImages,
-    title: 'LLM-chatbot & hybride aanbevelingssysteem',
+    title: 'Gebruikers linken met ML & Data',
     projectType: 'Minorproject',
     context: 'Minor Data Driven Business – AI Engineering',
     description:
@@ -201,6 +202,7 @@ export const projects: Project[] = [
       'Agile/Scrum',
     ],
     focusAreas: ['ai', 'data'],
+    previewAreas: ['data'],
     topics: ['LLM-toepassingen', 'Aanbevelingssystemen'],
     previewTags: ['Python', 'LLM', 'Machine Learning'],
     visual: 'recommendation',

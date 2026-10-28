@@ -176,7 +176,7 @@ test('project cards support inline photo navigation and an accessible gallery', 
   await previousSiemensImage.click()
 
   await page.getByRole('button', { name: 'Bekijk alle projecten' }).click()
-  const idcpTitle = 'LLM-chatbot & hybride aanbevelingssysteem'
+  const idcpTitle = 'Gebruikers linken met ML & Data'
   const idcp = page.getByRole('figure', { name: `Projectbeelden van ${idcpTitle}`, exact: true })
   const idcpImage = idcp.getByRole('img')
   await expectImageLoaded(idcpImage)
@@ -253,7 +253,7 @@ test('project detail pages show larger previews and navigable photo galleries', 
     },
     {
       slug: 'idcp-chatbot-recommendation',
-      title: 'LLM-chatbot & hybride aanbevelingssysteem',
+      title: 'Gebruikers linken met ML & Data',
       firstImage: /IDCP-dashboard/,
       nextImage: /IDCP-chatbot/,
     },
@@ -440,7 +440,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
     'Folio',
     'Loods 5-webshop',
   ])
-  await expect(page.getByRole('heading', { name: 'LLM-chatbot & hybride aanbevelingssysteem' })).toHaveCount(0)
+  await expect(page.getByRole('heading', { name: 'Gebruikers linken met ML & Data' })).toHaveCount(0)
   await expect(page.getByRole('heading', { name: 'Loods 5-webshop' })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(0)
   const expandProjects = page.locator('#work .projects-toggle')
@@ -450,7 +450,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   await expect(page.locator('#work .selected-projects .project-card h3')).toHaveText([
     'Folio',
     'Loods 5-webshop',
-    'LLM-chatbot & hybride aanbevelingssysteem',
+    'Gebruikers linken met ML & Data',
     'Voorspellen van leidingstoringen',
   ])
   await page.getByRole('button', { name: 'Toon minder projecten' }).click()
@@ -518,13 +518,13 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   await projectFilters.getByRole('link', { name: 'AI Engineering', exact: true }).click()
   await expect(work.getByRole('link', { name: 'Bekijk de casestudy' })).toBeVisible()
   const aiProjectCard = work.locator('.selected-projects .project-card').filter({
-    has: page.getByRole('heading', { name: 'LLM-chatbot & hybride aanbevelingssysteem', exact: true }),
+    has: page.getByRole('heading', { name: 'Gebruikers linken met ML & Data', exact: true }),
   })
   const aiProjectCardBounds = await aiProjectCard.boundingBox()
   expect(aiProjectCardBounds).not.toBeNull()
   expect(aiProjectCardBounds!.width).toBeCloseTo(normalProjectCardWidth, 0)
   await expect(
-    work.getByRole('heading', { name: 'LLM-chatbot & hybride aanbevelingssysteem' }),
+    work.getByRole('heading', { name: 'Gebruikers linken met ML & Data' }),
   ).toBeVisible()
   await expect(work.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toHaveCount(
     0,
