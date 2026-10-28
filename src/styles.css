@@ -551,22 +551,29 @@ section[tabindex='-1']:focus {
   gap: 32px;
   padding: 37px 39px 36px;
 }
-.project-overline {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  font-size: 9px;
+.project-overline,
+.company-label {
+  font-size: 10px;
+  line-height: 1.7;
   font-weight: 550;
   letter-spacing: 1.7px;
   text-transform: uppercase;
 }
+.project-overline {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+.project-overline > span + span {
+  flex-shrink: 0;
+}
 .featured-main .project-overline {
   color: var(--muted);
+  font-size: 9px;
 }
 .company-label {
   color: var(--accent);
-  font-size: 12px;
-  font-weight: 500;
 }
 .featured-main h3 {
   margin-top: 9px;
@@ -1080,7 +1087,6 @@ html:has(.project-image-dialog[open]) {
 }
 .project-card .project-overline {
   color: var(--accent);
-  font-size: 10px;
 }
 .project-card h3 {
   font-size: 22px;
@@ -2034,6 +2040,28 @@ html:has(.project-image-dialog[open]) {
 .project-case-page .project-tech-grid {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
 }
+.project-agent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 16px;
+}
+.project-agent-grid > article {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+}
+.project-agent-grid h3 {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+.project-agent-grid p {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
 .project-case-page .project-case-followups {
   margin-top: 28px;
   padding-top: 24px;
@@ -2897,9 +2925,6 @@ html:has(.project-image-dialog[open]) {
   }
   .featured-main .project-overline {
     font-size: 8px;
-  }
-  .company-label {
-    font-size: 12px;
   }
   .featured-main h3 {
     font-size: 30px;

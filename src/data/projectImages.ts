@@ -4,9 +4,10 @@ import idcpDashboard from '../media/optimized/idcp-dashboard.webp'
 import idcpChatbot from '../media/optimized/idcp-chatbot.webp'
 import loods5Homepage from '../media/optimized/loods5-homepage.webp'
 import loods5Product from '../media/optimized/loods5-product.webp'
-import folioUpload from '../media/folio-1.png'
-import folioAnswer from '../media/folio-2.png'
-import folioSources from '../media/folio-3.png'
+import folioDocumentChat from '../media/folio-1.png'
+import folioAgentLibrary from '../media/folio-2.png'
+import folioInvoice from '../media/folio-3.png'
+import folioComparison from '../media/folio-4.png'
 
 export interface ProjectImage {
   src: string
@@ -18,25 +19,32 @@ export interface ProjectImage {
 
 export const folioImages: ProjectImage[] = [
   {
-    src: folioUpload,
-    alt: 'Folio-startscherm met PDF-upload en een chatinterface om vragen over een document te stellen.',
-    caption: 'PDF uploaden',
-    width: 1895,
-    height: 933,
+    src: folioDocumentChat,
+    alt: 'Folio-startscherm voor Document Chat met PDF-upload, chatinterface en navigatie naar de AI-agents.',
+    caption: 'Document Chat',
+    width: 1573,
+    height: 885,
   },
   {
-    src: folioAnswer,
-    alt: 'Folio-chat met een geüploade PDF, een antwoord op een vraag en bronverwijzingen naar PDF-pagina’s.',
-    caption: 'Antwoord met bronverwijzingen',
-    width: 1890,
-    height: 935,
+    src: folioAgentLibrary,
+    alt: 'Folio-agentbibliotheek met categorieën en kaarten voor documentvergelijking, retourbeoordeling en klantenservice.',
+    caption: 'AI-agentbibliotheek',
+    width: 1571,
+    height: 884,
   },
   {
-    src: folioSources,
-    alt: 'Folio-antwoord met een uitgeklapt bronfragment en verwijzingen naar de oorspronkelijke PDF-pagina’s.',
-    caption: 'Bronfragment bekijken',
-    width: 1889,
-    height: 931,
+    src: folioInvoice,
+    alt: 'Folio-factuurverwerking met een fictieve testfactuur en een conclusie over gevonden afwijkingen in het totaalbedrag.',
+    caption: 'Factuurverwerking',
+    width: 1567,
+    height: 885,
+  },
+  {
+    src: folioComparison,
+    alt: 'Folio-documentvergelijking met twee PDF-versies, een vergelijkingsrapport en bevindingen met bronverwijzingen.',
+    caption: 'Documentvergelijking',
+    width: 1573,
+    height: 885,
   },
 ]
 

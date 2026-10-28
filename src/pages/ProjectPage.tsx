@@ -69,6 +69,37 @@ export default function ProjectPage() {
           },
         ]
       : []),
+    ...(project.agents
+      ? [
+          {
+            id: 'agents',
+            label: 'Agents & tools',
+            title: 'Vier agents, afgebakende taken.',
+            content: (
+              <>
+                <div className="project-agent-grid">
+                  {project.agents.map((agent) => (
+                    <article key={agent.title}>
+                      <h3>{agent.title}</h3>
+                      <p>{agent.description}</p>
+                    </article>
+                  ))}
+                </div>
+                {project.agentWorkflow && (
+                  <>
+                    <h3 className="project-case-subheading">De tool-calling-loop.</h3>
+                    <ProjectWorkflow
+                      steps={project.agentWorkflow.steps}
+                      caption={project.agentWorkflow.caption}
+                      label="Tool-calling-loop van de agents"
+                    />
+                  </>
+                )}
+              </>
+            ),
+          },
+        ]
+      : []),
     {
       id: 'stack',
       label: 'Tech stack',
@@ -132,7 +163,8 @@ export default function ProjectPage() {
         <BackToWork />
         <p className="eyebrow case-eyebrow">
           {project.organization}
-          <span className="eyebrow-divider">/</span>{project.projectType}
+          <span className="eyebrow-divider">/</span>
+          {project.projectType}
         </p>
         <h1>
           {project.title}

@@ -128,12 +128,14 @@ export function ProjectVisual({
 export function ProjectWorkflow({
   steps,
   caption,
+  label = 'Gegevensstroom van het project',
 }: {
   steps: readonly { title: string; description: string }[]
   caption: string
+  label?: string
 }) {
   return (
-    <figure className="project-workflow" aria-label="Gegevensstroom van het project">
+    <figure className="project-workflow" aria-label={label}>
       <ol className="project-workflow-steps" aria-label="Stappen van de gegevensstroom">
         {steps.map((step, index) => (
           <li key={step.title}>

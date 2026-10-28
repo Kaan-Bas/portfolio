@@ -92,6 +92,7 @@ interface ProjectDetailItem {
 export interface Project {
   slug: string
   organization: string
+  cardLabel?: string
   title: string
   context: string
   projectType: 'Minorproject' | 'Stageproject' | 'Eigen project'
@@ -107,6 +108,8 @@ export interface Project {
   contributions: ProjectDetailItem[]
   features?: string[]
   workflow?: { steps: ProjectDetailItem[]; caption: string }
+  agents?: ProjectDetailItem[]
+  agentWorkflow?: { steps: ProjectDetailItem[]; caption: string }
   techStack?: { title: string; technologies: string[] }[]
   testing?: { summary: string; note: string }
   considerations?: ProjectDetailItem[]
@@ -116,6 +119,7 @@ export interface Project {
 export const featuredProject = {
   slug: 'siemens-ai-quotation-automation',
   organization: 'Siemens Buildings',
+  cardLabel: 'Siemens - afstudeerstagiair',
   title: 'Offertes automatiseren met AI',
   context: 'Afstudeerstage — AI Engineer',
   description:
@@ -139,6 +143,7 @@ export const featuredProject = {
 export const endeavourProject: Project = {
   slug: 'loods5-webshop',
   organization: 'Endeavour',
+  cardLabel: 'Endeavour - stagiair',
   title: 'Loods 5-webshop',
   projectType: 'Stageproject',
   context: 'Software Developer · Stage · 2024–2025',
@@ -180,6 +185,7 @@ export const projects: Project[] = [
   {
     slug: 'idcp-chatbot-recommendation',
     organization: 'IDCP',
+    cardLabel: 'IDCP - MINOR',
     images: idcpImages,
     title: 'LLM-chatbot & hybride aanbevelingssysteem',
     projectType: 'Minorproject',
@@ -223,6 +229,7 @@ export const projects: Project[] = [
   {
     slug: 'waternet-pipe-failure-prediction',
     organization: 'Waternet',
+    cardLabel: 'WATERNET - MINOR',
     title: 'Voorspellen van leidingstoringen',
     projectType: 'Minorproject',
     context: 'Minor Data Driven Business – AI Engineering',
@@ -260,33 +267,36 @@ export const projects: Project[] = [
     slug: 'folio-pdf-knowledge-assistant',
     images: folioImages,
     organization: 'Persoonlijk project',
-    title: 'PDF Knowledge Assistant',
+    title: 'Folio',
     projectType: 'Eigen project',
-    context: 'AI Engineering · Full-stack RAG-applicatie',
+    context: 'Persoonlijk full-stack AI-project',
     description:
-      'Folio is een lokale webapplicatie om vragen te stellen over een PDF en de bijbehorende bronnen terug te vinden. Een expliciete Python-RAG-pipeline combineert lokale embeddings en FAISS-retrieval met een LLM voor antwoorden met tekstcitaten en paginaverwijzingen.',
+      'Een Agentic AI & Document Intelligence Platform voor documentchat en vier gespecialiseerde AI-agents. RAG maakt PDF’s doorzoekbaar met bronverwijzingen; tool calling ondersteunt documentvergelijking, retourbeoordeling, factuurcontrole en klantenservice met fictieve bedrijfsgegevens.',
     tags: [
       'Python',
       'RAG',
       'LLM',
+      'AI-agents',
+      'Tool calling',
       'React',
       'TypeScript',
       'Lokale embeddings',
       'FAISS',
+      'BM25',
       'Google Gemini',
     ],
-    previewTags: ['Python', 'RAG', 'LLM', 'React'],
+    previewTags: ['Python', 'RAG', 'LLM', 'AI-agents', 'Tool calling', 'React'],
     focusAreas: ['ai', 'software'],
-    topics: ['Retrieval-Augmented Generation', 'Full-stack development'],
-    overviewTitle: 'Vragen stellen over een PDF, met de bronnen erbij.',
+    topics: ['RAG', 'AI-agents & tool calling', 'Full-stack development'],
+    overviewTitle: 'Documenten doorzoeken, vergelijken en beoordelen.',
     overview:
-      'Ik ontwikkelde zowel de React-chatinterface als de Python-backend van Folio. De RAG-pipeline haalt relevante tekstfragmenten uit een PDF op en geeft die als context aan Gemini. Antwoorden worden getoond met uitklapbare citaten en links naar de oorspronkelijke PDF-pagina’s, zodat de gebruiker de bronnen kan nalopen.',
+      'Folio is een zelfstandig ontwikkeld Agentic AI & Document Intelligence Platform. Gebruikers kunnen vragen stellen over documenten, voorwaarden vergelijken en fictieve retourverzoeken, facturen en klantvragen onderzoeken. Ik ontwikkelde de React/TypeScript-interface en de Python-backend, met gedeelde diensten voor documentverwerking, retrieval en bronvalidatie. Document Chat gebruikt een vaste RAG-route; de vier gespecialiseerde agents laten het taalmodel kiezen welke toegestane tools nodig zijn. Bronnen, toolresultaten en menselijke review maken de uitkomsten controleerbaar.',
     features: [
-      'Eén PDF uploaden via een bestandsdialoog of drag-and-drop, met validatie en begrijpelijke foutmeldingen.',
-      'Vragen stellen via een chatinterface en relevante documentfragmenten semantisch ophalen.',
-      'Antwoorden bekijken met uitklapbare geciteerde fragmenten en links naar PDF-pagina’s.',
-      'Bij onvoldoende context een melding geven in plaats van een inhoudelijk antwoord te verzinnen.',
-      'Een nieuwe PDF uploaden en de antwoorden over het vorige document ongeldig maken.',
+      'Document Chat: vragen stellen over een PDF, met tekstcitaten en paginalinks. Bij onvoldoende context volgt een melding.',
+      'Agentbibliotheek: documentvergelijking, retourbeoordeling, factuurverwerking en klantenservice, gegroepeerd per toepassingsgebied.',
+      'Inzicht in de uitvoering: conclusies bovenaan, met uitklapbare bronnen, toolstatussen en factuurcontroles.',
+      'Menselijke review: conceptantwoorden bewerken, resultaten lokaal als beoordeeld markeren en factuurresultaten exporteren naar JSON.',
+      'Documentbeheer: uploads valideren en resultaten aan de juiste documentversie koppelen. Late responses van vervangen documenten worden genegeerd.',
     ],
     workflow: {
       steps: [
@@ -315,77 +325,152 @@ export const projects: Project[] = [
             'FAISS IndexFlatIP zoekt met genormaliseerde vectoren de fragmenten die bij de vraag passen.',
         },
         {
-          title: 'Relevante context',
+          title: 'Hybride contextselectie',
           description:
-            'De gevonden fragmenten en hun bronmetadata vormen de context voor het antwoord.',
+            'Document Chat combineert FAISS en BM25 via Reciprocal Rank Fusion, met naburige chunks en een begrensd contextbudget.',
         },
         {
-          title: 'Gemini',
+          title: 'LLM-antwoord',
           description:
-            'Gemini genereert het antwoord via google-genai. Het model is instelbaar met GEMINI_MODEL.',
+            'De vraag en geselecteerde context gaan naar de LLM. De Gemini-adapter vraagt gestructureerde output volgens een Pydantic-schema.',
         },
         {
           title: 'Antwoord met bronnen',
           description:
-            'Tekstcitaten en PDF-paginaverwijzingen helpen de gebruiker de bronnen terug te vinden.',
+            'Alleen opgehaalde chunk-ID’s worden geaccepteerd en gekoppeld aan de oorspronkelijke tekst en PDF-pagina’s.',
         },
       ],
       caption:
-        'Elke RAG-stap is expliciet in Python geïmplementeerd. sentence-transformers maakt de embeddings lokaal op de CPU; Gemini verzorgt de antwoordgeneratie.',
+        'De RAG-pipeline is expliciet in Python geïmplementeerd, zonder LangChain of LlamaIndex. Embeddings en vector search draaien lokaal; geselecteerde context wordt voor antwoordgeneratie naar de LLM-API verstuurd. De hybride contextselectie hoort bij Document Chat; agentsearch gebruikt de gedeelde vectorzoekfunctie.',
+    },
+    agents: [
+      {
+        title: 'Documentvergelijking',
+        description:
+          'Vergelijkt twee PDF-versies op gewijzigde, toegevoegde, verwijderde en ongewijzigde voorwaarden. Bevindingen verwijzen naar beide documenten; ontbrekend bewijs leidt tot onzekerheid, niet automatisch tot een wijzigingslabel.',
+      },
+      {
+        title: 'Retourbeoordeling',
+        description:
+          'Combineert beleidsbronnen, fictieve bestelgegevens en datumberekeningen voor een conceptadvies over een retourverzoek. De agent kiest welke tools nodig zijn en neemt geen terugbetalingsbesluit.',
+      },
+      {
+        title: 'Factuurverwerking',
+        description:
+          'Extraheert fictieve testfacturen met onderbouwende tekstcitaten. Python controleert bedragen met Decimal en vergelijkt fictieve inkooporders. Resultaten ondersteunen lokale review en JSON-export, zonder financiële goedkeuring of betaling.',
+      },
+      {
+        title: 'Klantenservice',
+        description:
+          'Onderzoekt een fictieve klantvraag met beleidsbronnen, order- en productgegevens en supportrichtlijnen. Geeft voorstellen voor categorie, prioriteit en escalatie, plus een bewerkbaar conceptantwoord dat pas na menselijke review kan worden gekopieerd.',
+      },
+    ],
+    agentWorkflow: {
+      steps: [
+        {
+          title: 'Opdracht & tools',
+          description:
+            'Elke agent krijgt een gerichte opdracht en een eigen afgebakende set tools.',
+        },
+        {
+          title: 'Model kiest de stap',
+          description:
+            'De LLM vraagt een tool aan of levert een eindantwoord; niet iedere opdracht gebruikt dezelfde tools.',
+        },
+        {
+          title: 'Python controleert',
+          description:
+            'De backend controleert de allowlist, argumenten, documentrevisie, het toolbudget en de deadline.',
+        },
+        {
+          title: 'Toolresultaat terug naar het model',
+          description:
+            'Python voert de tool uit, registreert de status en geeft het resultaat als onbetrouwbare data terug voor de volgende modelstap.',
+        },
+        {
+          title: 'Concept met bronnen',
+          description:
+            'De backend valideert output en bronverwijzingen. De gebruiker bekijkt onzekerheden en beoordeelt het concept.',
+        },
+      ],
+      caption:
+        'De model-, controle- en toolstappen herhalen zich tot een eindantwoord of uitvoeringslimiet. De agents draaien afzonderlijk; er is geen multi-agentorkestratie. Tools wijzigen geen bestellingen, versturen geen berichten en voeren geen betalingen uit.',
     },
     contributions: [
       {
-        title: 'Expliciete RAG-implementatie',
+        title: 'Full-stack platform en gedeelde diensten',
         description:
-          'Ik implementeerde de pipeline rechtstreeks in Python, zonder LangChain of LlamaIndex. Aparte modules verzorgen PDF-verwerking, chunking, embeddings, retrieval, LLM-contracten, Gemini-integratie en de RAG-service.',
+          'Ik ontwikkelde de React/TypeScript-interface en FastAPI-backend met Pydantic-contracten. Documentverwerking, embeddings, retrieval en LLM-integratie zijn aparte modules die de werkinterfaces delen. Model- en embeddingadapters zijn via interfaces gekoppeld aan de services.',
       },
       {
-        title: 'Lokale retrieval en bronmetadata',
+        title: 'RAG met herleidbare bronnen',
         description:
-          'Voor lokale embeddings koos ik sentence-transformers met intfloat/multilingual-e5-small op de CPU. Passage- en query-prefixen onderscheiden documenttekst van vragen. FAISS IndexFlatIP doorzoekt de genormaliseerde vectoren; de chunks behouden hun paginanummers.',
+          'De documentpipeline combineert PDF-extractie, paginagebonden chunking, lokale E5-embeddings en FAISS-retrieval. Voor Document Chat implementeerde ik hybride contextselectie met BM25 en Reciprocal Rank Fusion. De backend accepteert alleen opgehaalde bron-ID’s en koppelt die aan de oorspronkelijke tekst en paginanummers.',
       },
       {
-        title: 'Full-stack API-contracten',
+        title: 'Modelgestuurde tools met uitvoeringsgrenzen',
         description:
-          'Ik koppelde de React- en TypeScript-interface aan een FastAPI-backend met Pydantic-contracten. Limieten en foutafhandeling dekken bestandsgrootte, pagina-aantal, ontbrekende configuratie, quota, timeouts en providerfouten.',
+          'Ik bouwde een gedeelde Python-loop voor de vier gespecialiseerde agents. De LLM selecteert tools; Python valideert de argumenten en voert toegestane aanroepen uit. Elke agent heeft een eigen allowlist, documentafbakening, toolbudget en deadline. Toolresultaten komen met een uitvoeringsstatus terug bij het model.',
+      },
+      {
+        title: 'Python-controles en menselijke review',
+        description:
+          'Factuurvelden worden onderbouwd met letterlijke tekstcitaten; onvoldoende onderbouwde waarden blijven null. Python Decimal controleert bedragen en vergelijkt fictieve inkooporders, zonder herschreven modelbedragen te accepteren. In de interface blijven bronnen en afwijkingen zichtbaar en kunnen gebruikers concepten bewerken en lokaal beoordelen.',
       },
     ],
     techStack: [
       { title: 'Frontend', technologies: ['React', 'TypeScript', 'Vite', 'Eigen CSS'] },
-      { title: 'Backend', technologies: ['Python', 'FastAPI', 'Uvicorn', 'Pydantic'] },
+      { title: 'Backend', technologies: ['Python', 'FastAPI', 'Pydantic', 'pydantic-settings'] },
       { title: 'PDF-verwerking', technologies: ['PyMuPDF', 'Eigen chunkingfunctie'] },
       {
         title: 'Embeddings & retrieval',
-        technologies: ['sentence-transformers', 'intfloat/multilingual-e5-small', 'FAISS IndexFlatIP'],
+        technologies: [
+          'sentence-transformers',
+          'intfloat/multilingual-e5-small',
+          'FAISS IndexFlatIP',
+          'BM25',
+          'Reciprocal Rank Fusion',
+        ],
       },
-      { title: 'Antwoordgeneratie', technologies: ['Google Gemini', 'google-genai Python-SDK'] },
-      { title: 'Tests', technologies: ['pytest', 'FastAPI TestClient', 'Vitest', 'Testing Library'] },
+      {
+        title: 'LLM & agents',
+        technologies: [
+          'Google Gemini',
+          'google-genai Python-SDK',
+          'Function calling',
+          'Gestructureerde output',
+        ],
+      },
+      { title: 'Deterministische tools', technologies: ['Decimal', 'datetime'] },
+      {
+        title: 'Tests',
+        technologies: ['pytest', 'HTTP-mocks', 'Vitest', 'React Testing Library', 'jsdom'],
+      },
     ],
     testing: {
       summary:
-        'De testsuite bevat 81 backend-testgevallen en 16 frontendtests voor documentverwerking, retrieval, API-contracten, foutscenario’s en gebruikersinteracties. Bij een eerdere controle zijn deze tests en de frontendbuild geslaagd.',
-      note:
-        'Deze resultaten komen uit een eerdere testrun en zijn niet recent opnieuw gecontroleerd. Als vervolgstap wil ik de volledige flow opnieuw testen met een live Gemini-antwoord.',
+        'Bij de projectcontrole van 28 oktober 2026 zijn 284 backendtests en 83 frontendtests geslaagd, samen met de frontend-productiebuild. De tests dekken onder meer documentverwerking, hybride retrieval, bronvalidatie, toolkeuzes, uitvoeringslimieten, factuurcontroles en reviewinteracties.',
+      note: 'Externe LLM-aanroepen en modelinferentie worden gemockt; een deel van de tests gebruikt echte FAISS-indexen en de echte SDK met gemockt HTTP-verkeer. Bij deze controle zijn geen live LLM-requests uitgevoerd. Deze resultaten tonen geen gemeten antwoordkwaliteit of volledige bescherming tegen promptinjectie aan.',
     },
     considerations: [
       {
-        title: 'RAG-kwaliteit evalueren',
+        title: 'Retrieval en agentresultaten evalueren',
         description:
-          'Ik wil de kwaliteit van retrieval en antwoorden gericht evalueren, naast latentie en kosten. Daar zijn nog geen metingen voor beschikbaar. Bronverwijzingen helpen bij controle, maar garanderen niet dat elke bewering door de bron wordt ondersteund.',
+          'Ik wil een vaste evaluatieset opbouwen voor retrieval, antwoorden en agentresultaten. Bronvalidatie controleert herkomst, maar garandeert geen inhoudelijke juistheid of volledige documentvergelijking. Voor kwaliteit, latentie en kosten staan hier geen gemeten resultaten.',
       },
       {
         title: 'Meer PDF-inhoud verwerken',
         description:
-          'De huidige versie richt zich op tekst uit PDF’s. OCR, beeldinterpretatie en gespecialiseerde tabelverwerking vallen buiten die scope. Ondersteuning voor complexere documenten is een mogelijke uitbreiding.',
+          'Folio verwerkt PDF’s met een tekstlaag, zonder OCR. Complexe opmaak en tabellen kunnen structuur verliezen. OCR, chunking op zinnen of tokens en reranking zijn mogelijke vervolgstappen.',
       },
       {
-        title: 'Persistent documentbeheer',
+        title: 'Documentisolatie en duurzame opslag',
         description:
-          'Folio gebruikt één actieve documentindex per backendproces, zonder accounts of persistente documentbibliotheek. Voor een eventuele productiestap wil ik documentopslag, authenticatie en belastingtests uitwerken.',
+          'Document Chat en de bedrijfsagents delen één actieve PDF per backendproces; vergelijking gebruikt een onafhankelijk documentpaar. Er zijn geen accounts, gebruikersisolatie of permanente opslag. Documenten per gebruiker scheiden en menselijke correcties duurzaam bewaren zijn vervolgstappen.',
       },
     ],
     takeaway:
-      'Folio combineert een React-interface en Python-API met een expliciete RAG-pipeline. De onderdelen werken samen via duidelijke API-contracten; tekstfragmenten en paginametadata blijven tot aan het antwoord behouden.',
+      'Folio combineert full-stack development, documentretrieval en agentic AI in één zelfstandig project. De engineering zit in de samenhang tussen de gebruikersinterface, API-contracten, modelgestuurde toolkeuze en deterministische controles. Bronverwijzingen, uitvoeringsgrenzen en menselijke review zijn onderdeel van het ontwerp. De bedrijfsprocessen gebruiken fictieve gegevens en hebben geen koppeling met echte bestellingen, betalingen of tickets.',
   },
 ]
 
@@ -424,6 +509,7 @@ export const skillGroups: { area: FocusArea; title: string; skills: string[] }[]
       'Large Language Models',
       'Retrieval-Augmented Generation (RAG)',
       'AI-agents',
+      'Tool calling',
       'Prompt Engineering',
       'Embeddings',
       'Semantisch zoeken (FAISS)',

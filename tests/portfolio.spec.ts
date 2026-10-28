@@ -358,7 +358,7 @@ test('project case studies offer numbered navigation and shareable section links
 test('Folio is discoverable through the overview and relevant filters with an honest case study', async ({
   page,
 }, testInfo) => {
-  const title = 'PDF Knowledge Assistant'
+  const title = 'Folio'
   await page.goto('/#work')
   const work = page.locator('#work')
   const card = work.locator('.project-card').filter({
@@ -366,6 +366,9 @@ test('Folio is discoverable through the overview and relevant filters with an ho
   })
   await expect(card).toBeVisible()
   await expect(card.getByText('RAG', { exact: true })).toBeVisible()
+  await expect(card.getByText('AI-agents', { exact: true })).toBeVisible()
+  await expect(card.getByText('Tool calling', { exact: true })).toBeVisible()
+  await expect(card.locator('.project-description')).toContainText('fictieve bedrijfsgegevens')
 
   const filters = work.getByRole('navigation', { name: 'Filter projecten op vakgebied' })
   for (const area of ['AI Engineering', 'Software Engineering']) {
@@ -374,7 +377,7 @@ test('Folio is discoverable through the overview and relevant filters with an ho
   }
   await card.getByRole('link', { name: `Bekijk project: ${title}` }).click()
   await expect(page).toHaveURL('/projects/folio-pdf-knowledge-assistant?focus=software')
-  await expect(page).toHaveTitle('PDF Knowledge Assistant - Kaan Bas')
+  await expect(page).toHaveTitle('Folio - Agentic AI & Document Intelligence Platform - Kaan Bas')
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(`${title}.`)
   const gallery = page.getByRole('figure', { name: `Projectbeelden van ${title}`, exact: true })
   const previewImage = gallery.getByRole('img')
@@ -387,16 +390,34 @@ test('Folio is discoverable through the overview and relevant filters with an ho
     'Chunking',
     'Lokale embeddings',
     'FAISS vector search',
-    'Relevante context',
-    'Gemini',
+    'Hybride contextselectie',
+    'LLM-antwoord',
     'Antwoord met bronnen',
   ])
+  await page
+    .getByRole('navigation', { name: 'Inhoud van de casestudy' })
+    .getByRole('link', { name: /Agents & tools/ })
+    .click()
+  await expect(page).toHaveURL('/projects/folio-pdf-knowledge-assistant?focus=software#agents')
+  await expect(page.locator('#agents')).toBeFocused()
+  await expect(page.locator('.project-agent-grid h3')).toHaveText([
+    'Documentvergelijking',
+    'Retourbeoordeling',
+    'Factuurverwerking',
+    'Klantenservice',
+  ])
+  const agentWorkflow = page.getByRole('figure', { name: 'Tool-calling-loop van de agents' })
+  await expect(agentWorkflow).toContainText('geen multi-agentorkestratie')
+  await expect(agentWorkflow).toContainText('voeren geen betalingen uit')
+  await page.reload()
+  await expect(page.locator('#agents')).toBeFocused()
   const stack = page.getByRole('region', { name: 'Gebouwd met.' })
   await expect(stack.getByText('intfloat/multilingual-e5-small', { exact: true })).toBeVisible()
   await expect(stack.getByText('FastAPI', { exact: true })).toBeVisible()
   const testing = page.getByRole('region', { name: 'Hoe ik de applicatie test.' })
-  await expect(testing).toContainText('81 backend-testgevallen en 16 frontendtests')
-  await expect(testing).toContainText('niet recent opnieuw gecontroleerd')
+  await expect(testing).toContainText('28 oktober 2026')
+  await expect(testing).toContainText('284 backendtests en 83 frontendtests')
+  await expect(testing).toContainText('geen live LLM-requests uitgevoerd')
   await expect(page.locator('.project-case-page .case-content a[href^="http"]')).toHaveCount(0)
   await page.screenshot({ path: `.artifacts/folio-${testInfo.project.name}.png`, fullPage: true })
   await page.getByRole('link', { name: 'Terug naar projecten' }).click()
@@ -416,7 +437,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   const normalProjectCardWidth = initialProjectCardBounds!.width
   await expect(page.locator('#work .selected-projects .project-card')).toHaveCount(2)
   await expect(page.locator('#work .selected-projects .project-card h3')).toHaveText([
-    'PDF Knowledge Assistant',
+    'Folio',
     'Loods 5-webshop',
   ])
   await expect(page.getByRole('heading', { name: 'LLM-chatbot & hybride aanbevelingssysteem' })).toHaveCount(0)
@@ -427,7 +448,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   await expect(expandProjects).toHaveAttribute('aria-expanded', 'true')
   await expect(page.getByRole('heading', { name: 'Voorspellen van leidingstoringen' })).toBeVisible()
   await expect(page.locator('#work .selected-projects .project-card h3')).toHaveText([
-    'PDF Knowledge Assistant',
+    'Folio',
     'Loods 5-webshop',
     'LLM-chatbot & hybride aanbevelingssysteem',
     'Voorspellen van leidingstoringen',
@@ -570,7 +591,7 @@ test('production route HTML includes metadata before JavaScript runs', async () 
   expect(html).toMatch(/name="description"\s+content="Een afstudeerproject bij Siemens/)
   expect(html).toContain('property="og:locale" content="nl_NL"')
   const folioHtml = await readFile('dist/projects/folio-pdf-knowledge-assistant/index.html', 'utf8')
-  expect(folioHtml).toContain('<title>PDF Knowledge Assistant - Kaan Bas</title>')
-  expect(folioHtml).toContain('property="og:title" content="PDF Knowledge Assistant - Kaan Bas"')
-  expect(folioHtml).toMatch(/name="description"\s+content="Een full-stack RAG-project/)
+  expect(folioHtml).toContain('<title>Folio - Agentic AI &amp; Document Intelligence Platform - Kaan Bas</title>')
+  expect(folioHtml).toContain('property="og:title" content="Folio - Agentic AI &amp; Document Intelligence Platform - Kaan Bas"')
+  expect(folioHtml).toMatch(/name="description"\s+content="Folio is een Agentic AI/)
 })

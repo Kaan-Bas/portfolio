@@ -13,10 +13,9 @@ export function FeaturedProject() {
       <div className="featured-main">
         <div className="project-overline">
           <span>UITGELICHT PROJECT</span>
-          <span>2026</span>
         </div>
         <div className="featured-copy">
-          <p className="company-label">{featuredProject.organization}</p>
+          <p className="company-label">{featuredProject.cardLabel}</p>
           <h3>
             <Link to={path}>
               {featuredProject.title}
@@ -54,7 +53,7 @@ export function FeaturedProject() {
   )
 }
 
-export function ProjectCard({ project, index }: { project: Project; index: number }) {
+export function ProjectCard({ project }: { project: Project }) {
   const { focus } = useFocus()
   const path = projectUrl(project.slug, focus)
   return (
@@ -62,8 +61,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
       <ProjectGallery images={project.images} title={project.title} />
       <div className="project-card-body">
         <div className="project-overline">
-          <span>{project.organization}</span>
-          <span>0{index + 2}</span>
+          <span>{project.cardLabel ?? project.organization}</span>
         </div>
         <h3>
           <Link to={path}>
@@ -90,8 +88,8 @@ export function SelectedProjects({ items = projects }: { items?: Project[] }) {
       className={`selected-projects${items.length === 1 ? ' is-single' : ''}`}
       id="project-list"
     >
-      {items.map((project, index) => (
-        <ProjectCard key={project.slug} project={project} index={index} />
+      {items.map((project) => (
+        <ProjectCard key={project.slug} project={project} />
       ))}
     </div>
   )

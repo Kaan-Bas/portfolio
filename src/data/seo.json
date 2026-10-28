@@ -20,8 +20,8 @@
     "description": "Een project binnen de minor Data Driven Business – AI Engineering: waterinfrastructuur analyseren en leidingstoringen voorspellen met Python, pandas en scikit-learn."
   },
   "/projects/folio-pdf-knowledge-assistant": {
-    "title": "PDF Knowledge Assistant - Kaan Bas",
-    "description": "Een full-stack RAG-project met React, Python en FastAPI. Lokale embeddings en FAISS-retrieval geven Gemini context voor antwoorden met citaten en PDF-paginaverwijzingen."
+    "title": "Folio - Agentic AI & Document Intelligence Platform - Kaan Bas",
+    "description": "Folio is een Agentic AI & Document Intelligence Platform met documentchat, hybride RAG en vier gespecialiseerde agents. Python-controles en menselijke review begrenzen de uitvoering."
   },
   "/projects/loods5-webshop": {
     "title": "Loods 5-webshop · Endeavour - Kaan Bas",
