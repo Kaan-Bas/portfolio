@@ -34,7 +34,7 @@ const areaIcons: Record<FocusArea, typeof Sparkles> = {
   software: Braces,
   data: Database,
 }
-const previewProjectSlugs = ['folio-pdf-knowledge-assistant', 'loods5-webshop']
+const previewProjectSlugs = ['folio', 'loods5']
 const homeProjects = [
   ...previewProjectSlugs.flatMap((slug) => projects.filter((project) => project.slug === slug)),
   ...projects.filter((project) => !previewProjectSlugs.includes(project.slug)),
@@ -196,7 +196,7 @@ export default function Home() {
                     {item.company === 'Siemens' && (
                       <Link
                         className="text-link small-link"
-                        to={projectUrl('siemens-ai-quotation-automation', focus)}
+                        to={projectUrl('siemens', focus)}
                       >
                         Bekijk het afstudeerproject
                         <ArrowRight size={15} aria-hidden="true" />

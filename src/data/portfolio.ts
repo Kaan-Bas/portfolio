@@ -28,7 +28,7 @@ export function focusUrl(focus: FocusFilter, section: (typeof navigation)[number
 }
 
 export function projectUrl(slug: string, focus: FocusFilter) {
-  return `/projects/${slug}${focus === 'all' ? '' : `?focus=${focus}`}`
+  return `/${slug}${focus === 'all' ? '' : `?focus=${focus}`}`
 }
 
 // De vakgebiedkeuze bepaalt welke projecten, ervaring en vaardigheden zichtbaar zijn.
@@ -118,7 +118,7 @@ export interface Project {
 }
 
 export const featuredProject = {
-  slug: 'siemens-ai-quotation-automation',
+  slug: 'siemens',
   organization: 'Siemens Buildings',
   cardLabel: 'Siemens - afstudeerstagiair',
   title: 'Offertes automatiseren met AI',
@@ -142,7 +142,7 @@ export const featuredProject = {
 }
 
 export const endeavourProject: Project = {
-  slug: 'loods5-webshop',
+  slug: 'loods5',
   organization: 'Endeavour',
   cardLabel: 'Endeavour - stagiair',
   title: 'Loods 5-webshop',
@@ -184,7 +184,7 @@ export const endeavourProject: Project = {
 
 export const projects: Project[] = [
   {
-    slug: 'idcp-chatbot-recommendation',
+    slug: 'idcp',
     organization: 'IDCP',
     cardLabel: 'IDCP - MINOR',
     images: idcpImages,
@@ -229,7 +229,7 @@ export const projects: Project[] = [
       'Praktijkervaring met LLM-gebruikersondersteuning en een hybride aanbevelingssysteem op basis van gebruikersinteresses en content.',
   },
   {
-    slug: 'waternet-pipe-failure-prediction',
+    slug: 'waternet',
     organization: 'Waternet',
     cardLabel: 'WATERNET - MINOR',
     title: 'Voorspellen van leidingstoringen',
@@ -266,7 +266,7 @@ export const projects: Project[] = [
   },
   endeavourProject,
   {
-    slug: 'folio-pdf-knowledge-assistant',
+    slug: 'folio',
     images: folioImages,
     organization: 'Persoonlijk project',
     title: 'Folio',

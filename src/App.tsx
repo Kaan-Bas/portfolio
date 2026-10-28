@@ -16,8 +16,8 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/projects/siemens-ai-quotation-automation" element={<Siemens />} />
-        <Route path="/projects/:slug" element={<ProjectPage />} />
+        <Route path="/siemens" element={<Siemens />} />
+        <Route path="/:slug" element={<ProjectPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

@@ -7,23 +7,23 @@
     "title": "Kaan Bas",
     "description": "Software Engineering afgestudeerd met AI-projecten bij Siemens en machine-learningprojecten bij Waternet en IDCP. Bekijk relevante projecten en vaardigheden per vakgebied."
   },
-  "/projects/siemens-ai-quotation-automation": {
+  "/siemens": {
     "title": "Offertes automatiseren met AI · Siemens - Kaan Bas",
     "description": "Een afstudeerproject bij Siemens met LLM-extractie, Python-validatie en menselijke controle. 68,8% minder verwerkingstijd bij de geëvalueerde testcases."
   },
-  "/projects/idcp-chatbot-recommendation": {
+  "/idcp": {
     "title": "Gebruikers linken met ML & Data - Kaan Bas",
     "description": "Een project binnen de minor AI Engineering: een LLM-chatbot en een hybride aanbevelingssysteem in Python met data over gebruikers, interesses en content."
   },
-  "/projects/waternet-pipe-failure-prediction": {
+  "/waternet": {
     "title": "Voorspellen van leidingstoringen · Waternet - Kaan Bas",
     "description": "Een project binnen de minor Data Driven Business – AI Engineering: waterinfrastructuur analyseren en leidingstoringen voorspellen met Python, pandas en scikit-learn."
   },
-  "/projects/folio-pdf-knowledge-assistant": {
+  "/folio": {
     "title": "Folio - Agentic AI & Document Intelligence Platform - Kaan Bas",
     "description": "Folio is een Agentic AI & Document Intelligence Platform met documentchat, hybride RAG en vier gespecialiseerde agents. Python-controles en menselijke review begrenzen de uitvoering."
   },
-  "/projects/loods5-webshop": {
+  "/loods5": {
     "title": "Loods 5-webshop · Endeavour - Kaan Bas",
     "description": "Een teamproject tijdens mijn stage bij Endeavour. Ik werkte aan de Loods 5-webshop met frontend- en backendontwikkeling, API-endpoints en database- en CMS-koppelingen."
   }

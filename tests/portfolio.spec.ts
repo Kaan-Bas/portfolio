@@ -9,11 +9,11 @@ declare global {
 }
 
 const projectPaths = [
-  '/projects/siemens-ai-quotation-automation',
-  '/projects/idcp-chatbot-recommendation',
-  '/projects/waternet-pipe-failure-prediction',
-  '/projects/loods5-webshop',
-  '/projects/folio-pdf-knowledge-assistant',
+  '/siemens',
+  '/idcp',
+  '/waternet',
+  '/loods5',
+  '/folio',
 ]
 
 const focusPaths = ['/?focus=ai', '/?focus=data', '/?focus=software']
@@ -33,7 +33,7 @@ test('recruiter flow: homepage → Siemens → work → contact', async ({ page 
   await page.getByRole('link', { name: 'Bekijk mijn projecten' }).click()
   await expect(page).toHaveURL(/#work$/)
   await page.getByRole('link', { name: 'Bekijk de casestudy', exact: true }).click()
-  await expect(page).toHaveURL(/siemens-ai-quotation-automation$/)
+  await expect(page).toHaveURL(/siemens$/)
   await expect(page.getByRole('heading', { name: 'Offertes automatiseren met AI.' })).toBeVisible()
   await page.getByRole('link', { name: '03 De workflow' }).click()
   await expect(page.getByText('Documentverwerking / parsing', { exact: true })).toBeVisible()
@@ -246,19 +246,19 @@ test('project detail pages show larger previews and navigable photo galleries', 
 
   const galleries = [
     {
-      slug: 'siemens-ai-quotation-automation',
+      slug: 'siemens',
       title: 'Offertes automatiseren met AI',
       firstImage: /validatiestatussen/,
       nextImage: /totaalprijs/,
     },
     {
-      slug: 'idcp-chatbot-recommendation',
+      slug: 'idcp',
       title: 'Gebruikers linken met ML & Data',
       firstImage: /IDCP-dashboard/,
       nextImage: /IDCP-chatbot/,
     },
     {
-      slug: 'loods5-webshop',
+      slug: 'loods5',
       title: 'Loods 5-webshop',
       firstImage: /Color House/,
       nextImage: /Productoverzicht/,
@@ -268,12 +268,12 @@ test('project detail pages show larger previews and navigable photo galleries', 
   ]
 
   for (const { slug, title, firstImage, nextImage, lastImage = nextImage, imageCount = 2 } of galleries) {
-    await page.goto(`/projects/${slug}`)
+    await page.goto(`/${slug}`)
     const gallery = page.getByRole('figure', { name: `Projectbeelden van ${title}`, exact: true })
     const previewImage = gallery.getByRole('img')
     await expectImageLoaded(previewImage)
     await expect(previewImage).toHaveAttribute('alt', firstImage)
-    if (slug === 'loods5-webshop') {
+    if (slug === 'loods5') {
       const pageBounds = await previewImage.boundingBox()
       expect(pageBounds).not.toBeNull()
       expect(pageBounds!.width).toBeGreaterThan(cardBounds!.width)
@@ -314,7 +314,7 @@ test('project detail pages show larger previews and navigable photo galleries', 
     await expect(previewImage).toHaveAttribute('alt', firstImage)
   }
 
-  await page.goto('/projects/waternet-pipe-failure-prediction')
+  await page.goto('/waternet')
   const placeholder = page.getByRole('figure', {
     name: 'Projectbeeld van Voorspellen van leidingstoringen volgt',
   })
@@ -326,14 +326,14 @@ test('project case studies offer numbered navigation and shareable section links
   page,
 }, testInfo) => {
   const cases = [
-    { slug: 'idcp-chatbot-recommendation', focus: 'ai' },
-    { slug: 'waternet-pipe-failure-prediction', focus: 'data' },
-    { slug: 'loods5-webshop', focus: 'software' },
-    { slug: 'folio-pdf-knowledge-assistant', focus: 'ai' },
+    { slug: 'idcp', focus: 'ai' },
+    { slug: 'waternet', focus: 'data' },
+    { slug: 'loods5', focus: 'software' },
+    { slug: 'folio', focus: 'ai' },
   ]
 
   for (const { slug, focus } of cases) {
-    const route = `/projects/${slug}?focus=${focus}`
+    const route = `/${slug}?focus=${focus}`
     await page.goto(route)
     const contents = page.getByRole('navigation', { name: 'Inhoud van de casestudy' })
     await expect(contents).toBeVisible()
@@ -378,7 +378,7 @@ test('Folio is discoverable through the overview and relevant filters with an ho
     await expect(card).toBeVisible()
   }
   await card.getByRole('link', { name: `Bekijk project: ${title}` }).click()
-  await expect(page).toHaveURL('/projects/folio-pdf-knowledge-assistant?focus=software')
+  await expect(page).toHaveURL('/folio?focus=software')
   await expect(page).toHaveTitle('Folio - Agentic AI & Document Intelligence Platform - Kaan Bas')
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(`${title}.`)
   const gallery = page.getByRole('figure', { name: `Projectbeelden van ${title}`, exact: true })
@@ -400,7 +400,7 @@ test('Folio is discoverable through the overview and relevant filters with an ho
     .getByRole('navigation', { name: 'Inhoud van de casestudy' })
     .getByRole('link', { name: /Agents & tools/ })
     .click()
-  await expect(page).toHaveURL('/projects/folio-pdf-knowledge-assistant?focus=software#agents')
+  await expect(page).toHaveURL('/folio?focus=software#agents')
   await expect(page.locator('#agents')).toBeFocused()
   await expect(page.locator('.project-agent-grid h3')).toHaveText([
     'Documentvergelijking',
@@ -480,7 +480,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   await work
     .getByRole('link', { name: 'Bekijk project: Voorspellen van leidingstoringen', exact: true })
     .click()
-  await expect(page).toHaveURL(/waternet-pipe-failure-prediction\?focus=data$/)
+  await expect(page).toHaveURL(/waternet\?focus=data$/)
   await page.getByRole('link', { name: 'Terug naar projecten' }).click()
   await expect(page).toHaveURL(/\?focus=data#work$/)
   await expect(work.getByRole('link', { name: 'Bekijk de casestudy' })).toHaveCount(0)
@@ -503,7 +503,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   await expect(loods5Gallery.getByText('Productoverzicht')).toBeVisible()
   await loods5Gallery.getByRole('button', { name: 'Afbeelding sluiten' }).click()
   await work.getByRole('link', { name: 'Bekijk project: Loods 5-webshop' }).click()
-  await expect(page).toHaveURL(/loods5-webshop\?focus=software$/)
+  await expect(page).toHaveURL(/loods5\?focus=software$/)
   await expect(page.getByRole('heading', { name: /^Loods 5-webshop/ })).toBeVisible()
   await expect(page.locator('.case-eyebrow')).toContainText('Stageproject')
   await expect(page.getByRole('heading', { name: 'Mijn werk aan het project.' })).toBeVisible()
@@ -532,7 +532,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
     0,
   )
   await work.getByRole('link', { name: 'Bekijk de casestudy' }).click()
-  await expect(page).toHaveURL(/siemens-ai-quotation-automation\?focus=ai$/)
+  await expect(page).toHaveURL(/siemens\?focus=ai$/)
   await page.getByRole('link', { name: '03 De workflow' }).click()
   await expect(page).toHaveURL(/\?focus=ai#architecture$/)
   await page.getByRole('link', { name: 'Terug naar projecten' }).click()
@@ -585,14 +585,14 @@ test('all portfolio pages have no WCAG A/AA violations', async ({ page }) => {
 })
 
 test('production route HTML includes metadata before JavaScript runs', async () => {
-  const html = await readFile('dist/projects/siemens-ai-quotation-automation/index.html', 'utf8')
+  const html = await readFile('dist/siemens/index.html', 'utf8')
   expect(html).toContain('<title>Offertes automatiseren met AI · Siemens - Kaan Bas</title>')
   expect(html).toContain(
     'property="og:title" content="Offertes automatiseren met AI · Siemens - Kaan Bas"',
   )
   expect(html).toMatch(/name="description"\s+content="Een afstudeerproject bij Siemens/)
   expect(html).toContain('property="og:locale" content="nl_NL"')
-  const folioHtml = await readFile('dist/projects/folio-pdf-knowledge-assistant/index.html', 'utf8')
+  const folioHtml = await readFile('dist/folio/index.html', 'utf8')
   expect(folioHtml).toContain('<title>Folio - Agentic AI &amp; Document Intelligence Platform - Kaan Bas</title>')
   expect(folioHtml).toContain('property="og:title" content="Folio - Agentic AI &amp; Document Intelligence Platform - Kaan Bas"')
   expect(folioHtml).toMatch(/name="description"\s+content="Folio is een Agentic AI/)
