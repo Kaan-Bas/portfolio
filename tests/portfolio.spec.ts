@@ -9,13 +9,13 @@ declare global {
 }
 
 const projectPaths = [
-  '/siemens',
-  '/idcp',
-  '/loods5',
-  '/folio',
+  '/portfolio/#/siemens',
+  '/portfolio/#/idcp',
+  '/portfolio/#/loods5',
+  '/portfolio/#/folio',
 ]
 
-const focusPaths = ['/?focus=ai', '/?focus=data', '/?focus=software']
+const focusPaths = ['/portfolio/#/?focus=ai', '/portfolio/#/?focus=data', '/portfolio/#/?focus=software']
 
 async function expectImageLoaded(image: Locator) {
   await image.scrollIntoViewIfNeeded()
@@ -27,7 +27,8 @@ async function expectImageLoaded(image: Locator) {
 }
 
 test('recruiter flow: homepage → Siemens → work → contact', async ({ page }) => {
-  await page.goto('/')
+  await page.goto('/portfolio/#/')
+  await expect(page).toHaveURL('/portfolio/#/')
   await expect(page.getByRole('heading', { name: 'Kaan Bas.' })).toBeVisible()
   await page.getByRole('link', { name: 'Bekijk mijn projecten' }).click()
   await expect(page).toHaveURL(/#work$/)
@@ -53,23 +54,23 @@ test('pages load directly with correct titles and no horizontal overflow', async
 }, testInfo) => {
   const errors: string[] = []
   page.on('pageerror', (error) => errors.push(error.message))
-  for (const route of ['/', ...focusPaths, '/?focus=unknown', ...projectPaths, '/missing-page']) {
+  for (const route of ['/portfolio/#/', ...focusPaths, '/portfolio/#/?focus=unknown', ...projectPaths, '/portfolio/#/missing-page']) {
     await page.goto(route)
     await expect(page.locator('html')).toHaveAttribute('lang', 'nl')
     await expect(page.locator('main h1')).toHaveCount(1)
     await expect(page).toHaveTitle(
-      route === '/missing-page' ? 'Pagina niet gevonden - Kaan Bas' : /Kaan Bas/,
+      route === '/portfolio/#/missing-page' ? 'Pagina niet gevonden - Kaan Bas' : /Kaan Bas/,
     )
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth > window.innerWidth,
     )
     expect(overflow, `Horizontal overflow on ${route}`).toBe(false)
-    if (route === '/' || route === projectPaths[0]) {
+    if (route === '/portfolio/#/' || route === projectPaths[0]) {
       await page.screenshot({
-        path: `.artifacts/${route === '/' ? 'home' : 'siemens'}-${testInfo.project.name}.png`,
+        path: `.artifacts/${route === '/portfolio/#/' ? 'home' : 'siemens'}-${testInfo.project.name}.png`,
         fullPage: true,
       })
-      if (route === '/') {
+      if (route === '/portfolio/#/') {
         await page
           .locator('.hero')
           .screenshot({ path: `.artifacts/hero-${testInfo.project.name}.png` })
@@ -78,11 +79,11 @@ test('pages load directly with correct titles and no horizontal overflow', async
   }
   expect(errors).toEqual([])
   await page.getByRole('link', { name: 'Terug naar de homepage' }).click()
-  await expect(page).toHaveURL('/')
+  await expect(page).toHaveURL('/portfolio/#/')
 })
 
 test('keyboard skip link and mobile navigation', async ({ page, isMobile }) => {
-  await page.goto('/')
+  await page.goto('/portfolio/#/')
   await page.keyboard.press('Tab')
   await expect(page.getByRole('link', { name: 'Ga naar de inhoud' })).toBeFocused()
   await page.keyboard.press('Enter')
@@ -106,7 +107,7 @@ test('keyboard skip link and mobile navigation', async ({ page, isMobile }) => {
 test('project cards support inline photo navigation and an accessible gallery', async ({
   page,
 }, testInfo) => {
-  await page.goto('/#work')
+  await page.goto('/portfolio/#/#work')
   const siemens = page.locator('.featured-project')
   const cover = siemens.getByRole('figure', { name: 'Projectbeelden van Siemens Buildings' })
   const siemensImage = cover.getByRole('img')
@@ -230,7 +231,7 @@ test('project cards support inline photo navigation and an accessible gallery', 
 test('project detail pages show larger previews and navigable photo galleries', async ({
   page,
 }, testInfo) => {
-  await page.goto('/#work')
+  await page.goto('/portfolio/#/#work')
   const cardImage = page
     .getByRole('figure', { name: 'Projectbeelden van Loods 5-webshop', exact: true })
     .getByRole('img')
@@ -262,7 +263,7 @@ test('project detail pages show larger previews and navigable photo galleries', 
   ]
 
   for (const { slug, title, firstImage, nextImage, lastImage = nextImage, imageCount = 2 } of galleries) {
-    await page.goto(`/${slug}`)
+    await page.goto(`/portfolio/#/${slug}`)
     const gallery = page.getByRole('figure', { name: `Projectbeelden van ${title}`, exact: true })
     const previewImage = gallery.getByRole('img')
     await expectImageLoaded(previewImage)
@@ -320,7 +321,7 @@ test('project case studies offer numbered navigation and shareable section links
   ]
 
   for (const { slug, focus } of cases) {
-    const route = `/${slug}?focus=${focus}`
+    const route = `/portfolio/#/${slug}?focus=${focus}`
     await page.goto(route)
     const contents = page.getByRole('navigation', { name: 'Inhoud van de casestudy' })
     await expect(contents).toBeVisible()
@@ -367,7 +368,7 @@ test('Folio is discoverable through the overview and relevant filters with an ho
   page,
 }, testInfo) => {
   const title = 'Folio'
-  await page.goto('/#work')
+  await page.goto('/portfolio/#/#work')
   const work = page.locator('#work')
   const card = work.locator('.project-card').filter({
     has: page.getByRole('heading', { name: title, exact: true }),
@@ -384,7 +385,7 @@ test('Folio is discoverable through the overview and relevant filters with an ho
     await expect(card).toBeVisible()
   }
   await card.getByRole('link', { name: `Bekijk project: ${title}` }).click()
-  await expect(page).toHaveURL('/folio?focus=software')
+  await expect(page).toHaveURL('/portfolio/#/folio?focus=software')
   await expect(page).toHaveTitle('Folio - Agentic AI & Document Intelligence Platform - Kaan Bas')
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(`${title}.`)
   const gallery = page.getByRole('figure', { name: `Projectbeelden van ${title}`, exact: true })
@@ -406,7 +407,7 @@ test('Folio is discoverable through the overview and relevant filters with an ho
     .getByRole('navigation', { name: 'Inhoud van de casestudy' })
     .getByRole('link', { name: /Agents & tools/ })
     .click()
-  await expect(page).toHaveURL('/folio?focus=software#agents')
+  await expect(page).toHaveURL('/portfolio/#/folio?focus=software#agents')
   await expect(page.locator('#agents')).toBeFocused()
   await expect(page.locator('.project-agent-grid h3')).toHaveText([
     'Documentvergelijking',
@@ -429,7 +430,7 @@ test('Folio is discoverable through the overview and relevant filters with an ho
   await expect(page.locator('.project-case-page .case-content a[href^="http"]')).toHaveCount(0)
   await page.screenshot({ path: `.artifacts/folio-${testInfo.project.name}.png`, fullPage: true })
   await page.getByRole('link', { name: 'Terug naar projecten' }).click()
-  await expect(page).toHaveURL('/?focus=software#work')
+  await expect(page).toHaveURL('/portfolio/#/?focus=software#work')
   await expect(card).toBeVisible()
 })
 
@@ -437,7 +438,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   page,
   isMobile,
 }, testInfo) => {
-  await page.goto('/')
+  await page.goto('/portfolio/#/')
   const initialProjectCard = page.locator('#work .selected-projects .project-card').first()
   await expect(initialProjectCard).toBeVisible()
   const initialProjectCardBounds = await initialProjectCard.boundingBox()
@@ -514,7 +515,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
   await expect(
     skills.getByRole('heading', { name: 'Software Engineering', exact: true }),
   ).toBeVisible()
-  await page.goto('/?focus=software#experience')
+  await page.goto('/portfolio/#/?focus=software#experience')
   await expect(
     page.locator('#experience').getByRole('heading', { name: 'Endeavour' }),
   ).toBeVisible()
@@ -548,7 +549,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
     .getByRole('navigation', { name: 'Filter vaardigheden op vakgebied' })
     .getByRole('link', { name: 'Alles', exact: true })
     .click()
-  await expect(page).toHaveURL('/#skills')
+  await expect(page).toHaveURL('/portfolio/#/#skills')
   await expect(skills.getByRole('heading', { level: 3 })).toHaveCount(3)
   await page.goBack()
   await expect(page).toHaveURL(/\?focus=ai#skills$/)
@@ -557,7 +558,7 @@ test('recruiters can choose a discipline, reload it and reset the view', async (
 
 test('all portfolio pages have no WCAG A/AA violations', async ({ page }) => {
   const issues = []
-  for (const route of ['/', ...focusPaths, ...projectPaths]) {
+  for (const route of ['/portfolio/#/', ...focusPaths, ...projectPaths]) {
     await page.goto(route)
     await page.addScriptTag({ content: axe.source })
     const violations = await page.evaluate(async () => {
@@ -577,16 +578,16 @@ test('all portfolio pages have no WCAG A/AA violations', async ({ page }) => {
   expect(issues).toEqual([])
 })
 
-test('production route HTML includes metadata before JavaScript runs', async () => {
-  const html = await readFile('dist/siemens/index.html', 'utf8')
-  expect(html).toContain('<title>Offertes automatiseren met AI · Siemens - Kaan Bas</title>')
-  expect(html).toContain(
-    'property="og:title" content="Offertes automatiseren met AI · Siemens - Kaan Bas"',
-  )
-  expect(html).toMatch(/name="description"\s+content="Een afstudeerproject bij Siemens/)
+test('production HTML serves the hash app with portfolio metadata and correct asset paths', async () => {
+  const html = await readFile('dist/index.html', 'utf8')
+  expect(html).toContain('<title>Kaan Bas</title>')
+  expect(html).toContain('property="og:title" content="Kaan Bas"')
   expect(html).toContain('property="og:locale" content="nl_NL"')
-  const folioHtml = await readFile('dist/folio/index.html', 'utf8')
-  expect(folioHtml).toContain('<title>Folio - Agentic AI &amp; Document Intelligence Platform - Kaan Bas</title>')
-  expect(folioHtml).toContain('property="og:title" content="Folio - Agentic AI &amp; Document Intelligence Platform - Kaan Bas"')
-  expect(folioHtml).toMatch(/name="description"\s+content="Folio is een Agentic AI/)
+  expect(html).toMatch(/src="\/portfolio\/assets\//)
+  expect(html).toContain('href="/portfolio/favicon.svg"')
+  expect(html).toContain('rel="canonical" href="https://kaan-bas-engineering.peachybow5.chatgpt.site/portfolio/"')
+  expect(html).toContain('content="https://kaan-bas-engineering.peachybow5.chatgpt.site/portfolio/og-image.png"')
+  const sitemap = await readFile('dist/sitemap.xml', 'utf8')
+  expect(sitemap).toContain('<loc>https://kaan-bas-engineering.peachybow5.chatgpt.site/portfolio/</loc>')
+  expect(sitemap).not.toContain('/#/')
 })

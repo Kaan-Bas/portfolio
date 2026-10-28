@@ -35,20 +35,18 @@ export function RouteEffects() {
       page === metadata['404'] ? 'noindex, follow' : 'index, follow',
     )
     if (profile.siteUrl) {
-      const url = `${profile.siteUrl}${path === '/' ? '/' : path}`
+      const siteUrl = profile.siteUrl.replace(/\/$/, '')
+      const url = `${siteUrl}/#${path}`
       setMeta('meta[property="og:url"]', { property: 'og:url' }, url)
-      setMeta(
-        'meta[property="og:image"]',
-        { property: 'og:image' },
-        `${profile.siteUrl}/og-image.png`,
-      )
+      setMeta('meta[property="og:image"]', { property: 'og:image' }, `${siteUrl}/og-image.png`)
       let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
       if (!canonical) {
         canonical = document.createElement('link')
         canonical.rel = 'canonical'
         document.head.appendChild(canonical)
       }
-      canonical.href = url
+      // Hash routes share one indexable HTML entry point.
+      canonical.href = `${siteUrl}/`
     }
     const frame = requestAnimationFrame(() => {
       if (hash) {

@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import { Header, Footer } from './components/Layout'
 import { RouteEffects } from './components/RouteEffects'
 import Home from './pages/Home'
@@ -7,11 +7,12 @@ import ProjectPage from './pages/ProjectPage'
 import NotFound from './pages/NotFound'
 
 export default function App() {
+  const { pathname, search } = useLocation()
   return (
     <>
-      <a className="skip-link" href="#main-content">
+      <Link className="skip-link" to={{ pathname, search, hash: '#main-content' }}>
         Ga naar de inhoud
-      </a>
+      </Link>
       <RouteEffects />
       <Header />
       <Routes>

@@ -15,7 +15,7 @@ export const profile = {
   email: 'kaan.bas762@gmail.com',
   linkedin: 'https://www.linkedin.com/in/kaan-bas-62225a420',
   github: 'https://github.com/Kaan-Bas',
-  siteUrl: 'https://kaan-bas-engineering.peachybow5.chatgpt.site',
+  siteUrl: 'https://kaan-bas-engineering.peachybow5.chatgpt.site/portfolio',
 }
 
 export const navigation = [

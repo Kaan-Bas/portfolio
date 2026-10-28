@@ -45,7 +45,7 @@ public/
   favicon.svg       Custom KB favicon
   og-image.png      Social-sharing image
 scripts/
-  build-metadata.mjs       Static route metadata, sitemap and robots.txt
+  build-metadata.mjs       Homepage metadata, sitemap and robots.txt
   create-social-image.ps1  Recreates the typographic social image on Windows
   optimize-project-images.mjs Creates WebP previews from the supplied PNGs
 tests/portfolio.spec.ts   Browser, navigation, responsive and accessibility checks
@@ -66,7 +66,7 @@ Start in **`src/data/portfolio.ts`**:
 
 The contact email and social links are used throughout the site. Clear a social URL to show a labelled placeholder; an empty GitHub URL hides that optional link.
 
-Recruiters can choose a discipline from the technical-background cards or use the project and skill filters. The choice is preserved in the URL, for example `/?focus=data#work`, so it survives reloads, remains selected when returning from a case study and can be shared. AI shows Siemens, Folio and IDCP; data shows IDCP; software shows Folio, Loods 5 and IDCP. `Alles` restores the full overview. The three profile cards remain visible in every view.
+Recruiters can choose a discipline from the technical-background cards or use the project and skill filters. The choice is preserved in the URL, for example `/portfolio/#/?focus=data#work`, so it survives reloads, remains selected when returning from a case study and can be shared. AI shows Siemens, Folio and IDCP; data shows IDCP; software shows Folio, Loods 5 and IDCP. `Alles` restores the full overview. The three profile cards remain visible in every view.
 
 The hero uses `src/components/CodeVisual.tsx`: a decorative SVG with abstract coding symbols, layered panels and a subtle dot grid. It has no project-specific meaning, contains no actual source code and is hidden from assistive technology. Its styles are in `.code-visual` in `src/styles.css`.
 
@@ -79,10 +79,10 @@ To regenerate previews after replacing an original PNG, run `node scripts/optimi
 ## Add a project
 
 1. Add a `Project` object to `projects` in `src/data/portfolio.ts`, including a unique `slug`, matching `focusAreas`, `topics`, the supplied facts and contribution descriptions.
-2. Add a title and description for `/projects/your-slug` to `src/data/seo.json`.
+2. Add a title and description for `/your-slug` to `src/data/seo.json`.
 3. Reuse an existing `visual`, or add your own labelled conceptual diagram in `src/components/Diagrams.tsx` and update the `Project.visual` union.
 
-The project card and `/projects/:slug` page are generated automatically. For a larger custom case study, add a page and route in `src/App.tsx`.
+The project card and `/portfolio/#/:slug` page are generated automatically. For a larger custom case study, add a page and route in `src/App.tsx`.
 
 ## Change the design
 
@@ -102,9 +102,11 @@ Playwright tests run against the production preview at desktop (1440px), tablet 
 
 ## Hosting and metadata
 
-`npm run build` writes the deployable site to **`dist/`**. Each known route has its own HTML file with its title, description and Open Graph metadata so link previews can read it before JavaScript runs. Page content renders in React. The build also creates a sitemap, robots.txt and `_redirects` for hosts that support that convention.
+`npm run build` writes the deployable site to **`dist/`**. Publish its contents at `/portfolio/`, matching `base` in `vite.config.ts`. The homepage is `/portfolio/`; React Router's `HashRouter` handles projects at `/portfolio/#/siemens`, `/portfolio/#/folio`, `/portfolio/#/idcp` and `/portfolio/#/loods5`. Hash routes require no server-side route rewrites and survive direct navigation and reloads. Section and filter links remain inside the router hash.
 
-For a different domain, update `profile.siteUrl` and rebuild. On another static host, serve existing files first and fall back unknown paths to `index.html` so React Router can render the custom 404. If the host supports a dedicated error document, use `404.html` to retain a real HTTP 404 response. The site contains no analytics or external runtime services.
+The HTML entry point contains the homepage title, description and Open Graph metadata. Project titles and descriptions update in the browser from `src/data/seo.json`. Social preview crawlers receive the shared homepage metadata because URL fragments are not sent to the server. The canonical URL and sitemap therefore point to `/portfolio/`.
+
+For a different domain or mount path, update `profile.siteUrl` and Vite's `base` and rebuild. The build also creates `404.html`, a sitemap and robots.txt. Unknown hash routes display the custom React 404. The site contains no analytics or external runtime services.
 
 `.openai/hosting.json` tracks the private Sites preview identity and static output directory. Keep its project ID intact when updating that preview.
 
