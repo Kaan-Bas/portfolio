@@ -90,28 +90,30 @@ export default function Home() {
         <CodeVisual />
       </section>
 
-      <section className="pillars-section container" aria-labelledby="pillars-title">
-        <div className="pillar-intro">
-          <h2 id="pillars-title">Mijn technische achtergrond</h2>
-          <p>Algemene vaardigheden per vakgebied.</p>
-        </div>
-        <div className="pillar-grid">
-          {pillars.map((pillar) => {
-            const Icon = areaIcons[pillar.id]
-            return (
-              <article className="pillar" data-area={pillar.id} key={pillar.id}>
-                <div className="pillar-top">
-                  <Icon size={23} aria-hidden="true" />
-                </div>
-                <h3>{pillar.title}</h3>
-                <p>{pillar.description}</p>
-                <Link className="pillar-link" to={focusUrl(pillar.id)}>
-                  {pillar.linkLabel}
-                  <ArrowRight size={15} aria-hidden="true" />
-                </Link>
-              </article>
-            )
-          })}
+      <section className="pillars-section home-section" aria-labelledby="pillars-title">
+        <div className="container">
+          <div className="pillar-intro">
+            <h2 id="pillars-title">Mijn technische achtergrond</h2>
+            <p>Algemene vaardigheden per vakgebied.</p>
+          </div>
+          <div className="pillar-grid">
+            {pillars.map((pillar) => {
+              const Icon = areaIcons[pillar.id]
+              return (
+                <article className="pillar" data-area={pillar.id} key={pillar.id}>
+                  <div className="pillar-top">
+                    <Icon size={23} aria-hidden="true" />
+                  </div>
+                  <h3>{pillar.title}</h3>
+                  <p>{pillar.description}</p>
+                  <Link className="pillar-link" to={focusUrl(pillar.id)}>
+                    {pillar.linkLabel}
+                    <ArrowRight size={15} aria-hidden="true" />
+                  </Link>
+                </article>
+              )
+            })}
+          </div>
         </div>
       </section>
 

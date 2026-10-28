@@ -143,7 +143,15 @@ section[tabindex='-1']:focus {
 }
 .work-section,
 .experience-section {
+  background: var(--paper);
+}
+.pillars-section,
+.about-section,
+.skills-section {
   background: var(--section-alternate);
+}
+.home-page > .contact-section {
+  background: var(--paper);
 }
 .accent {
   color: var(--accent);
@@ -386,17 +394,14 @@ section[tabindex='-1']:focus {
   width: 100%;
   height: auto;
 }
-.pillars-section {
-  padding-bottom: 88px;
-}
 .pillar-intro {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: end;
-  margin-bottom: 26px;
+  margin-bottom: 36px;
 }
 .pillar-intro h2 {
-  font-size: 24px;
+  font-size: clamp(28px, 2.8vw, 36px);
   letter-spacing: -0.8px;
   font-weight: 650;
 }
@@ -1127,9 +1132,6 @@ html:has(.project-image-dialog[open]) {
 }
 
 /* Personal background */
-.about-section {
-  background: var(--paper);
-}
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1281,9 +1283,6 @@ html:has(.project-image-dialog[open]) {
   font-size: 10px;
   color: var(--muted);
   margin-top: 8px;
-}
-.skills-section {
-  background: var(--paper);
 }
 .skills-grid {
   display: grid;
@@ -2548,7 +2547,7 @@ html:has(.project-image-dialog[open]) {
     font-size: 10px;
   }
   .pillar-intro h2 {
-    font-size: 21px;
+    font-size: 26px;
   }
   .section-heading h2 {
     font-size: 36px;
@@ -2733,9 +2732,6 @@ html:has(.project-image-dialog[open]) {
   .home-section {
     padding-block: 64px;
   }
-  .pillars-section {
-    padding-bottom: 56px;
-  }
   .eyebrow {
     font-size: 9px;
     letter-spacing: 1.4px;
@@ -2832,7 +2828,7 @@ html:has(.project-image-dialog[open]) {
     margin-bottom: 23px;
   }
   .pillar-intro h2 {
-    font-size: 23px;
+    font-size: 26px;
     line-height: 1.45;
     letter-spacing: -0.65px;
   }
