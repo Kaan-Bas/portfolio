@@ -102,6 +102,8 @@ Playwright tests run against the production preview at desktop (1440px), tablet 
 
 ## Hosting and metadata
 
+The GitHub Pages address is `https://kaan-bas.github.io/portfolio/`. The existing `.github/workflows/deploy.yml` builds and publishes `dist/` when changes are pushed to `main`. The Vite config is `vite.config.ts`; no separate JavaScript config is needed.
+
 `npm run build` writes the deployable site to **`dist/`**. Publish its contents at `/portfolio/`, matching `base` in `vite.config.ts`. The homepage is `/portfolio/`; React Router's `HashRouter` handles projects at `/portfolio/#/siemens`, `/portfolio/#/folio`, `/portfolio/#/idcp` and `/portfolio/#/loods5`. Hash routes require no server-side route rewrites and survive direct navigation and reloads. Section and filter links remain inside the router hash.
 
 The HTML entry point contains the homepage title, description and Open Graph metadata. Project titles and descriptions update in the browser from `src/data/seo.json`. Social preview crawlers receive the shared homepage metadata because URL fragments are not sent to the server. The canonical URL and sitemap therefore point to `/portfolio/`.
