@@ -5,7 +5,7 @@ export const profile = {
   name: 'Kaan Bas',
   headline: 'Technologie vertalen naar impact',
   introduction:
-    'Afgestudeerd in HBO-ICT met een sterke interesse in AI & Data. Gedreven om technologie te vertalen naar praktische en slimme oplossingen.',
+    'Afgestudeerd in HBO-ICT met ervaring in AI, Software Engineering en Data. Gedreven om technologie te vertalen naar praktische en slimme oplossingen.',
   email: 'kaan.bas762@gmail.com',
   linkedin: 'https://www.linkedin.com/in/kaan-bas-62225a420',
   github: 'https://github.com/Kaan-Bas',

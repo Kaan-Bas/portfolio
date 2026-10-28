@@ -86,13 +86,6 @@ export default function Home() {
               LinkedIn
             </ExternalLink>
           </div>
-          <div className="hero-education">
-            <GraduationCap size={19} aria-hidden="true" />
-            <span>
-              {education.degree}
-              <small>{education.institution} · 2026</small>
-            </span>
-          </div>
         </div>
         <CodeVisual />
       </section>
