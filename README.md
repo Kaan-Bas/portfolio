@@ -110,8 +110,6 @@ Vite uses `base: '/'` in `vite.config.ts`. React Router uses `BrowserRouter`, wi
 
 Each entry contains its own title, description, canonical URL and Open Graph metadata. The build also creates a sitemap, robots.txt and `404.html` for unknown URLs. For a different domain, update `profile.siteUrl` and rebuild. No component styles or content depend on the hosting domain.
 
-`.openai/hosting.json` tracks the private Sites preview identity and static output directory. Keep its project ID intact when updating that preview.
-
 ## Optional assets to provide next
 
 - A portrait, if you want one added to the About section.
