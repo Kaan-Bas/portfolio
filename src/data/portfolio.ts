@@ -733,6 +733,6 @@ export const skillGroups: { area: FocusArea; title: string; skills: string[] }[]
 ]
 
 export const about = [
-  'Ik ben recent afgestudeerd in HBO-ICT: Software Engineering aan de Hogeschool van Amsterdam. Tijdens mijn studie groeide mijn interesse in AI en data. Daarom volgde ik de minor Data Driven Business – AI Engineering.',
-  'Ik verdiep me graag in een proces of vraagstuk voordat ik aan een oplossing begin. Mijn grootste interesse ligt bij praktische AI-toepassingen, automatisering en machine learning. Ik leer graag nieuwe technologieën en zoek een startende functie waarin ik me gericht verder kan ontwikkelen.',
+  'Ik ben recent afgestudeerd in HBO-ICT: Software Engineering aan de Hogeschool van Amsterdam. Hierbij heb ervaring opgebouwd in verschillende ICT vakgebieden. Ten eerste heb ik een sterke basis opgebouwd met Software Engineering. Tijdens mijn studie groeide ook mijn interesse in AI en data. Om mij verder in deze richtingen te ontwikkelen, volgde ik de minor Data Driven Business - AI Engineering. Hierdoor heb ik mijn kennis op het gebied van softwareontwikkeling verder kunnen uitbreiden en mij verdiept in de mogelijkheden van AI en datagedreven oplossingen.',
+  'Wat mij motiveert, is het oplossen van complexe problemen en het bouwen van oplossingen die daadwerkelijk werken en waarde toevoegen. Ik vind het interessant om logica en technologie te combineren om praktische uitdagingen aan te pakken. Daarnaast ben ik nieuwsgierig naar nieuwe technologieën en verdiep ik mij graag in hoe deze werken en hoe ze toegepast kunnen worden. Ik blijf mezelf graag ontwikkelen en zoek naar mogelijkheden om mijn kennis te verbreden en nieuwe ideeën om te zetten in werkende oplossingen.',
 ]
